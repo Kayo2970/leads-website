@@ -65,7 +65,7 @@ export default function AdminDashboard() {
         top: '20px'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '40px' }}>
-          <div style={{ width: '40px', height: '40px', background: 'var(--primary)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyCenter: 'center' }}>
+          <div style={{ width: '40px', height: '40px', background: 'var(--primary)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <LayoutDashboard color="white" size={24} style={{ margin: 'auto' }} />
           </div>
           <span style={{ fontSize: '20px', fontWeight: 800, color: 'var(--text)' }}>Admin</span>

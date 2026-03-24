@@ -13,6 +13,7 @@ const links = [
   { href: '/events', label: 'Events' },
   { href: '/events/bharat-lead-summit', label: 'BLS' },
   { href: '/contact', label: 'Contact' },
+  { href: '/admin', label: 'Admin' },
 ]
 
 export default function Navbar() {

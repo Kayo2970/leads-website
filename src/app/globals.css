@@ -1679,7 +1679,43 @@ body {
   inset: 0;
 }
 
-.contact-bg {
-  background: radial-gradient(circle at top left, rgba(0, 150, 136, 0.1), transparent),
-              radial-gradient(circle at bottom right, rgba(0, 77, 64, 0.2), transparent);
+/* ── TEAM CARD OVERLAY REFINEMENT ── */
+.team-card-overlay {
+  transform: translateY(100%);
+  opacity: 0;
 }
+
+.team-card-extra {
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover behaviors for Desktop */
+@media (min-width: 1025px) {
+  .card:hover .team-card-overlay {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .card:hover .team-card-extra {
+    height: auto;
+    opacity: 1;
+    margin-top: 10px;
+  }
+}
+
+/* Permanent visibility for Mobile/Tablet */
+@media (max-width: 1024px) {
+  .team-card-overlay {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    background: linear-gradient(to top, rgba(13, 71, 161, 0.98), rgba(13, 71, 161, 0.45)) !important;
+    padding: 15px !important;
+  }
+  .team-card-extra {
+    height: 0 !important; /* Keep it minimal on mobile to see the face */
+    opacity: 0 !important;
+  }
+}
+
