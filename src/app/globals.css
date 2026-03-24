@@ -35,13 +35,27 @@ html {
   scroll-behavior: smooth;
 }
 
+@keyframes pearlPulse {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 body {
   font-family: var(--font-inter), 'Inter', system-ui, -apple-system, sans-serif;
-  background: var(--bg);
+  background: linear-gradient(120deg, #fdfcfb, #fce4ec, #e8eaf6, #e0f7fa, #fdfcfb);
+  background-size: 300% 300%;
+  animation: pearlPulse 20s ease infinite;
   color: var(--text);
-  transition: background var(--trans), color var(--trans);
+  transition: color var(--trans);
   line-height: 1.6;
   overflow-x: hidden;
+}
+
+.dark body {
+  background: linear-gradient(120deg, #0A1628, #1E1A33, #0F2040, #16243A, #0A1628);
+  background-size: 300% 300%;
+  animation: pearlPulse 20s ease infinite;
 }
 
 /* ── SCROLLBAR ── */
@@ -1538,7 +1552,7 @@ body {
 }
 
 .dynamic-bg {
-  background: linear-gradient(-45deg, var(--navy), var(--primary), var(--teal), #004D40);
+  background: linear-gradient(-45deg, var(--navy), var(--primary), #7B1FA2, #4A148C);
   background-size: 400% 400%;
   animation: bgPulse 10s ease infinite;
 }
