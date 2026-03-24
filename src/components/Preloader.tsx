@@ -20,8 +20,8 @@ export default function Preloader() {
           <Image
             src="/leads-logo.png"
             alt="LEADS Loading"
-            width={160}
-            height={160}
+            width={640}
+            height={640}
             className="spinning-logo"
             priority
           />
