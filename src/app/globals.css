@@ -688,9 +688,17 @@ body {
   0%, 100% { background-position: 0% 0%; }
   50% { background-position: 100% 100%; }
 }
-@keyframes prism-shimmer {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
+@keyframes plasma-drift {
+  0% { transform: translate(-30%, -30%) scale(1); opacity: 0.3; }
+  33% { transform: translate(10%, 20%) scale(1.2); opacity: 0.5; }
+  66% { transform: translate(-10%, 40%) scale(0.9); opacity: 0.3; }
+  100% { transform: translate(-30%, -30%) scale(1); opacity: 0.3; }
+}
+
+@keyframes plasma-drift-alt {
+  0% { transform: translate(20%, 40%) scale(1.1); opacity: 0.2; }
+  50% { transform: translate(-40%, -10%) scale(0.8); opacity: 0.4; }
+  100% { transform: translate(20%, 40%) scale(1.1); opacity: 0.2; }
 }
 
 /* ── SHARED PRISMATIC STYLES ── */
@@ -738,11 +746,29 @@ body {
 
 @media (max-width: 1024px) {
   .hero-bg::after, .page-hero::after, .cta-section::after, .dynamic-bg::after {
-    /* Safe mobile background: highly performant rotating mesh instead of blurry conic gradient */
-    filter: none; 
-    opacity: 0.08;
-    background: repeating-linear-gradient(45deg, var(--primary) 0%, var(--primary) 2px, transparent 2px, transparent 40px);
-    animation: prism-shimmer 40s linear infinite;
+    /* Premium Liquid Plasma Effect: Soft drifting organic orbs */
+    filter: blur(60px); 
+    opacity: 0.4;
+    width: 150%; height: 150%;
+    top: -25%; left: -25%;
+    background: 
+      radial-gradient(circle at 30% 30%, var(--primary) 0%, transparent 50%),
+      radial-gradient(circle at 70% 70%, var(--teal) 0%, transparent 50%);
+    animation: plasma-drift 15s ease-in-out infinite;
+    display: block !important;
+    transform-origin: center center;
+  }
+  .hero-bg::before, .page-hero::before, .cta-section::before, .dynamic-bg::before {
+    /* Adding a second drifting layer for depth */
+    content: "";
+    position: absolute;
+    width: 150%; height: 150%;
+    top: -25%; left: -25%;
+    background: radial-gradient(circle at 80% 20%, var(--navy) 0%, transparent 40%);
+    animation: plasma-drift-alt 20s ease-in-out infinite;
+    filter: blur(80px);
+    opacity: 0.3;
+    z-index: -2;
     display: block !important;
   }
 }
