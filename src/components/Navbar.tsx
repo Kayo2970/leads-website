@@ -35,8 +35,8 @@ export default function Navbar() {
             <Image
               src={isMobile ? '/leads-logo-thumb.png' : '/leads-logo-large.png'}
               alt="LEADS Next Gen Centre"
-              width={isMobile ? 60 : 320}
-              height={isMobile ? 60 : 92}
+              width={isMobile ? 120 : 320}
+              height={isMobile ? 120 : 92}
               className="nav-logo-image"
               priority
             />
