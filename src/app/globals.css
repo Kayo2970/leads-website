@@ -639,7 +639,7 @@ body {
 .bottom-nav {
   display: none;
   position: fixed !important;
-  bottom: 24px !important; /* Raised slightly for better thumb reach/proportion */
+  bottom: 8px !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
   width: min(94vw, 440px) !important;
