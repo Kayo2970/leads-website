@@ -86,5 +86,4 @@ For technical inquiries, departmental review, or maintenance support:
 - **Location**: University House, New BEL Rd, M S R Nagar, Mathikere, Bengaluru, Karnataka 560054
 
 ---
-**Director of Operations - LEADS Next Gen Centre**
 *Powered by MSRUAS Engineering Standards*
