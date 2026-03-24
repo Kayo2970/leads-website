@@ -71,16 +71,17 @@ body {
 }
 .preloader-container {
   position: relative;
-  width: 480px;
-  height: 480px;
+  width: 800px;
+  height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .logo-spinner {
   position: relative;
-  width: 320px;
-  height: 320px;
+  width: 100%;
+  max-width: 720px;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -92,7 +93,7 @@ body {
 }
 .loading-line {
   position: absolute;
-  width: 480px;
+  width: 720px;
   height: 12px;
   bottom: 0;
   background: linear-gradient(90deg, transparent, var(--teal), transparent);
