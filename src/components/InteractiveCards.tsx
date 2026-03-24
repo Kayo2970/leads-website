@@ -82,10 +82,12 @@ export default function InteractiveCards() {
 
   const cards = cardsRaw.map(c => {
     const rad = c.angle * (Math.PI / 180)
+    // Calculate X to create a > shape (concave relative to the right edge)
+    // Center card (rad=0) stays pushed mostly right. Edges push left.
     return {
       ...c,
-      x: -radius * Math.cos(rad),
-      y: radius * Math.sin(rad),
+      x: -radius * (1 - Math.cos(rad)) - 40,
+      y: radius * Math.sin(rad) * 1.2,
     }
   })
 
