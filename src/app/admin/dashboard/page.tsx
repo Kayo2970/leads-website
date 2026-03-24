@@ -78,8 +78,8 @@ export default function AdminDashboard() {
 
   return (
     <div className="hero-bg" style={{ minHeight: '100vh', display: 'flex', position: 'relative', overflow: 'hidden' }}>
-      {/* Faded Background Logo */}
-      <div style={{ position: 'absolute', opacity: 0.1, zIndex: 0, width: '900px', height: '900px', bottom: '-20%', right: '-10%', transform: 'rotate(-15deg)', pointerEvents: 'none' }}>
+      {/* Centered Faded Background Logo */}
+      <div style={{ position: 'absolute', opacity: 0.05, zIndex: 0, width: '800px', height: '800px', top: '50%', left: '55%', transform: 'translate(-50%, -50%)', pointerEvents: 'none' }}>
         <Image src="/leads-logo-thumb.png" alt="" fill style={{ objectFit: 'contain' }} />
       </div>
 
