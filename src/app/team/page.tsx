@@ -108,13 +108,6 @@ const organizingCommittee = [
     image: '/team-photos/arvind-rakshith.webp',
     linkedin: 'https://www.linkedin.com/in/arvind-rakshith-94a36a375/',
   },
-  {
-    name: 'Mr. Syed Furqaan Ahmed',
-    role: 'SR. RESEARCH & DEVELOPMENT HEAD',
-    org: 'LEADS Next Gen Centre',
-    image: '/team-photos/syed-furqaan.webp',
-    linkedin: 'https://www.linkedin.com/in/sydkwests/',
-  },
 ]
 
 const organizers = [
@@ -237,22 +230,12 @@ const organizers = [
     image: '/team-photos/arvind-manashetti.webp',
     linkedin: '',
   },
-]
-
-const partners = [
   {
-    name: 'Sahana Mahadev',
-    role: 'COLLABORATIVE PARTNER',
-    org: 'Senior Manager Business Development and Operations',
-    image: '/team-photos/sahana-mahadev.webp',
-    linkedin: 'https://www.linkedin.com/in/sahana-mahadev-7b7532154/',
-  },
-  {
-    name: 'Anurag Pandey',
-    role: 'COLLABORATIVE PARTNER',
-    org: 'Market Research and Business Development',
-    image: '/team-photos/anurag-pandey.webp',
-    linkedin: 'https://www.linkedin.com/in/anurag-pandey-126b5326b/',
+    name: 'Mr. Syed Furqaan Ahmed',
+    role: 'HEAD-RESEARCH & DEVELOPMENT',
+    org: 'Organizing Committee',
+    image: '/team-photos/syed-furqaan.webp',
+    linkedin: 'https://www.linkedin.com/in/sydkwests/',
   },
 ]
 
@@ -265,7 +248,7 @@ export default function TeamPage() {
           <div className="section-label" style={{ color: 'var(--teal)' }}>Leadership</div>
           <h1 className="page-hero-title">Meet Our Team</h1>
           <p className="page-hero-sub">
-            The passionate leaders, dedicated committee members, and collaborative partners
+            The passionate leaders, dedicated committee members, and talented organizers
             driving LEADS Next Gen Centre and the Bharat Lead Summit vision forward.
           </p>
         </div>
@@ -320,25 +303,6 @@ export default function TeamPage() {
           <hr className="divider" />
           <div className="grid-4">
             {organizers.map((member, i) => (
-              <div key={i} style={{ animationDelay: `${i * 0.1}s` }}>
-                <TeamCard member={member} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── COLLABORATIVE PARTNERS ── */}
-      <section className="section" id="collaborative-partners" style={{ background: 'var(--surface)' }}>
-        <div className="container">
-          <div className="section-label reveal">Partnership</div>
-          <h2 className="section-heading reveal">Collaborative Partners</h2>
-          <p className="section-sub reveal">
-            Strategic partners supporting our mission and amplifying our impact.
-          </p>
-          <hr className="divider" />
-          <div className="grid-4">
-            {partners.map((member, i) => (
               <div key={i} style={{ animationDelay: `${i * 0.1}s` }}>
                 <TeamCard member={member} />
               </div>
