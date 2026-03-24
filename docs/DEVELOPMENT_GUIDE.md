@@ -1,0 +1,205 @@
+# Development Guidelines for LEADS Website
+
+## 📌 Documentation First Approach
+
+**Every code change must be documented in CHANGELOG.md**
+
+### Commit Workflow
+
+1. **Before Coding**: Check CHANGELOG.md for existing tickets/issues
+2. **During Development**: Keep notes of changes
+3. **After Completion**: Update CHANGELOG.md with:
+   - Date
+   - Files changed
+   - What changed
+   - Why it changed
+   - Any breaking changes
+4. **Before Push**: Review documentation updates
+5. **Git Commit**: Include reference to CHANGELOG section
+
+### Example Commit Message
+```
+git commit -m "Implement team card hover effects
+
+- Add gradient Play overlay to TeamCard component
+- Implement dual-tone color scanning effect
+- Enhance image saturation on hover
+- Updated: docs/CHANGELOG.md with implementation details
+- Files: src/components/TeamCard.tsx"
+```
+
+---
+
+## 🎯 Current Priority Tasks
+
+### 1️⃣ HIGH PRIORITY - Team Card Visual Enhancements
+**File**: `src/components/TeamCard.tsx`
+
+**Features to Add**:
+- Gradient Play button overlay (appears on hover)
+- Dual-tone color effect that scans/enhances image vibrancy
+- Smooth animations throughout
+
+**Implementation Notes**:
+- Use CSS gradients (teal to primary color)
+- Play icon should be SVG or emoji
+- Position center of image
+- Enhance saturation filter on hover
+
+**When Complete**: Update CHANGELOG.md with implementation details
+
+---
+
+### 2️⃣ HIGH PRIORITY - Fix Dark Mode Button Duplication
+**File**: `src/components/Navbar.tsx`
+
+**Issue**: Theme toggle button appears in both:
+- Desktop nav (line ~67)
+- Mobile menu area (line ~78)
+
+**Solution**:
+- Remove the mobile theme toggle button (line 78-82)
+- Keep only the desktop version
+- Test responsiveness
+
+**When Complete**: Update CHANGELOG.md and commit
+
+---
+
+### 3️⃣ HIGH PRIORITY - Remove "Mr." Prefix
+**File**: `src/app/team/page.tsx`
+
+**Change**:
+- Line 234: `'Mr. Syed Furqaan Ahmed'` → `'Syed Furqaan Ahmed'`
+
+**When Complete**: Update CHANGELOG.md and commit
+
+---
+
+### 4️⃣ MEDIUM PRIORITY - Download Missing Team Photos
+**Location**: `/public/team-photos/`
+
+**15 Photos Needed**:
+```
+sudev-mitra.webp
+jyotsna-karn.webp
+pranav-pj.webp
+shravya-t.webp
+shriram-sg.webp
+bhavya-shree.webp
+manoj-petakamsetty.webp
+yash-chandak.webp
+kayomarz-pavri.webp
+shwetha-s.webp
+niyati-chawra.webp
+sadiya-sawood.webp
+nimisha-km.webp
+kishan-kp.webp
+syed-furqaan.webp
+```
+
+**Requirements**:
+- Format: WEBP or PNG
+- Minimum size: 240x240px
+- Naming convention: `[first-name]-[last-name].webp`
+
+**When Complete**: Update CHANGELOG.md with photo sourcing details
+
+---
+
+## 📂 Documentation Structure Reference
+
+```
+docs/
+├── CHANGELOG.md          ← Update with every change
+├── README.md             ← Overview
+├── DEVELOPMENT_GUIDE.md  ← This file
+├── strategic/            ← Business docs (PRD, Analysis, Analytics)
+├── technical/            ← Tech docs (TechSpec, Design)
+├── content/              ← Content docs (Copy, Social Kit, Sitemap)
+└── operational/          ← Operations (Launch Checklist, Maintenance)
+```
+
+---
+
+## ✅ Documentation Checklist
+
+Before committing code, verify:
+
+- [ ] All files modified are listed in commit message
+- [ ] CHANGELOG.md updated with change details
+- [ ] New features documented with their purpose
+- [ ] Breaking changes clearly noted
+- [ ] Files that will be affected are identified
+- [ ] Related documentation (if any) is updated
+- [ ] Git commit message is descriptive
+
+---
+
+## 🔄 Common Update Patterns
+
+### Adding a New Feature
+```markdown
+### [YYYY-MM-DD] - Feature Name
+
+**Files Modified**:
+- src/path/to/file.tsx
+
+**Changes**:
+- Added feature X
+- Modified behavior Y
+- New styling/animation Z
+
+**Impact**:
+- Users will now see [description]
+- Improves [aspect] by [metric]
+
+**Dependencies**: [if any]
+
+**Browser Support**: All modern browsers
+```
+
+### Bug Fixes
+```markdown
+### [YYYY-MM-DD] - Fix Bug Description
+
+**Issue**: What was broken
+**Root Cause**: Why it happened
+**Solution**: What was changed
+
+**Files Modified**:
+- src/path/to/file.tsx
+
+**Impact**: Users will experience [improvement]
+```
+
+### Refactoring
+```markdown
+### [YYYY-MM-DD] - Code Refactor
+
+**Type**: Code organization/cleanup
+**Files Modified**:
+- List all files
+
+**What Changed**: 
+- Restructured X
+- Renamed Y
+- Reorganized Z
+
+**Why**: Better performance/maintainability/readability
+**No Breaking Changes**: Yes/No
+```
+
+---
+
+## 📞 Questions?
+
+Refer to:
+- `docs/CHANGELOG.md` for change history
+- `docs/README.md` for documentation overview
+- Git commit history for detailed implementation notes
+
+---
+
+**Last Updated**: 2026-03-24
+**Maintained By**: Development Team

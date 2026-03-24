@@ -123,29 +123,103 @@
 
 ---
 
-## Pending Tasks
+## 📋 Development Workflow Policy
 
-- [ ] Download missing team member photos
-  - Sudev Mitra
-  - Jyotsna Karn
-  - Pranav P J
-  - Shravya T
-  - Shriram SG
-  - S Bhavya Shree
-  - Manoj Petakamsetty
-  - Yash Chandak
-  - Kayomarz Pavri
-  - Shwetha S
-  - Niyati Chawra
-  - Sadiya Sawood
-  - Nimisha K M
-  - Kishan KP
-  - Syed Furqaan Ahmed
-- [ ] Implement Play button overlay with gradient effect on team photos
-- [ ] Implement dual-tone color enhancement effect on hover
-- [ ] Fix duplicate dark mode button in navigation
-- [ ] Update all document "Last Updated" dates
-- [ ] Review and update PRD with latest business changes
+**CRITICAL**: All code changes must be documented in CHANGELOG.md immediately after implementation.
+
+**Update Checklist for Every Change:**
+- [ ] Code implemented and tested locally
+- [ ] CHANGELOG.md updated with:
+  - Date of change
+  - File(s) modified
+  - What changed and why
+  - Impact on user/team
+- [ ] Changes committed to git with descriptive message
+- [ ] Changes pushed to remote repository
+
+---
+
+## ⏳ Pending Implementation Tasks
+
+### High Priority - In Progress
+
+#### 1. Team Card Visual Enhancements
+- **Status**: In Progress
+- **Files**: `src/components/TeamCard.tsx`
+- **Tasks**:
+  - [ ] Add gradient Play button overlay (center, hover visible)
+  - [ ] Implement dual-tone color scanning effect on hover
+  - [ ] Enhance image saturation/vibrancy on hover
+  - [ ] Add smooth transition animations
+- **Dependencies**: None
+- **Estimated Impact**: Visual polish, improved user engagement
+
+#### 2. Navigation Dark Mode Button Duplication
+- **Status**: Pending
+- **Files**: `src/components/Navbar.tsx`
+- **Issue**: Dark mode button appears twice (desktop + mobile)
+- **Solution**: Single theme toggle for responsive navigation
+- **Tasks**:
+  - [ ] Remove duplicate `theme-toggle-mobile` button
+  - [ ] Keep single theme toggle in desktop nav
+  - [ ] Ensure mobile hamburger menu works correctly
+- **Dependencies**: None
+- **Estimated Impact**: Cleaner UI, better UX
+
+#### 3. Remove "Mr." Title from Syed Furqaan Ahmed
+- **Status**: Pending
+- **Files**: `src/app/team/page.tsx`
+- **Change**: "Mr. Syed Furqaan Ahmed" → "Syed Furqaan Ahmed"
+- **Location**: Line 234 (organizingCommittee array)
+- **Dependencies**: None
+- **Estimated Impact**: Consistency with other team member naming
+
+### Medium Priority - On Hold
+
+#### 4. Missing Team Member Photographs (15 photos needed)
+- **Status**: Awaiting Photo Sourcing
+- **Location**: `/public/team-photos/`
+- **Missing Profiles**:
+  - Sudev Mitra (Organizing Committee)
+  - Jyotsna Karn (Organizing Committee)
+  - Pranav P J (Organizing Committee)
+  - Shravya T (Organizing Committee)
+  - Shriram SG (General Secretary)
+  - S Bhavya Shree (General Secretary)
+  - Manoj Petakamsetty (General Secretary)
+  - Yash Chandak (Head-Operations & Logistics)
+  - Kayomarz Pavri (Head-Design & Social Media)
+  - Shwetha S (Head-Design & Social Media)
+  - Niyati Chawra (Head-Leadership & Development)
+  - Sadiya Sawood (Head-Leadership & Development)
+  - Nimisha K M (Head-Sustainability & Innovation)
+  - Kishan KP (Head-Marketing & Branding)
+  - Syed Furqaan Ahmed (Head-Research & Development)
+- **Requirements**: 
+  - Format: WebP or PNG (240x240px minimum)
+  - Naming: `/public/team-photos/[first-name]-[last-name].webp`
+  - Fallback: System will show placeholder if missing
+- **Dependencies**: Photo sourcing from team members
+- **Estimated Impact**: Complete team roster display, professional appearance
+
+### Lower Priority
+
+- [ ] Update all document "Last Updated" dates in `/docs/`
+- [ ] Review and update PRD with latest feature changes
+- [ ] Create component library documentation
+- [ ] Add performance optimization audit
+
+---
+
+## Implementation Schedule
+
+| Task | Priority | Status | Target Date | Owner |
+|------|----------|--------|-------------|-------|
+| Team Card Enhancements | High | In Progress | 2026-03-25 | - |
+| Dark Mode Button Fix | High | Pending | 2026-03-25 | - |
+| Remove "Mr." from Syed | High | Pending | 2026-03-25 | - |
+| Download Missing Photos | Medium | Awaiting | 2026-03-27 | - |
+| Documentation Updates | Ongoing | Active | Daily | - |
 
 ---
 
