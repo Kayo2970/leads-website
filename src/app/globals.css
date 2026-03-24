@@ -317,10 +317,23 @@ body {
   0%, 100% { 
     transform: translateY(0);
     animation-timing-function: ease-in;
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 16px rgba(0, 188, 212, 0.7));
   }
-  25% { transform: translateY(-30px); animation-timing-function: ease-out; }
-  50% { transform: translateY(0); animation-timing-function: ease-in; }
-  75% { transform: translateY(-15px); animation-timing-function: ease-out; }
+  25% { 
+    transform: translateY(-100px); 
+    animation-timing-function: ease-out; 
+    filter: drop-shadow(0 100px 30px rgba(0, 0, 0, 0.1)) drop-shadow(0 0 16px rgba(0, 188, 212, 0.3));
+  }
+  50% { 
+    transform: translateY(0); 
+    animation-timing-function: ease-in; 
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 16px rgba(0, 188, 212, 0.7));
+  }
+  75% { 
+    transform: translateY(-50px); 
+    animation-timing-function: ease-out; 
+    filter: drop-shadow(0 50px 20px rgba(0, 0, 0, 0.15)) drop-shadow(0 0 16px rgba(0, 188, 212, 0.4));
+  }
 }
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
