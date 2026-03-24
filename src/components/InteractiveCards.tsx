@@ -114,14 +114,14 @@ export default function InteractiveCards() {
           )
 
           return card.link ? (
-            <Link href={card.link} passHref legacyBehavior key={i}>
-              <motion.a style={{ display: 'block', position: 'absolute', inset: 0 }}>{Content}</motion.a>
+            <Link key={i} href={card.link} style={{ display: 'block', position: 'absolute', inset: 0 }}>
+              {Content}
             </Link>
           ) : (
             <div key={i} style={{ display: 'block', position: 'absolute', inset: 0 }}>{Content}</div>
-          )
+          );
         })}
       </motion.div>
     </div>
-  )
+  );
 }

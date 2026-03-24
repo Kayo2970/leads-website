@@ -18,7 +18,6 @@ export function useTheme() {
 
 export default function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>('light')
-  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     // Time-of-day always wins. Only respect localStorage if the user
@@ -30,10 +29,8 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
 
     let resolved: Theme
     if (userOverride === 'true' && saved) {
-      // User manually picked a theme — honour it
       resolved = saved
     } else {
-      // Default to time-of-day; clear any stale saved value
       resolved = isNight ? 'dark' : 'light'
       localStorage.removeItem('leads-theme')
       localStorage.removeItem('leads-theme-override')
@@ -41,7 +38,6 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
 
     setTheme(resolved)
     document.documentElement.classList.toggle('dark', resolved === 'dark')
-    setMounted(true)
   }, [])
 
   const toggleTheme = () => {
@@ -52,10 +48,8 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
     document.documentElement.classList.toggle('dark', next === 'dark')
   }
 
-  if (!mounted) {
-    return <>{children}</>
-  }
-
+  // Always render the same tree shape (provider always present).
+  // This prevents the server↔client tree mismatch that was blanking pages.
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
