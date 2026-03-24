@@ -66,7 +66,7 @@ export default function Navbar() {
             onClick={toggle}
             style={{ 
               padding: '16px', 
-              marginRight: '-16px',
+              margin: 0,
               cursor: 'pointer',
               WebkitTapHighlightColor: 'transparent'
             }}
