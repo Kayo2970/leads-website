@@ -38,6 +38,7 @@ export default function Footer() {
             <Link href="/about">About</Link>
             <Link href="/events">Our Programs</Link>
             <Link href="/about#governance">Leadership Council</Link>
+            <Link href="/terms">Terms & Conditions</Link>
           </div>
           <div className="footer-col">
             <h4>Events</h4>

@@ -87,7 +87,7 @@ body {
   font-family: var(--font-inter), 'Inter', system-ui, -apple-system, sans-serif;
   background: linear-gradient(120deg, #fdfcfb, #fce4ec, #e8eaf6, #e0f7fa, #fdfcfb);
   background-size: 300% 300%;
-  animation: pearlPulse 20s ease infinite;
+  animation: pearlPulse 18s ease infinite;
   color: var(--text);
   transition: color var(--trans);
   line-height: 1.6;
@@ -97,7 +97,7 @@ body {
 .dark body {
   background: linear-gradient(120deg, #0A1628, #1E1A33, #0F2040, #16243A, #0A1628);
   background-size: 300% 300%;
-  animation: pearlPulse 20s ease infinite;
+  animation: pearlPulse 18s ease infinite;
 }
 
 /* ── SCROLLBAR ── */
@@ -784,7 +784,7 @@ body {
     radial-gradient(ellipse at 90% 80%, rgba(2, 44, 102, 0.6) 0%, transparent 60%),
     radial-gradient(ellipse at 50% 50%, rgba(0, 188, 212, 0.2) 0%, transparent 70%);
   background-size: 200% 200%;
-  animation: prism-aurora 20s ease-in-out infinite;
+  animation: prism-aurora 18s ease-in-out infinite;
   overflow: hidden;
   z-index: 0;
 }
@@ -798,7 +798,7 @@ body {
     radial-gradient(circle at 30% 30%, var(--primary) 0%, transparent 40%),
     radial-gradient(circle at 70% 70%, var(--teal) 0%, transparent 40%),
     radial-gradient(circle at 50% 10%, var(--gold) 0%, transparent 30%);
-  animation: plasma-drift 25s ease-in-out infinite;
+  animation: plasma-drift 22s ease-in-out infinite;
   filter: blur(80px);
   pointer-events: none;
   z-index: -1;
