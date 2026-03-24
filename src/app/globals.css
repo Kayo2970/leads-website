@@ -8,18 +8,18 @@
   --gold: #FFB300;
   --bg: #F0F7FF;
   --surface: rgba(232, 241, 252, 0.4);
-  --card: rgba(240, 249, 255, 0.5); /* Slight blue tint */
-  --glass-border: rgba(255, 255, 255, 0.4);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-  --glass-blur: blur(12px);
+  --card: rgba(224, 242, 254, 0.4); /* Frosted Ice Blue Tint */
+  --glass-blur: blur(16px);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
   --text: #1A1A2E;
   --text2: #4A5568;
   --text3: #8A8A8A;
   --success: #16A34A;
   --warning: #D97706;
   --error: #DC2626;
-  --radius: 16px;
-  --trans: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --radius: 20px;
+  --trans: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .dark {
@@ -453,8 +453,10 @@ body {
 
 /* ── NAVIGATION ── */
 .navbar {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 9999;
   background: rgba(240, 247, 255, 0.7);
   backdrop-filter: blur(20px) saturate(180%);
@@ -604,39 +606,41 @@ body {
     height: 70px; 
     justify-content: center; 
     padding: 0 16px;
-    pointer-events: auto; /* Only logo is clickable at top */
+    pointer-events: auto; /* Restores clicks for the logo area only */
   }
   .navbar {
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    pointer-events: none; /* Let clicks pass through to content */
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    pointer-events: none; /* Let clicks pass through empty navbar space to page content */
+    position: fixed !important;
+    top: 0 !important;
   }
-  .nav-logo { height: 60px; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
+  .nav-logo { height: 60px; margin: 0 auto; display: flex; align-items: center; justify-content: center; transform: scale(0.9); }
   .mobile-logo { display: block !important; }
   .desktop-logo { display: none !important; }
-  body { padding-bottom: 90px; } /* Space for bottom nav */
+  body { padding-bottom: 100px; } /* Increased space for bottom nav */
 }
 
 /* ── BOTTOM NAV (Mobile Only) ── */
 .bottom-nav {
   display: none;
   position: fixed !important;
-  bottom: 20px !important; /* Force to bottom */
+  bottom: 24px !important; /* Raised slightly for better thumb reach/proportion */
   left: 50% !important;
   transform: translateX(-50%) !important;
-  width: min(92vw, 420px) !important;
-  height: 64px;
-  background: var(--card);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  width: min(94vw, 440px) !important;
+  height: 68px; /* Slightly taller for better touch targets */
+  background: var(--card); /* Uses the new ice-blue tint */
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid var(--glass-border);
-  border-radius: 32px;
-  z-index: 9999 !important;
+  border-radius: 34px;
+  z-index: 10000 !important;
   justify-content: space-around;
   align-items: center;
-  padding: 0 10px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  padding: 0 12px;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.3);
   pointer-events: auto !important;
 }
 
@@ -1553,7 +1557,11 @@ body {
 /* ── GRIDS ── */
 .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.grid-2 { 
+  display: grid; 
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 52px; /* Balanced spacing for better proportions */
+}
 @media (max-width: 900px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 768px) { .grid-3 { grid-template-columns: 1fr; } }
 @media (max-width: 640px) {
