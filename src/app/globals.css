@@ -314,25 +314,29 @@ body {
   z-index: 11;
 }
 @keyframes spinAndBounce {
-  0%, 100% { 
-    transform: translateY(0);
-    animation-timing-function: ease-in;
+  0% { 
+    transform: translateY(0) scaleY(0.95);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); /* ease-out for upward motion */
     filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 16px rgba(0, 188, 212, 0.7));
   }
   25% { 
-    transform: translateY(-100px); 
-    animation-timing-function: ease-out; 
-    filter: drop-shadow(0 100px 30px rgba(0, 0, 0, 0.1)) drop-shadow(0 0 16px rgba(0, 188, 212, 0.3));
+    transform: translateY(-120px) scaleY(1); 
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19); /* ease-in for downward motion */
+    filter: drop-shadow(0 120px 30px rgba(0, 0, 0, 0.05)) drop-shadow(0 0 16px rgba(0, 188, 212, 0.2));
   }
   50% { 
-    transform: translateY(0); 
-    animation-timing-function: ease-in; 
+    transform: translateY(0) scaleY(0.95); 
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); 
     filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 16px rgba(0, 188, 212, 0.7));
   }
   75% { 
-    transform: translateY(-50px); 
-    animation-timing-function: ease-out; 
-    filter: drop-shadow(0 50px 20px rgba(0, 0, 0, 0.15)) drop-shadow(0 0 16px rgba(0, 188, 212, 0.4));
+    transform: translateY(-60px) scaleY(1); 
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19); 
+    filter: drop-shadow(0 60px 20px rgba(0, 0, 0, 0.15)) drop-shadow(0 0 16px rgba(0, 188, 212, 0.3));
+  }
+  100% { 
+    transform: translateY(0) scaleY(0.95); 
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 16px rgba(0, 188, 212, 0.7));
   }
 }
 @keyframes float {

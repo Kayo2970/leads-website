@@ -490,3 +490,6 @@ New Component Checklist (from v2)
 	•	[ ] Is it responsive at 900px, 768px, 480px breakpoints?
 ────────────────────────────────────────────────────────────
 END OF DOCUMENT  ·  TechSpec-LEADS v2.0  ·  LEADS Next Gen Centre — MSRUAS
+
+
+[UPDATE 2026-03-24]: The tech stack now officially includes Prisma ORM with an SQLite provider (`file:./dev.db`) used in the `src/app/api/join/route.ts` API endpoint endpoint for local form submission recording. The front-end leverages Framer Motion for complex D-Shape (semi-circle) floating interactive menus in `InteractiveCards.tsx`.

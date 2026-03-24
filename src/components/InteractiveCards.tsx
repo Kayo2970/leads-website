@@ -10,7 +10,7 @@ export default function InteractiveCards() {
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    setIsMobile(window.innerWidth < 768)
+    setIsMobile(window.innerWidth < 1024)
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({
         x: (e.clientX - window.innerWidth / 2) / 30,
@@ -23,126 +23,108 @@ export default function InteractiveCards() {
 
   if (isMobile) return null;
 
-  const cardStyle = {
+  const cardStyleBase = {
+    position: 'absolute' as const,
     background: 'rgba(255, 255, 255, 0.08)',
-    backdropFilter: 'blur(12px)', 
+    backdropFilter: 'blur(12px)',
     WebkitBackdropFilter: 'blur(12px)',
     border: '1px solid rgba(255, 255, 255, 0.15)',
-    padding: '1.25rem 1.5rem', 
-    borderRadius: '20px',
-    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
-    display: 'flex', 
-    alignItems: 'center', 
-    gap: '1rem',
-    color: 'white', 
+    padding: '1.25rem 1.5rem',
+    borderRadius: '24px',
+    boxShadow: '0 12px 40px rgba(0, 0, 0, 0.25)',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+    color: 'white',
     fontWeight: 600,
-    fontSize: '1.1rem',
+    fontSize: '1rem',
     cursor: 'pointer',
     textDecoration: 'none',
+    width: '260px',
   }
 
+  const radius = 320;
+  
+  const cardsRaw = [
+    {
+      title: 'Strategic Vision',
+      icon: <TrendingUp size={22} color="#FFF" />,
+      gradient: 'linear-gradient(135deg, var(--teal), var(--primary))',
+      angle: -50,
+    },
+    {
+      title: 'Global Impact',
+      icon: <Globe size={22} color="#FFF" />,
+      gradient: 'linear-gradient(135deg, var(--gold), #E65100)',
+      angle: -25,
+    },
+    {
+      title: 'Bharat Lead Summit',
+      icon: <Calendar size={22} color="#FFF" />,
+      gradient: 'linear-gradient(135deg, #004D40, var(--teal))',
+      angle: 0,
+      link: '/events/bharat-lead-summit'
+    },
+    {
+      title: 'Innovation',
+      icon: <Lightbulb size={22} color="#FFF" />,
+      gradient: 'linear-gradient(135deg, #7B1FA2, var(--primary))',
+      angle: 25,
+    },
+    {
+      title: 'Fireside Talks',
+      icon: <Mic size={22} color="#FFF" />,
+      gradient: 'linear-gradient(135deg, #1B5E20, #00C853)',
+      angle: 50,
+      link: '/events'
+    }
+  ]
+
+  const cards = cardsRaw.map(c => {
+    const rad = c.angle * (Math.PI / 180)
+    return {
+      ...c,
+      x: -radius * Math.cos(rad),
+      y: radius * Math.sin(rad),
+    }
+  })
+
   return (
-    <div className="hero-floating-elements" style={{ position: 'absolute', right: '2%', top: '10%', height: '80%', width: '45%', zIndex: 5 }}>
-      
-      {/* Card 1 - Strategic Vision */}
-      <motion.div
-        style={{ position: 'absolute', top: '5%', right: '25%' }}
-        animate={{ x: mousePosition.x * 1.5, y: mousePosition.y * 1.5 }}
-        transition={{ type: 'spring', damping: 15, stiffness: 50 }}
-      >
-        <motion.div 
-          animate={{ y: [0, -10, 0] }} 
-          whileHover={{ scale: 1.15, zIndex: 20 }}
-          transition={{ y: { repeat: Infinity, duration: 4, ease: "easeInOut" }, scale: { type: 'spring', stiffness: 300 } }} 
-          style={cardStyle}
-        >
-          <div style={{ background: 'linear-gradient(135deg, var(--teal), var(--primary))', padding: '10px', borderRadius: '12px' }}>
-            <TrendingUp size={24} color="#FFF" />
-          </div>
-          <span>Strategic Vision</span>
-        </motion.div>
-      </motion.div>
-
-      {/* Card 2 - Global Impact */}
-      <motion.div
-        style={{ position: 'absolute', top: '30%', right: '5%' }}
-        animate={{ x: -mousePosition.x * 1.2, y: -mousePosition.y * 1.2 }}
+    <div className="hero-floating-elements" style={{ position: 'absolute', right: '0%', top: '50%', zIndex: 5 }}>
+      <motion.div 
+        animate={{ x: mousePosition.x * 2.5, y: mousePosition.y * 2.5 }}
         transition={{ type: 'spring', damping: 20, stiffness: 40 }}
+        style={{ position: 'relative' }}
       >
-        <motion.div 
-          animate={{ y: [0, -12, 0] }} 
-          whileHover={{ scale: 1.15, zIndex: 20 }}
-          transition={{ y: { repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }, scale: { type: 'spring', stiffness: 300 } }} 
-          style={cardStyle}
-        >
-          <div style={{ background: 'linear-gradient(135deg, var(--gold), #E65100)', padding: '10px', borderRadius: '12px' }}>
-            <Globe size={24} color="#FFF" />
-          </div>
-          <span>Global Impact</span>
-        </motion.div>
-      </motion.div>
+        {cards.map((card, i) => {
+          const Content = (
+            <motion.div
+              style={{
+                ...cardStyleBase,
+                x: card.x,
+                y: card.y,
+                rotate: 0,
+                zIndex: i,
+              }}
+              whileHover={{ scale: 1.15, x: card.x - 20, zIndex: 30 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            >
+              <div style={{ background: card.gradient, padding: '10px', borderRadius: '12px' }}>
+                {card.icon}
+              </div>
+              <span style={{flex: 1}}>{card.title}</span>
+            </motion.div>
+          )
 
-      {/* Card 3 - Innovation */}
-      <motion.div
-        style={{ position: 'absolute', top: '55%', right: '35%' }}
-        animate={{ x: mousePosition.x * 2, y: mousePosition.y * 2 }}
-        transition={{ type: 'spring', damping: 12, stiffness: 60 }}
-      >
-        <motion.div 
-          animate={{ y: [0, -8, 0] }} 
-          whileHover={{ scale: 1.15, zIndex: 20 }}
-          transition={{ y: { repeat: Infinity, duration: 3.5, ease: "easeInOut", delay: 2 }, scale: { type: 'spring', stiffness: 300 } }} 
-          style={cardStyle}
-        >
-          <div style={{ background: 'linear-gradient(135deg, #7B1FA2, var(--primary))', padding: '10px', borderRadius: '12px' }}>
-            <Lightbulb size={24} color="#FFF" />
-          </div>
-          <span>Innovation</span>
-        </motion.div>
+          return card.link ? (
+            <Link href={card.link} passHref legacyBehavior key={i}>
+              <motion.a style={{ display: 'block', position: 'absolute', inset: 0 }}>{Content}</motion.a>
+            </Link>
+          ) : (
+            <div key={i} style={{ display: 'block', position: 'absolute', inset: 0 }}>{Content}</div>
+          )
+        })}
       </motion.div>
-
-      {/* Card 4 - Event: BLS */}
-      <motion.div
-        style={{ position: 'absolute', top: '80%', right: '15%' }}
-        animate={{ x: -mousePosition.x * 1.8, y: -mousePosition.y * 1.8 }}
-        transition={{ type: 'spring', damping: 18, stiffness: 45 }}
-      >
-        <Link href="/events/bharat-lead-summit" passHref legacyBehavior>
-          <motion.a 
-            animate={{ y: [0, -10, 0] }} 
-            whileHover={{ scale: 1.15, zIndex: 20 }}
-            transition={{ y: { repeat: Infinity, duration: 4.5, ease: "easeInOut", delay: 0.5 }, scale: { type: 'spring', stiffness: 300 } }} 
-            style={cardStyle}
-          >
-            <div style={{ background: 'linear-gradient(135deg, #004D40, var(--teal))', padding: '10px', borderRadius: '12px' }}>
-              <Calendar size={24} color="#FFF" />
-            </div>
-            <span>Bharat Lead Summit</span>
-          </motion.a>
-        </Link>
-      </motion.div>
-
-      {/* Card 5 - Event: Fireside Talk */}
-      <motion.div
-        style={{ position: 'absolute', top: '15%', right: '55%' }}
-        animate={{ x: mousePosition.x * 2.2, y: -mousePosition.y * 1.5 }}
-        transition={{ type: 'spring', damping: 14, stiffness: 55 }}
-      >
-        <Link href="/events" passHref legacyBehavior>
-          <motion.a 
-            animate={{ y: [0, -12, 0] }} 
-            whileHover={{ scale: 1.15, zIndex: 20 }}
-            transition={{ y: { repeat: Infinity, duration: 3.8, ease: "easeInOut", delay: 1.5 }, scale: { type: 'spring', stiffness: 300 } }} 
-            style={cardStyle}
-          >
-            <div style={{ background: 'linear-gradient(135deg, #1B5E20, #00C853)', padding: '10px', borderRadius: '12px' }}>
-              <Mic size={24} color="#FFF" />
-            </div>
-            <span>Fireside Talks</span>
-          </motion.a>
-        </Link>
-      </motion.div>
-
     </div>
   )
 }

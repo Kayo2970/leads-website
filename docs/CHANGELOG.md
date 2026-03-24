@@ -2,6 +2,21 @@
 
 ## Version History & Changes Tracking
 
+### [2026-03-24] - Structural, Pearl Theme, Database & Fan Interactive Cards
+
+#### Visual & Structure Update
+- Added `@prisma/client` and `better-sqlite3` for local forms backing.
+- Converted standard green themes into a dynamic luxurious Pearl/Purple gradient base.
+- Created `InteractiveCards.tsx` a right-to-left semicircular D-Shape fan layout for the Hero section.
+- Added realistic physics bounce + shadow tracking for the preloader.
+
+#### Files Updated
+- `src/app/page.tsx`, `src/app/globals.css`, `src/components/InteractiveCards.tsx`
+- `prisma/schema.prisma`
+- `src/app/api/join/route.ts`
+- `src/app/dashboard/page.tsx`
+
+
 ### [2026-03-24] - Mobile Navigation Drawer (Left Side)
 
 #### Navigation UX Update
