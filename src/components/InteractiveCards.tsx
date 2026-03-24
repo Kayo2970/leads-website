@@ -92,7 +92,7 @@ export default function InteractiveCards() {
   })
 
   return (
-    <div className="hero-floating-elements" style={{ position: 'absolute', right: '0%', top: '50%', zIndex: 5 }}>
+    <div className="hero-floating-elements" style={{ position: 'absolute', right: '18%', top: '50%', zIndex: 5 }}>
       <motion.div 
         animate={{ x: mousePosition.x * 2.5, y: mousePosition.y * 2.5 }}
         transition={{ type: 'spring', damping: 20, stiffness: 40 }}
