@@ -86,7 +86,7 @@ body {
   justify-content: center;
 }
 .spinning-logo {
-  animation: spinAndBounce 1.3s ease-in-out 1;
+  animation: spinAndBounce 2s ease-in-out 1;
   will-change: transform;
   filter: drop-shadow(0 0 16px rgba(0, 188, 212, 0.5));
 }
