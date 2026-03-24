@@ -84,7 +84,7 @@ body {
   justify-content: center;
 }
 .spinning-logo {
-  animation: spinLogo 1.5s linear infinite;
+  animation: spinAndBounce 2.8s ease-in-out 1;
   will-change: transform;
   filter: drop-shadow(0 0 16px rgba(0, 188, 212, 0.5));
 }
@@ -105,9 +105,29 @@ body {
   text-transform: uppercase;
   font-weight: 500;
 }
-@keyframes spinLogo {
-  0% { transform: rotateX(0deg); }
-  100% { transform: rotateX(360deg); }
+@keyframes spinAndBounce {
+  /* Fast rotation 3 times */
+  0% { 
+    transform: rotateY(0deg) scale(1);
+    perspective: 1000px;
+  }
+  60% { 
+    transform: rotateY(1080deg) scale(1);
+  }
+  /* First bounce */
+  70% { 
+    transform: rotateY(1080deg) scale(0.75);
+  }
+  75% { 
+    transform: rotateY(1080deg) scale(1);
+  }
+  /* Second bounce */
+  85% { 
+    transform: rotateY(1080deg) scale(0.80);
+  }
+  100% { 
+    transform: rotateY(1080deg) scale(1);
+  }
 }
 @keyframes loadingLine {
   0%, 100% { transform: scaleX(0); opacity: 0; }
