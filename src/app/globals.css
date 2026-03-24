@@ -176,16 +176,16 @@ body {
 }
 
 @media (max-width: 1024px) {
-  .hero-floating-elements {
+  .hero-floating-elements, .desktop-logo {
     display: none !important;
   }
 }
 @media (max-width: 768px) {
-  .preloader, .desktop-logo {
+  .preloader {
     display: none !important;
   }
 }
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .mobile-logo {
     display: none !important;
   }
@@ -1262,13 +1262,22 @@ body {
 /* ── SCROLL REVEAL ── */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(30px);
+  transition: opacity 1s cubic-bezier(0.165, 0.84, 0.44, 1),
+    transform 1s cubic-bezier(0.165, 0.84, 0.44, 1);
   will-change: opacity, transform;
 }
 .reveal.visible {
   opacity: 1;
-  transform: none;
+  transform: translateY(0);
+}
+
+@media (max-width: 1024px) {
+  .reveal {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    transition: none !important;
+  }
 }
 .reveal-d1 { transition-delay: 0.05s; }
 .reveal-d2 { transition-delay: 0.1s; }
