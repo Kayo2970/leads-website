@@ -39,7 +39,7 @@ export default function Navbar() {
               <Image src="/leads-logo-large.png" alt="LEADS Next Gen Centre" width={200} height={57} priority style={{ objectFit: 'contain' }} />
             </div>
             <div className="mobile-logo">
-              <Image src="/leads-logo-thumb.png" alt="LEADS" width={90} height={90} priority style={{ objectFit: 'contain' }} />
+              <Image src="/leads-logo-thumb.png" alt="LEADS" width={48} height={48} priority style={{ objectFit: 'contain' }} />
             </div>
           </Link>
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface CountUpProps {
   end: number
@@ -10,45 +10,34 @@ interface CountUpProps {
 
 export default function CountUp({ end, suffix = '', duration = 2000 }: CountUpProps) {
   const [count, setCount] = useState(0)
-  const ref = useRef<HTMLSpanElement>(null)
-  const hasAnimated = useRef(false)
 
   useEffect(() => {
-    const el = ref.current
-    if (!el) return
+    // Small delay to allow the component to mount and paint
+    const timeout = setTimeout(() => {
+      const startTime = Date.now()
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated.current) {
-          hasAnimated.current = true
-          const startTime = performance.now()
+      const animate = () => {
+        const elapsed = Date.now() - startTime
+        const progress = Math.min(elapsed / duration, 1)
+        // Ease-out cubic
+        const eased = 1 - Math.pow(1 - progress, 3)
+        setCount(Math.floor(eased * end))
 
-          const animate = (now: number) => {
-            const elapsed = now - startTime
-            const progress = Math.min(elapsed / duration, 1)
-            // Ease-out cubic
-            const eased = 1 - Math.pow(1 - progress, 3)
-            setCount(Math.floor(eased * end))
-
-            if (progress < 1) {
-              requestAnimationFrame(animate)
-            } else {
-              setCount(end)
-            }
-          }
-
+        if (progress < 1) {
           requestAnimationFrame(animate)
+        } else {
+          setCount(end)
         }
-      },
-      { threshold: 0.1 }
-    )
+      }
 
-    observer.observe(el)
-    return () => observer.disconnect()
+      requestAnimationFrame(animate)
+    }, 300)
+
+    return () => clearTimeout(timeout)
   }, [end, duration])
 
   return (
-    <span ref={ref}>
+    <span>
       {count.toLocaleString()}{suffix}
     </span>
   )
