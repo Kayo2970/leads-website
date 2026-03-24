@@ -175,8 +175,18 @@ body {
   overflow: hidden;
 }
 
+@media (max-width: 1024px) {
+  .hero-floating-elements {
+    display: none !important;
+  }
+}
 @media (max-width: 768px) {
-  .preloader {
+  .preloader, .desktop-logo {
+    display: none !important;
+  }
+}
+@media (min-width: 769px) {
+  .mobile-logo {
     display: none !important;
   }
 }

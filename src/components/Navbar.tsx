@@ -19,13 +19,8 @@ export default function Navbar() {
   const pathname = usePathname()
   const { theme, toggleTheme } = useTheme()
   const [mobileMenuPath, setMobileMenuPath] = useState<string | null>(null)
-  const [isMobile, setIsMobile] = useState(false)
-
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 768)
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
+    // Component mounted logic
   }, [])
 
   const mobileOpen = mobileMenuPath === pathname
@@ -35,14 +30,28 @@ export default function Navbar() {
       <nav className="navbar" id="main-nav">
         <div className="nav-container">
           <Link href="/" className="nav-logo" id="nav-logo">
-            <Image
-              src={isMobile ? '/leads-logo-thumb.png' : '/leads-logo-large.png'}
-              alt="LEADS Next Gen Centre"
-              width={isMobile ? 120 : 320}
-              height={isMobile ? 120 : 92}
-              className="nav-logo-image"
-              priority
-            />
+            {/* Desktop Logo */}
+            <div className="desktop-logo">
+              <Image
+                src="/leads-logo-large.png"
+                alt="LEADS Next Gen Centre"
+                width={200}
+                height={57}
+                className="nav-logo-image"
+                priority
+              />
+            </div>
+            {/* Mobile Logo */}
+            <div className="mobile-logo">
+              <Image
+                src="/leads-logo-thumb.png"
+                alt="LEADS"
+                width={80}
+                height={80}
+                className="nav-logo-image"
+                priority
+              />
+            </div>
             <span className="sr-only">LEADS</span>
           </Link>
 

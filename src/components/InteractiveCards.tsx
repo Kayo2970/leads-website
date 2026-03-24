@@ -7,10 +7,7 @@ import Link from 'next/link'
 
 export default function InteractiveCards() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [isMobile, setIsMobile] = useState(false)
-
   useEffect(() => {
-    setIsMobile(window.innerWidth < 1024)
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({
         x: (e.clientX - window.innerWidth / 2) / 30,
@@ -20,8 +17,6 @@ export default function InteractiveCards() {
     window.addEventListener('mousemove', handleMouseMove)
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
-
-  if (isMobile) return null;
 
   const cardStyleBase = {
     position: 'absolute' as const,
