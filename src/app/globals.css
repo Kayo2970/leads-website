@@ -602,23 +602,33 @@ body {
   .nav-links { display: none !important; }
   .nav-hamburger { display: none !important; }
   .nav-container { 
-    height: 70px; 
+    height: 64px; 
     justify-content: center; 
     padding: 0 16px;
-    pointer-events: auto; /* Restores clicks for the logo area only */
+    pointer-events: auto;
   }
   .navbar {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    pointer-events: none; /* Let clicks pass through empty navbar space to page content */
-    position: fixed !important;
+    background: rgba(224, 240, 255, 0.8) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border-bottom: 1px solid rgba(21, 101, 192, 0.1) !important;
+    pointer-events: auto; 
+    position: sticky !important;
     top: 0 !important;
   }
-  .nav-logo { height: 60px; margin: 0 auto; display: flex; align-items: center; justify-content: center; transform: scale(0.9); }
+  .nav-logo { 
+    height: 48px; 
+    margin: 0 auto; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    position: relative;
+    left: 0;
+    transform: none;
+  }
   .mobile-logo { display: block !important; }
   .desktop-logo { display: none !important; }
-  body { padding-bottom: 100px; } /* Increased space for bottom nav */
+  body { padding-bottom: 100px; }
 }
 
 /* ── BOTTOM NAV (Mobile Only) ── */

@@ -40,7 +40,7 @@ export default function CountUp({ end, suffix = '', duration = 2000 }: CountUpPr
           requestAnimationFrame(animate)
         }
       },
-      { threshold: 0 }
+      { threshold: 0.1 }
     )
 
     observer.observe(el)
