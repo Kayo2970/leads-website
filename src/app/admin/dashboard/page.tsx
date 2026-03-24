@@ -77,22 +77,22 @@ export default function AdminDashboard() {
   ]
 
   return (
-    <div className="hero-bg" style={{ minHeight: '100vh', display: 'flex', position: 'relative', overflow: 'hidden' }}>
+    <div className="hero-bg admin-layout" style={{ minHeight: '100vh', display: 'flex', position: 'relative', overflow: 'hidden' }}>
       {/* Centered Faded Background Logo */}
       <div style={{ position: 'absolute', opacity: 0.05, zIndex: 0, width: '800px', height: '800px', top: '50%', left: '55%', transform: 'translate(-50%, -50%)', pointerEvents: 'none' }}>
         <Image src="/leads-logo-thumb.png" alt="" fill style={{ objectFit: 'contain' }} />
       </div>
 
-      {/* Sidebar */}
-      <aside className="glass-panel" style={{ 
-        width: '260px', 
-        height: 'calc(100vh - 40px)', 
-        margin: '20px', 
+      {/* Sidebar - Integrated Mobile Support */}
+      <aside className="glass-panel admin-sidebar" style={{ 
+        width: 'var(--sidebar-width)', 
+        height: 'var(--sidebar-height)', 
+        margin: 'var(--sidebar-margin)', 
         display: 'flex', 
         flexDirection: 'column', 
         padding: '24px',
-        position: 'sticky',
-        top: '20px',
+        position: 'var(--sidebar-pos)' as any,
+        top: 'var(--sidebar-top)',
         zIndex: 5,
         border: '1px solid var(--glass-border)'
       }}>
@@ -118,7 +118,7 @@ export default function AdminDashboard() {
       </aside>
 
       {/* Main Content */}
-      <main style={{ flex: 1, padding: '20px 20px 20px 0', overflowY: 'auto', position: 'relative', zIndex: 5 }}>
+      <main className="admin-main" style={{ flex: 1, padding: 'var(--admin-main-padding)', overflowY: 'auto', position: 'relative', zIndex: 5 }}>
         <header style={{ marginBottom: '32px' }}>
           <p className="section-label">System Live</p>
           <h1 className="section-heading">Welcome back, Admin!</h1>

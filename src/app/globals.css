@@ -20,6 +20,13 @@
   --error: #DC2626;
   --radius: 20px;
   --trans: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  /* Admin Sidebar Defaults */
+  --sidebar-width: 260px;
+  --sidebar-height: calc(100vh - 40px);
+  --sidebar-margin: 20px;
+  --sidebar-pos: sticky;
+  --sidebar-top: 20px;
+  --admin-main-padding: 20px 20px 20px 0;
 }
 
 .dark {
@@ -1730,4 +1737,22 @@ body {
 .contact-bg {
   background: radial-gradient(circle at top left, rgba(0, 150, 136, 0.1), transparent),
               radial-gradient(circle at bottom right, rgba(0, 77, 64, 0.2), transparent);
+}
+
+/* ── ADMIN RESPONSIVE ── */
+@media (max-width: 1024px) {
+  :root {
+    --sidebar-width: calc(100% - 32px);
+    --sidebar-height: auto;
+    --sidebar-margin: 16px;
+    --sidebar-pos: relative;
+    --sidebar-top: 0;
+    --admin-main-padding: 0 16px 120px 16px;
+  }
+  .admin-layout {
+    flex-direction: column !important;
+  }
+  .admin-sidebar {
+    margin-bottom: 0 !important;
+  }
 }
