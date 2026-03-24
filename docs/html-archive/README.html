@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Documentation Structure | LEADS HTML Archive</title>
+<style>
+:root {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --text: #16243b;
+  --muted: #516075;
+  --accent: #0b6a8b;
+  --border: #d6dfeb;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+  color: var(--text);
+  background: radial-gradient(circle at top right, #eef6fb 0%, #f5f7fb 42%, #edf2f7 100%);
+}
+main { max-width: 1100px; margin: 0 auto; padding: 28px 20px 40px; }
+h1 { margin: 0 0 8px; }
+h2 { margin: 0 0 12px; }
+p { color: var(--muted); }
+.nav { margin: 14px 0 24px; }
+.nav a {
+  display: inline-block;
+  margin: 0 10px 10px 0;
+  padding: 9px 12px;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--accent);
+  font-weight: 600;
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 8px 20px rgba(10, 35, 66, 0.06);
+}
+.card + .card { margin-top: 14px; }
+pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.55;
+}
+ul { line-height: 1.6; }
+table { width: 100%; border-collapse: collapse; }
+th, td { border-bottom: 1px solid var(--border); padding: 8px; text-align: left; }
+.footer { margin-top: 24px; font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Documentation Structure</h1>
+  <p>Reliable browser view generated from current project docs.</p>
+  <div class="nav"><a href="index.html">Back to Index</a></div>
+  <section class="card"><pre># Documentation Structure
+
+This directory contains all project documentation organized by category for easy navigation and maintenance.
+
+## 📁 Directory Structure
+
+```
+docs/
+├── strategic/          # Business &amp; strategic documents
+│   ├── PRD-LEADS.docx                    # Product Requirements Document
+│   ├── CompetitorBrief-LEADS.docx        # Competitive Analysis
+│   └── Analytics-LEADS.docx              # Analytics &amp; Metrics Framework
+│
+├── technical/         # Technical specifications &amp; design
+│   ├── TechSpec-LEADS.docx               # Technical Specifications
+│   ├── TechSpec-LEADS.txt                # Text version
+│   └── DesignDocument-LEADS.html         # UI/UX Design System
+│
+├── content/           # Content &amp; marketing assets
+│   ├── Content-LEADS.docx                # Website Content &amp; Copy
+│   ├── Content-LEADS.txt                 # Text version
+│   ├── SocialKit-LEADS.docx              # Social Media Kit
+│   ├── Sitemap-LEADS.docx                # Information Architecture
+│   └── Sitemap-LEADS.txt                 # Text version
+│
+├── operational/       # Operations &amp; maintenance
+│   ├── LaunchChecklist-LEADS.docx        # Pre-Launch Checklist
+│   └── Maintenance-LEADS.docx            # Ongoing Maintenance Guide
+│
+└── CHANGELOG.md       # Complete change history &amp; version tracking
+```
+
+## 📋 Document Guide
+
+### Strategic (`/strategic`)
+Business-critical documents for stakeholders and planning.
+
+| Document | Updated | Purpose |
+|----------|---------|---------|
+| PRD-LEADS.docx | - | Core product vision and requirements |
+| CompetitorBrief-LEADS.docx | - | Market positioning &amp; competition analysis |
+| Analytics-LEADS.docx | - | KPIs, metrics, and analytics framework |
+
+### Technical (`/technical`)
+Technical specifications and design systems for developers.
+
+| Document | Updated | Purpose |
+|----------|---------|---------|
+| TechSpec-LEADS.docx | - | Architecture, stack, and technical requirements |
+| DesignDocument-LEADS.html | - | Component library and design tokens |
+
+### Content (`/content`)
+Copy, messaging, and information structure.
+
+| Document | Updated | Purpose |
+|----------|---------|---------|
+| Content-LEADS.docx | - | All website copy and messaging |
+| SocialKit-LEADS.docx | - | Social media templates and guidelines |
+| Sitemap-LEADS.docx | - | Information architecture and navigation |
+
+### Operational (`/operational`)
+Checklists and guides for daily operations and deployment.
+
+| Document | Updated | Purpose |
+|----------|---------|---------|
+| LaunchChecklist-LEADS.docx | - | Go-live checklist and pre-launch tasks |
+| Maintenance-LEADS.docx | - | Routine maintenance, updates, monitoring |
+
+## 📝 Change Tracking
+
+All changes to documents and code are tracked in **CHANGELOG.md**, including:
+- Date of change
+- What was changed
+- Why it was changed
+- Team member changes
+- Component/UI updates
+
+## 🔄 Usage Guidelines
+
+1. **Before updating a document**: Check CHANGELOG.md for previous changes
+2. **After updating a document**: Update the corresponding section in CHANGELOG.md
+3. **For version control**: All .docx files are tracked in Git
+4. **For accessibility**: .txt versions provided for all key documents
+
+## 📱 Team Structure Reference
+
+Current team is organized in three tiers:
+1. **Executive Council** (7 members) - Strategic leadership and oversight
+2. **Senior Organizing Committee** (8 members) - Senior management and coordination
+3. **Organizing Committee Members** (17 members) - Committee execution and specialized functions
+
+See CHANGELOG.md for current roster and recent team changes.
+
+---
+
+**Last Updated**: 2026-03-24
+</pre></section>
+  <div class="footer">Generated: 2026-03-24 15:47:06</div>
+</main>
+</body>
+</html>

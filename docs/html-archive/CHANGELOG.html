@@ -1,6 +1,71 @@
-# LEADS Website Documentation Changelog
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Project Changelog | LEADS HTML Archive</title>
+<style>
+:root {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --text: #16243b;
+  --muted: #516075;
+  --accent: #0b6a8b;
+  --border: #d6dfeb;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+  color: var(--text);
+  background: radial-gradient(circle at top right, #eef6fb 0%, #f5f7fb 42%, #edf2f7 100%);
+}
+main { max-width: 1100px; margin: 0 auto; padding: 28px 20px 40px; }
+h1 { margin: 0 0 8px; }
+h2 { margin: 0 0 12px; }
+p { color: var(--muted); }
+.nav { margin: 14px 0 24px; }
+.nav a {
+  display: inline-block;
+  margin: 0 10px 10px 0;
+  padding: 9px 12px;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--accent);
+  font-weight: 600;
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 8px 20px rgba(10, 35, 66, 0.06);
+}
+.card + .card { margin-top: 14px; }
+pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.55;
+}
+ul { line-height: 1.6; }
+table { width: 100%; border-collapse: collapse; }
+th, td { border-bottom: 1px solid var(--border); padding: 8px; text-align: left; }
+.footer { margin-top: 24px; font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Project Changelog</h1>
+  <p>Reliable browser view generated from current project docs.</p>
+  <div class="nav"><a href="index.html">Back to Index</a></div>
+  <section class="card"><pre># LEADS Website Documentation Changelog
 
-## Version History & Changes Tracking
+## Version History &amp; Changes Tracking
 
 ### [2026-03-24] - Mobile Navigation Drawer (Left Side)
 
@@ -19,7 +84,7 @@
 
 ### [2026-03-24] - Route Transition Content Loading Fix
 
-#### Navigation & Reveal Stability
+#### Navigation &amp; Reveal Stability
 - Fixed hidden/unfinished content issue after page transitions on mobile and desktop.
 - Updated `src/components/ScrollReveal.tsx` to reinitialize observer logic on every route change using pathname.
 - Added immediate in-viewport visibility handling so above-the-fold elements are shown without waiting for delayed observer callbacks.
@@ -67,25 +132,25 @@
 - Archive index includes links to original source docs in `docs/strategic/`, `docs/technical/`, `docs/content/`, and `docs/operational/`
 - Archive index includes recent git work summary for quick auditability
 
-### [2026-03-24] - Team Page Reorganization & Structure Optimization
+### [2026-03-24] - Team Page Reorganization &amp; Structure Optimization
 
 #### Documentation Structure Updates
-- **Reorganized file structure** from flat "site doc/" folder to categorized `/docs/` directory
+- **Reorganized file structure** from flat &quot;site doc/&quot; folder to categorized `/docs/` directory
 - Created 4 strategic categories:
-  - `docs/strategic/` - Business & strategy documents (PRD, Competitor Analysis, Analytics)
-  - `docs/technical/` - Technical specifications & design (TechSpec, Design Documents)
-  - `docs/content/` - Content & marketing assets (Content plans, Social Kit, Sitemap)
-  - `docs/operational/` - Operations & maintenance (Launch Checklist, Maintenance guides)
+  - `docs/strategic/` - Business &amp; strategy documents (PRD, Competitor Analysis, Analytics)
+  - `docs/technical/` - Technical specifications &amp; design (TechSpec, Design Documents)
+  - `docs/content/` - Content &amp; marketing assets (Content plans, Social Kit, Sitemap)
+  - `docs/operational/` - Operations &amp; maintenance (Launch Checklist, Maintenance guides)
 
 #### Team Page Changes (`src/app/team/page.tsx`)
-- **Removed**: "Collaborative Partners" section (Sahana Mahadev, Anurag Pandey)
+- **Removed**: &quot;Collaborative Partners&quot; section (Sahana Mahadev, Anurag Pandey)
 - **Reorganized team hierarchy** into three distinct groups:
   1. Executive Council (7 members)
   2. Senior Organizing Committee (8 members)
   3. Organizing Committee Members (17 members)
 - **Updated**: Syed Furqaan Ahmed moved from Senior level to Organizing Committee members
-- **Fixed**: Removed duplicate "Mr." prefix from Syed Furqaan Ahmed's name
-- **Updated hero text**: Changed from "collaborative partners" to "talented organizers"
+- **Fixed**: Removed duplicate &quot;Mr.&quot; prefix from Syed Furqaan Ahmed&#39;s name
+- **Updated hero text**: Changed from &quot;collaborative partners&quot; to &quot;talented organizers&quot;
 
 #### Team Card Component Updates (`src/components/TeamCard.tsx`)
 - Added hover effects: image zoom (1.08x), brightness increase, card elevation
@@ -105,9 +170,9 @@
 ### Strategic Documents (`docs/strategic/`)
 | Document | Purpose | Last Updated |
 |----------|---------|--------------|
-| PRD-LEADS.docx | Product Requirements & Roadmap | TBD |
+| PRD-LEADS.docx | Product Requirements &amp; Roadmap | TBD |
 | CompetitorBrief-LEADS.docx | Competitive Analysis | TBD |
-| Analytics-LEADS.docx | Analytics & Metrics Framework | TBD |
+| Analytics-LEADS.docx | Analytics &amp; Metrics Framework | TBD |
 
 ### Technical Documents (`docs/technical/`)
 | Document | Purpose | Last Updated |
@@ -119,9 +184,9 @@
 ### Content Documents (`docs/content/`)
 | Document | Purpose | Last Updated |
 |----------|---------|--------------|
-| Content-LEADS.docx | Website Content & Copy | TBD |
+| Content-LEADS.docx | Website Content &amp; Copy | TBD |
 | Content-LEADS.txt | Text version of Content | TBD |
-| SocialKit-LEADS.docx | Social Media Kit & Guidelines | TBD |
+| SocialKit-LEADS.docx | Social Media Kit &amp; Guidelines | TBD |
 | Sitemap-LEADS.docx | Information Architecture | TBD |
 | Sitemap-LEADS.txt | Text version of Sitemap | TBD |
 
@@ -141,19 +206,19 @@
 - Prof. Kuldeep Kumar Raina - Patron
 - Dr. K. M. Sharath Kumar - Chief Adviser
 - Dr. Subhadeep Mukherjee - Centre Head
-- Mr. Ajay R - Finance Head & Auditor
-- Dr. Kiran Kumar B M - Head Event & Campus Coordination (RT Campus)
-- Dr. Pallabi Mund - Head Event & Campus Coordination (GG Campus)
+- Mr. Ajay R - Finance Head &amp; Auditor
+- Dr. Kiran Kumar B M - Head Event &amp; Campus Coordination (RT Campus)
+- Dr. Pallabi Mund - Head Event &amp; Campus Coordination (GG Campus)
 - Ms. Sujata Bijwe - Head Industry Connect
 
 #### Senior Organizing Committee (8 members)
 - Mr. Gurutejas C - Sr. President
 - Mr. Abhijit Arya - Sr. Vice President
-- Mr. Laksh Soorya Singh - Sr. Events & Operations Head
-- Mr. Bhawen Maroo - Sr. Events & Operations Head
-- Ms. Shreesha S.N - Sr. Social Media & Design Head
+- Mr. Laksh Soorya Singh - Sr. Events &amp; Operations Head
+- Mr. Bhawen Maroo - Sr. Events &amp; Operations Head
+- Ms. Shreesha S.N - Sr. Social Media &amp; Design Head
 - Ms. Bharvi A Padia - Sr. PR Head
-- Mr. Arvind Rakshith G - Sr. Finance & Sponsorship Head
+- Mr. Arvind Rakshith G - Sr. Finance &amp; Sponsorship Head
 
 #### Organizing Committee Members (17 members)
 - Nuthan H - President
@@ -165,14 +230,14 @@
 - Shriram SG - General Secretary
 - S Bhavya Shree - General Secretary
 - Manoj Petakamsetty - General Secretary
-- Yash Chandak - Head-Operations & Logistics
-- Kayomarz Pavri - Head-Design & Social Media
-- Shwetha S - Head-Design & Social Media
-- Niyati Chawra - Head-Leadership & Development
-- Sadiya Sawood - Head-Leadership & Development
-- Nimisha K M - Head-Sustainability & Innovation
-- Kishan KP - Head-Marketing & Branding
-- Syed Furqaan Ahmed - Head-Research & Development
+- Yash Chandak - Head-Operations &amp; Logistics
+- Kayomarz Pavri - Head-Design &amp; Social Media
+- Shwetha S - Head-Design &amp; Social Media
+- Niyati Chawra - Head-Leadership &amp; Development
+- Sadiya Sawood - Head-Leadership &amp; Development
+- Nimisha K M - Head-Sustainability &amp; Innovation
+- Kishan KP - Head-Marketing &amp; Branding
+- Syed Furqaan Ahmed - Head-Research &amp; Development
 
 ---
 
@@ -231,10 +296,10 @@
 - **Dependencies**: None
 - **Estimated Impact**: Cleaner UI, better UX
 
-#### 3. Remove "Mr." Title from Syed Furqaan Ahmed
+#### 3. Remove &quot;Mr.&quot; Title from Syed Furqaan Ahmed
 - **Status**: Pending
 - **Files**: `src/app/team/page.tsx`
-- **Change**: "Mr. Syed Furqaan Ahmed" → "Syed Furqaan Ahmed"
+- **Change**: &quot;Mr. Syed Furqaan Ahmed&quot; → &quot;Syed Furqaan Ahmed&quot;
 - **Location**: Line 234 (organizingCommittee array)
 - **Dependencies**: None
 - **Estimated Impact**: Consistency with other team member naming
@@ -243,7 +308,7 @@
 
 
 #### 4. Team Member Photographs (✅ COMPLETE)
-- **Status**: ✅ Downloaded & Ready
+- **Status**: ✅ Downloaded &amp; Ready
 - **Location**: `/public/team-photos/`
 - **Coverage**: 32 active team members + 2 legacy partners
 - **Total Files**: 34 WebP images (14 MB total)
@@ -270,7 +335,7 @@
 - **Estimated Impact**: Complete team roster, professional appearance
 ### Lower Priority
 
-- [ ] Update all document "Last Updated" dates in `/docs/`
+- [ ] Update all document &quot;Last Updated&quot; dates in `/docs/`
 - [ ] Review and update PRD with latest feature changes
 - [ ] Create component library documentation
 - [ ] Add performance optimization audit
@@ -284,7 +349,7 @@
 |------|----------|--------|-------------|-------|
 | Team Card Enhancements | High | In Progress | 2026-03-25 | - |
 | Dark Mode Button Fix | High | Pending | 2026-03-25 | - |
-| Remove "Mr." from Syed | High | Pending | 2026-03-25 | - |
+| Remove &quot;Mr.&quot; from Syed | High | Pending | 2026-03-25 | - |
 | Download Missing Photos | Medium | ✅ Complete | 2026-03-24 | ✅ |
 | Documentation Updates | Ongoing | Active | Daily | - |
 ---
@@ -300,3 +365,8 @@ c633115 - Remove Collaborative Partners section and update team page structure
 
 **Last Updated**: 2026-03-24  
 **Document Version**: 1.0
+</pre></section>
+  <div class="footer">Generated: 2026-03-24 15:47:06</div>
+</main>
+</body>
+</html>

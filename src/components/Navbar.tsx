@@ -18,7 +18,7 @@ const links = [
 export default function Navbar() {
   const pathname = usePathname()
   const { theme, toggleTheme } = useTheme()
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const [mobileMenuPath, setMobileMenuPath] = useState<string | null>(null)
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -27,6 +27,8 @@ export default function Navbar() {
     window.addEventListener('resize', checkMobile)
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
+
+  const mobileOpen = mobileMenuPath === pathname
 
   return (
     <>
@@ -70,16 +72,8 @@ export default function Navbar() {
 
           <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
             <button
-              className="theme-toggle nav-hamburger"
-              onClick={toggleTheme}
-              id="theme-toggle-mobile"
-              aria-label="Toggle dark mode"
-            >
-              {theme === 'light' ? '🌙' : '☀️'}
-            </button>
-            <button
               className="nav-hamburger"
-              onClick={() => setMobileOpen(!mobileOpen)}
+              onClick={() => setMobileMenuPath(mobileOpen ? null : pathname)}
               id="mobile-menu-toggle"
               aria-label="Toggle menu"
             >
@@ -95,13 +89,20 @@ export default function Navbar() {
         </div>
       </nav>
 
+      <button
+        type="button"
+        className={`mobile-menu-backdrop ${mobileOpen ? 'open' : ''}`}
+        onClick={() => setMobileMenuPath(null)}
+        aria-label="Close mobile menu"
+      />
+
       <div className={`mobile-menu ${mobileOpen ? 'open' : ''}`} id="mobile-menu">
         {links.map((link) => (
           <Link
             key={link.href}
             href={link.href}
             className={`nav-link ${pathname === link.href ? 'active' : ''}`}
-            onClick={() => setMobileOpen(false)}
+            onClick={() => setMobileMenuPath(null)}
           >
             {link.label}
           </Link>
@@ -109,7 +110,7 @@ export default function Navbar() {
         <Link
           href="/join"
           className="nav-cta"
-          onClick={() => setMobileOpen(false)}
+          onClick={() => setMobileMenuPath(null)}
         >
           Join LEADS
         </Link>
