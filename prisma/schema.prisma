@@ -17,3 +17,13 @@ model Application {
   whyJoin   String
   createdAt DateTime @default(now())
 }
+
+model Enquiry {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  subject   String
+  message   String
+  status    String   @default("new")
+  createdAt DateTime @default(now())
+}

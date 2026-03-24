@@ -12,44 +12,68 @@ import {
   LogOut, 
   Home,
   CheckCircle,
-  Clock
+  Clock,
+  Trash
 } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { getEnquiries, updateEnquiryStatus } from '@/app/actions/enquiry'
+
+interface Enquiry {
+  id: number;
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  status: string;
+  createdAt: Date;
+}
 
 export default function AdminDashboard() {
   const router = useRouter()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [enquiries, setEnquiries] = useState<Enquiry[]>([])
 
   useEffect(() => {
     const auth = localStorage.getItem('admin_auth')
     if (auth === 'true') {
       setIsAuthenticated(true)
-      setIsLoading(false)
+      fetchEnquiries()
     } else {
       router.push('/admin')
     }
   }, [router])
+
+  async function fetchEnquiries() {
+    try {
+      const data = await getEnquiries()
+      // Convert result to match local types (handling Date vs ISO string if necessary)
+      setEnquiries(data as any)
+      setIsLoading(false)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleStatusUpdate = async (id: number, status: string) => {
+    const result = await updateEnquiryStatus(id, status)
+    if (result.success) {
+      fetchEnquiries()
+    }
+  }
 
   const handleLogout = () => {
     localStorage.removeItem('admin_auth')
     router.push('/admin')
   }
 
-  if (isLoading) return <div className="hero-bg" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><p className="section-label">Loading...</p></div>
+  if (isLoading) return <div className="hero-bg" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><p className="section-label">Loading Dashboard...</p></div>
 
   const stats = [
-    { label: 'Total Enquiries', value: '42', icon: <MessageSquare size={20} />, color: 'var(--teal)' },
+    { label: 'Total Enquires', value: enquiries.length.toString(), icon: <MessageSquare size={20} />, color: 'var(--teal)' },
     { label: 'Website Views', value: '1.2k', icon: <Eye size={20} />, color: 'var(--primary)' },
-    { label: 'Subscribers', value: '86', icon: <Users size={20} />, color: 'var(--gold)' },
-  ]
-
-  const submissions = [
-    { id: 1, name: 'John Doe', email: 'john@example.com', subject: 'Partnership Inquiry', date: 'Mar 24, 2026', status: 'new' },
-    { id: 2, name: 'Sarah Smith', email: 'sarah@msruas.ac.in', subject: 'Student Registration', date: 'Mar 24, 2026', status: 'read' },
-    { id: 3, name: 'Michael Chen', email: 'mchen@tech.com', subject: 'Mentorship Program', date: 'Mar 23, 2026', status: 'replied' },
-    { id: 4, name: 'Ananya Rao', email: 'ananya@msruas.ac.in', subject: 'Volunteer for BLS', date: 'Mar 22, 2026', status: 'new' },
+    { label: 'New Inbox', value: enquiries.filter(e => e.status === 'new').length.toString(), icon: <Users size={20} />, color: 'var(--gold)' },
   ]
 
   return (
@@ -68,7 +92,9 @@ export default function AdminDashboard() {
         flexDirection: 'column', 
         padding: '24px',
         position: 'sticky',
-        top: '20px'
+        top: '20px',
+        zIndex: 5,
+        border: '1px solid var(--glass-border)'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '40px' }}>
           <div style={{ width: '40px', height: '40px', background: 'var(--primary)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -84,9 +110,6 @@ export default function AdminDashboard() {
           <Link href="/" className="btn btn-outline" style={{ display: 'flex', alignItems: 'center', gap: '10px', width: '100%', justifyContent: 'flex-start', padding: '12px 16px', border: 'none' }}>
             <Home size={18} /> View Website
           </Link>
-          <a href="#" className="btn btn-outline" style={{ display: 'flex', alignItems: 'center', gap: '10px', width: '100%', justifyContent: 'flex-start', padding: '12px 16px', border: 'none' }}>
-            <Settings size={18} /> Settings
-          </a>
         </nav>
 
         <button onClick={handleLogout} className="btn btn-outline" style={{ display: 'flex', alignItems: 'center', gap: '10px', width: '100%', border: 'none', color: 'var(--error)' }}>
@@ -95,10 +118,11 @@ export default function AdminDashboard() {
       </aside>
 
       {/* Main Content */}
-      <main style={{ flex: 1, padding: '20px 20px 20px 0', overflowY: 'auto' }}>
+      <main style={{ flex: 1, padding: '20px 20px 20px 0', overflowY: 'auto', position: 'relative', zIndex: 5 }}>
         <header style={{ marginBottom: '32px' }}>
-          <p className="section-label">Overview</p>
+          <p className="section-label">System Live</p>
           <h1 className="section-heading">Welcome back, Admin!</h1>
+          <p style={{ color: 'var(--text2)', fontSize: '14px' }}>Real-time dashboard for user enquiries.</p>
         </header>
 
         {/* Stats Grid */}
@@ -124,44 +148,74 @@ export default function AdminDashboard() {
         {/* Recent Submissions Table */}
         <div className="glass-panel" style={{ padding: '24px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-            <h3 style={{ fontSize: '18px', fontWeight: 700, color: 'var(--text)', margin: '0' }}>Recent Form Submissions</h3>
-            <button className="btn btn-primary" style={{ padding: '8px 16px', fontSize: '13px' }}>View All</button>
+            <h3 style={{ fontSize: '18px', fontWeight: 700, color: 'var(--text)', margin: '0' }}>Live Form Submissions</h3>
+            <button className="btn btn-ghost" onClick={fetchEnquiries} style={{ padding: '8px 16px', fontSize: '13px' }}>Refresh 🔄</button>
           </div>
 
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
               <thead>
                 <tr style={{ borderBottom: '1px solid var(--glass-border)' }}>
-                  <th style={{ padding: '12px 16px', fontSize: '13px', fontWeight: 700, color: 'var(--text3)', textTransform: 'uppercase', letterSpacing: '1px' }}>Name</th>
-                  <th style={{ padding: '12px 16px', fontSize: '13px', fontWeight: 700, color: 'var(--text3)', textTransform: 'uppercase', letterSpacing: '1px' }}>Subject</th>
-                  <th style={{ padding: '12px 16px', fontSize: '13px', fontWeight: 700, color: 'var(--text3)', textTransform: 'uppercase', letterSpacing: '1px' }}>Date</th>
-                  <th style={{ padding: '12px 16px', fontSize: '13px', fontWeight: 700, color: 'var(--text3)', textTransform: 'uppercase', letterSpacing: '1px' }}>Status</th>
+                  <th style={{ padding: '12px 16px', fontSize: '11px', fontWeight: 700, color: 'var(--text3)', textTransform: 'uppercase', letterSpacing: '1px' }}>Sender</th>
+                  <th style={{ padding: '12px 16px', fontSize: '11px', fontWeight: 700, color: 'var(--text3)', textTransform: 'uppercase', letterSpacing: '1px' }}>Enquiry & Message</th>
+                  <th style={{ padding: '12px 16px', fontSize: '11px', fontWeight: 700, color: 'var(--text3)', textTransform: 'uppercase', letterSpacing: '1px' }}>Status</th>
+                  <th style={{ padding: '12px 16px', fontSize: '11px', fontWeight: 700, color: 'var(--text3)', textTransform: 'uppercase', letterSpacing: '1px' }}>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {submissions.map((sub, i) => (
-                  <tr key={i} style={{ borderBottom: '1px solid var(--glass-border)' }}>
-                    <td style={{ padding: '16px' }}>
-                      <div style={{ fontWeight: 700, color: 'var(--text)' }}>{sub.name}</div>
-                      <div style={{ fontSize: '12px', color: 'var(--text2)' }}>{sub.email}</div>
-                    </td>
-                    <td style={{ padding: '16px', fontSize: '14px', color: 'var(--text2)' }}>{sub.subject}</td>
-                    <td style={{ padding: '16px', fontSize: '14px', color: 'var(--text2)' }}>{sub.date}</td>
-                    <td style={{ padding: '16px' }}>
-                      <span style={{ 
-                        fontSize: '11px', 
-                        fontWeight: 700, 
-                        padding: '4px 10px', 
-                        borderRadius: '20px', 
-                        background: sub.status === 'new' ? 'var(--teal)15' : sub.status === 'read' ? 'var(--primary)15' : 'var(--success)15',
-                        color: sub.status === 'new' ? 'var(--teal)' : sub.status === 'read' ? 'var(--primary)' : 'var(--success)',
-                        textTransform: 'uppercase'
-                      }}>
-                        {sub.status}
-                      </span>
-                    </td>
+                {enquiries.length === 0 ? (
+                  <tr>
+                    <td colSpan={4} style={{ padding: '40px', textAlign: 'center', color: 'var(--text3)' }}>No enquires found yet.</td>
                   </tr>
-                ))}
+                ) : (
+                  enquiries.map((enq) => (
+                    <tr key={enq.id} style={{ borderBottom: '1px solid var(--glass-border)', transition: 'background 0.2s' }}>
+                      <td style={{ padding: '16px' }}>
+                        <div style={{ fontWeight: 700, color: 'var(--text)', fontSize: '14px' }}>{enq.name}</div>
+                        <div style={{ fontSize: '12px', color: 'var(--text2)' }}>{enq.email}</div>
+                      </td>
+                      <td style={{ padding: '16px' }}>
+                        <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--primary)', textTransform: 'capitalize', marginBottom: '4px' }}>{enq.subject}</div>
+                        <div style={{ fontSize: '13px', color: 'var(--text2)', maxWidth: '300px', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
+                          {enq.message}
+                        </div>
+                      </td>
+                      <td style={{ padding: '16px' }}>
+                        <span style={{ 
+                          fontSize: '10px', 
+                          fontWeight: 700, 
+                          padding: '4px 10px', 
+                          borderRadius: '20px', 
+                          background: enq.status === 'new' ? 'rgba(0,188,212,0.15)' : enq.status === 'read' ? 'rgba(21,101,192,0.15)' : 'rgba(22,163,74,0.15)',
+                          color: enq.status === 'new' ? 'var(--teal)' : enq.status === 'read' ? 'var(--primary)' : 'var(--success)',
+                          textTransform: 'uppercase'
+                        }}>
+                          {enq.status}
+                        </span>
+                      </td>
+                      <td style={{ padding: '16px' }}>
+                        <div style={{ display: 'flex', gap: '8px' }}>
+                          <button 
+                            className="btn btn-icon" 
+                            onClick={() => handleStatusUpdate(enq.id, 'read')}
+                            title="Mark as Read"
+                            style={{ padding: '6px', minWidth: 'auto', border: '1px solid var(--glass-border)' }}
+                          >
+                            <Eye size={16} />
+                          </button>
+                          <button 
+                            className="btn btn-icon" 
+                            onClick={() => handleStatusUpdate(enq.id, 'replied')}
+                            title="Mark as Replied"
+                            style={{ padding: '6px', minWidth: 'auto', border: '1px solid var(--glass-border)', color: 'var(--success)' }}
+                          >
+                            <CheckCircle size={16} />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>

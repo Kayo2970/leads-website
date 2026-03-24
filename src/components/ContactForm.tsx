@@ -1,17 +1,34 @@
 'use client'
 
-import { useState, FormEvent } from 'react'
+import { useState, useRef } from 'react'
+import { submitEnquiry } from '@/app/actions/enquiry'
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const formRef = useRef<HTMLFormElement>(null)
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
-    await new Promise((resolve) => setTimeout(resolve, 300))
-    setSubmitted(true)
-    setLoading(false)
+    setError('')
+    
+    const formData = new FormData(e.currentTarget)
+    
+    try {
+      const result = await submitEnquiry(formData)
+      if (result.success) {
+        setSubmitted(true)
+        formRef.current?.reset()
+      } else {
+        setError(result.error || 'Something went wrong')
+      }
+    } catch (err) {
+      setError('A connection error occurred. Please try again.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   if (submitted) {
@@ -22,27 +39,34 @@ export default function ContactForm() {
           Message Sent!
         </h3>
         <p style={{ fontSize: '15px', color: 'var(--text2)' }}>
-          Thank you for reaching out. We&apos;ll respond as soon as possible.
+          Thank you for reaching out. Your enquiry has been saved to our database and we&apos;ll respond as soon as possible.
         </p>
+        <button 
+          onClick={() => setSubmitted(false)}
+          className="btn btn-outline"
+          style={{ marginTop: '20px', fontSize: '13px' }}
+        >
+          Send Another Message
+        </button>
       </div>
     )
   }
 
   return (
-    <form onSubmit={handleSubmit} id="contact-form">
+    <form onSubmit={handleSubmit} ref={formRef} id="contact-form">
       <div className="grid-2">
         <div className="form-group">
           <label className="form-label" htmlFor="contact-name">Full Name *</label>
-          <input className="form-input" id="contact-name" type="text" placeholder="Your name" required />
+          <input className="form-input" id="contact-name" name="name" type="text" placeholder="Your name" required />
         </div>
         <div className="form-group">
           <label className="form-label" htmlFor="contact-email">Email Address *</label>
-          <input className="form-input" id="contact-email" type="email" placeholder="you@example.com" required />
+          <input className="form-input" id="contact-email" name="email" type="email" placeholder="you@example.com" required />
         </div>
       </div>
       <div className="form-group">
         <label className="form-label" htmlFor="contact-subject">Subject *</label>
-        <select className="form-input" id="contact-subject" required>
+        <select className="form-input" id="contact-subject" name="subject" required>
           <option value="">Select a topic</option>
           <option value="general">General Enquiry</option>
           <option value="membership">Membership Question</option>
@@ -54,8 +78,15 @@ export default function ContactForm() {
       </div>
       <div className="form-group">
         <label className="form-label" htmlFor="contact-message">Message *</label>
-        <textarea className="form-input" id="contact-message" rows={5} placeholder="How can we help?" required />
+        <textarea className="form-input" id="contact-message" name="message" rows={5} placeholder="How can we help?" required />
       </div>
+      
+      {error && (
+        <p style={{ color: 'var(--error)', fontSize: '13px', marginBottom: '16px', fontWeight: 600 }}>
+          {error}
+        </p>
+      )}
+
       <button type="submit" className="btn btn-primary" disabled={loading} id="contact-submit-btn">
         {loading ? 'Sending...' : 'Send Message →'}
       </button>
