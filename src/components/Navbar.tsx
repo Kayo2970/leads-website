@@ -9,6 +9,7 @@ import { useTheme } from './ThemeProvider'
 const links = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
+  { href: '/team', label: 'Team' },
   { href: '/events', label: 'Events' },
   { href: '/events/bharat-lead-summit', label: 'BLS' },
   { href: '/contact', label: 'Contact' },

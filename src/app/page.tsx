@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import TestimonialCarousel from '@/components/TestimonialCarousel'
 import ArcRings from '@/components/ArcRings'
+import InteractiveHeroShapes from '@/components/InteractiveHeroShapes'
 
 export const metadata: Metadata = {
   title: 'LEADS Next Gen Centre | Inspiring Future-Ready Youth Leaders',
@@ -74,11 +75,7 @@ export default function HomePage() {
       <section className="hero" id="hero">
         <div className="hero-bg">
           <ArcRings />
-          <div className="hero-shapes">
-            <div className="hero-shape hero-shape-1" />
-            <div className="hero-shape hero-shape-2" />
-            <div className="hero-shape hero-shape-3" />
-          </div>
+          <InteractiveHeroShapes />
         </div>
         <div className="hero-content">
           <div className="hero-eyebrow">MSRUAS · Est. 2019</div>

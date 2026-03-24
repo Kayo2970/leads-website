@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Preloader from '@/components/Preloader'
 import ScrollReveal from '@/components/ScrollReveal'
+import InteractiveCursor from '@/components/InteractiveCursor'
 
 const inter = Inter({
   variable: '--font-inter',
@@ -53,6 +54,7 @@ export default function RootLayout({
     <html lang="en" className={inter.variable}>
       <body>
         <ThemeProvider>
+          <InteractiveCursor />
           <Preloader />
           <Navbar />
           <main>{children}</main>
