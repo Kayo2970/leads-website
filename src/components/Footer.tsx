@@ -1,7 +1,15 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 export default function Footer() {
+  const pathname = usePathname()
+  
+  // Hide footer on Admin pages
+  if (pathname?.startsWith('/admin')) return null
+
   return (
     <footer className="footer dynamic-bg" id="footer" style={{ color: 'white', borderTop: 'none', position: 'relative' }}>
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
