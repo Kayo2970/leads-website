@@ -54,7 +54,9 @@ body {
 .preloader {
   position: fixed;
   inset: 0;
-  background: linear-gradient(135deg, #0D47A1 0%, #0F2040 100%);
+  background: linear-gradient(-45deg, #ffffff, #f0f7ff, #e8f1fc, #ffffff);
+  background-size: 400% 400%;
+  animation: dynamicBg 8s ease infinite;
   z-index: 9999;
   display: flex;
   align-items: center;
@@ -135,6 +137,11 @@ body {
   100% { 
     transform: rotateY(1080deg) scale(1);
   }
+}
+@keyframes dynamicBg {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 @keyframes loadingLine {
   0%, 100% { transform: scaleX(0); opacity: 0; }
