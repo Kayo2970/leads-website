@@ -21,17 +21,26 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    // Time-of-day always wins. Only respect localStorage if the user
+    // explicitly toggled (flag stored separately).
+    const hour = new Date().getHours()
+    const isNight = hour >= 18 || hour < 6
+    const userOverride = localStorage.getItem('leads-theme-override')
     const saved = localStorage.getItem('leads-theme') as Theme | null
-    if (saved) {
-      setTheme(saved)
-      document.documentElement.classList.toggle('dark', saved === 'dark')
+
+    let resolved: Theme
+    if (userOverride === 'true' && saved) {
+      // User manually picked a theme — honour it
+      resolved = saved
     } else {
-      const hour = new Date().getHours()
-      const isNight = hour >= 18 || hour < 6
-      const defaultTheme = isNight ? 'dark' : 'light'
-      setTheme(defaultTheme)
-      document.documentElement.classList.toggle('dark', isNight)
+      // Default to time-of-day; clear any stale saved value
+      resolved = isNight ? 'dark' : 'light'
+      localStorage.removeItem('leads-theme')
+      localStorage.removeItem('leads-theme-override')
     }
+
+    setTheme(resolved)
+    document.documentElement.classList.toggle('dark', resolved === 'dark')
     setMounted(true)
   }, [])
 
@@ -39,6 +48,7 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
     const next = theme === 'light' ? 'dark' : 'light'
     setTheme(next)
     localStorage.setItem('leads-theme', next)
+    localStorage.setItem('leads-theme-override', 'true')
     document.documentElement.classList.toggle('dark', next === 'dark')
   }
 
