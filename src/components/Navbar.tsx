@@ -24,6 +24,9 @@ export default function Navbar() {
   const toggle = () => setMenuOpen((o) => !o)
   const close = () => setMenuOpen(false)
 
+  // Hide Navbar on Admin pages to prevent overlap
+  if (pathname?.startsWith('/admin')) return null
+
   return (
     <>
       {/* ── NAV BAR ── */}
