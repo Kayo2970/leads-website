@@ -29,7 +29,7 @@ export default function Navbar() {
 
   return (
     <>
-      {/* ── NAV BAR ── */}
+      {/* ── NAV BAR (Desktop top bar + Mobile logo only) ── */}
       <nav id="main-nav" className="navbar">
         <div className="nav-container">
 
@@ -60,36 +60,36 @@ export default function Navbar() {
               {theme === 'light' ? '🌙' : '☀️'}
             </button>
           </div>
-
-          {/* Bottom Nav for Mobile */}
-          <div className="bottom-nav">
-            <Link href="/" className={`bottom-nav-item ${pathname === '/' ? 'active' : ''}`}>
-              <Home className="bottom-nav-icon" />
-              <span>Home</span>
-            </Link>
-            <Link href="/about" className={`bottom-nav-item ${pathname === '/about' ? 'active' : ''}`}>
-              <Users className="bottom-nav-icon" />
-              <span>About</span>
-            </Link>
-            <Link href="/team" className={`bottom-nav-item ${pathname === '/team' ? 'active' : ''}`}>
-              <Award className="bottom-nav-icon" />
-              <span>Team</span>
-            </Link>
-            <Link href="/events" className={`bottom-nav-item ${pathname === '/events' ? 'active' : ''}`}>
-              <Calendar className="bottom-nav-icon" />
-              <span>Events</span>
-            </Link>
-            <Link href="/contact" className={`bottom-nav-item ${pathname === '/contact' ? 'active' : ''}`}>
-              <Mail className="bottom-nav-icon" />
-              <span>Contact</span>
-            </Link>
-            <Link href="/admin" className={`bottom-nav-item ${pathname === '/admin' ? 'active' : ''}`}>
-              <LayoutDashboard className="bottom-nav-icon" />
-              <span>Admin</span>
-            </Link>
-          </div>
         </div>
       </nav>
+
+      {/* ── BOTTOM NAV (Mobile) ── Placed OUTSIDE navbar to avoid backdrop-filter containment ── */}
+      <div className="bottom-nav">
+        <Link href="/" className={`bottom-nav-item ${pathname === '/' ? 'active' : ''}`}>
+          <Home className="bottom-nav-icon" />
+          <span>Home</span>
+        </Link>
+        <Link href="/about" className={`bottom-nav-item ${pathname === '/about' ? 'active' : ''}`}>
+          <Users className="bottom-nav-icon" />
+          <span>About</span>
+        </Link>
+        <Link href="/team" className={`bottom-nav-item ${pathname === '/team' ? 'active' : ''}`}>
+          <Award className="bottom-nav-icon" />
+          <span>Team</span>
+        </Link>
+        <Link href="/events" className={`bottom-nav-item ${pathname === '/events' ? 'active' : ''}`}>
+          <Calendar className="bottom-nav-icon" />
+          <span>Events</span>
+        </Link>
+        <Link href="/contact" className={`bottom-nav-item ${pathname === '/contact' ? 'active' : ''}`}>
+          <Mail className="bottom-nav-icon" />
+          <span>Contact</span>
+        </Link>
+        <Link href="/admin" className={`bottom-nav-item ${pathname === '/admin' ? 'active' : ''}`}>
+          <LayoutDashboard className="bottom-nav-icon" />
+          <span>Admin</span>
+        </Link>
+      </div>
 
       {/* ── BACKDROP ── only mounted when open so it never blocks taps */}
       {menuOpen && (
