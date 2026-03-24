@@ -25,6 +25,12 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
     if (saved) {
       setTheme(saved)
       document.documentElement.classList.toggle('dark', saved === 'dark')
+    } else {
+      const hour = new Date().getHours()
+      const isNight = hour >= 18 || hour < 6
+      const defaultTheme = isNight ? 'dark' : 'light'
+      setTheme(defaultTheme)
+      document.documentElement.classList.toggle('dark', isNight)
     }
     setMounted(true)
   }, [])

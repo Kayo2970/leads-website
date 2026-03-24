@@ -12,7 +12,7 @@ export default function Preloader() {
     checkMobile()
     window.addEventListener('resize', checkMobile)
     
-    const timer = setTimeout(() => setHidden(true), 3000)
+    const timer = setTimeout(() => setHidden(true), 800)
     return () => {
       clearTimeout(timer)
       window.removeEventListener('resize', checkMobile)

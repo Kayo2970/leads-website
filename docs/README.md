@@ -1,4 +1,7 @@
-# Documentation Structure
+\n[2026-03-24] Architecture Update: 
+- Optimized loading speeds drastically by eliminating artificial timeouts (3s to 800ms) and refining Preloader DOM handling.
+- Enabled full Dark Mode environment for all site elements (Preloader now includes natively shifting deep-space gradients) and implemented System Time Auto-Trigger context. Device automatically detects if it is past 6PM and renders dark mode natively.
+- Completed conversion for interactive menu fan shapes to convex leftward arc (`InteractiveCards.tsx`), scaling the experience cleanly on all devices.\n# Documentation Structure
 
 This directory contains all project documentation organized by category for easy navigation and maintenance.
 
