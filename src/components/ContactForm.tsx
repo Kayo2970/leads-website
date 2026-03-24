@@ -54,7 +54,7 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} ref={formRef} id="contact-form">
-      <div className="grid-2">
+      <div className="contact-form-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
         <div className="form-group">
           <label className="form-label" htmlFor="contact-name">Full Name *</label>
           <input className="form-input" id="contact-name" name="name" type="text" placeholder="Your name" required />

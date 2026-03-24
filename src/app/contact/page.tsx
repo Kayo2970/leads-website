@@ -106,7 +106,7 @@ export default function ContactPage() {
                 <h4 style={{ fontSize: '14px', fontWeight: 700, color: 'var(--text)', marginBottom: '12px' }}>
                   Follow Our Journey
                 </h4>
-                <div style={{ display: 'flex', gap: '12px' }}>
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                   {[
                     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/leads-next-gen-centre-ruas-700555327/' },
                     { label: 'Summit Instagram', href: 'https://www.instagram.com/bharatlead_summit?igsh=b3c5dmtwMG43MmMw&utm_source=qr' },
@@ -123,13 +123,14 @@ export default function ContactPage() {
                       style={{
                         background: 'var(--surface)',
                         color: 'var(--text2)',
-                        padding: '10px 18px',
+                        padding: '10px 14px',
                         borderRadius: '10px',
-                        fontSize: '13px',
+                        fontSize: '12px',
                         fontWeight: 600,
                         textDecoration: 'none',
                         border: '1px solid rgba(21,101,192,0.1)',
                         transition: 'all 0.2s',
+                        whiteSpace: 'nowrap'
                       }}
                     >
                       {platform.label}
