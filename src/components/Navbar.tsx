@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useTheme } from './ThemeProvider'
 
 const links = [
@@ -18,6 +18,14 @@ export default function Navbar() {
   const pathname = usePathname()
   const { theme, toggleTheme } = useTheme()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   return (
     <>
@@ -25,10 +33,10 @@ export default function Navbar() {
         <div className="nav-container">
           <Link href="/" className="nav-logo" id="nav-logo">
             <Image
-              src="/leads-logo-large.png"
+              src={isMobile ? '/leads-logo-thumb.png' : '/leads-logo-large.png'}
               alt="LEADS Next Gen Centre"
-              width={320}
-              height={92}
+              width={isMobile ? 60 : 320}
+              height={isMobile ? 60 : 92}
               className="nav-logo-image"
               priority
             />

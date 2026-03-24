@@ -156,9 +156,9 @@ body {
   justify-content: center;
   text-decoration: none;
   border-radius: 8px;
-  padding: 6px 10px;
-  background: rgba(13,71,161,0.08);
-  border: 1px solid rgba(21,101,192,0.18);
+  padding: 0;
+  background: transparent;
+  border: none;
 }
 .nav-logo-image {
   width: 320px;
@@ -247,10 +247,10 @@ body {
   .nav-links { display: none; }
   .nav-hamburger { display: block; }
   .nav-container { height: 82px; }
-  .nav-logo { padding: 4px 8px; }
+  .nav-logo { padding: 0; }
   .nav-logo-image {
-    width: 220px;
-    height: 54px;
+    width: 60px;
+    height: 60px;
   }
 }
 
