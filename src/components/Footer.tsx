@@ -3,17 +3,23 @@ import Link from 'next/link'
 
 export default function Footer() {
   return (
-    <footer className="footer" id="footer">
-      <div className="container">
+    <footer className="footer dynamic-bg" id="footer" style={{ color: 'white', borderTop: 'none', position: 'relative' }}>
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div className="footer-grid">
           <div className="footer-brand">
-            <Image
-              src="/leads-logo-large.png"
-              alt="LEADS Next Gen Centre"
-              width={400}
-              height={116}
-              className="footer-logo-image"
-            />
+            <div style={{ background: 'white', padding: '16px', borderRadius: '12px', display: 'inline-block', marginBottom: '16px' }}>
+                <Image
+                  src="/leads-logo-large.png"
+                  alt="LEADS Next Gen Centre"
+                  width={200}
+                  height={58}
+                  className="footer-logo-image" style={{ filter: 'none' }}
+                />
+            </div>
+            <p style={{ color: '#E0F2F1' }}>
+              LEADS Next Gen Centre — MSRUAS. Empowering the next generation of
+              leaders, speakers, and entrepreneurs since 2019.
+            </p>
             <p>
               LEADS Next Gen Centre — MSRUAS. Empowering the next generation of
               leaders, speakers, and entrepreneurs since 2019.

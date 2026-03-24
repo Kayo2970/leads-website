@@ -71,44 +71,44 @@ const stats = [
 export default function HomePage() {
   return (
     <>
+      
       {/* ── HERO ── */}
-      <section className="hero" id="hero">
-        <div className="hero-bg">
+      <section className="hero" id="hero" style={{ textAlign: 'left', minHeight: '90vh', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', position: 'relative', overflow: 'hidden' }}>
+        <div className="hero-bg dynamic-bg">
           <ArcRings />
           <InteractiveHeroShapes />
         </div>
-        <div className="hero-content">
-          <div className="hero-eyebrow">MSRUAS · Est. 2019</div>
-          <h1 className="hero-title">
-            Where Leaders<br />Are <em>Made.</em>
-          </h1>
-          <p className="hero-description">
-            LEADS Next Gen Centre shapes students into communicators,
-            entrepreneurs, and change-makers through real-world programmes,
-            industry mentorship, and India&apos;s premier leadership summit.
-          </p>
-          <div className="hero-actions">
-            <Link href="/about" className="btn btn-primary" id="hero-explore-btn">
-              Explore LEADS
-            </Link>
-            <Link href="/join" className="btn btn-outline" id="hero-join-btn">
-              Join the Movement →
-            </Link>
+        <div className="container" style={{ position: 'relative', zIndex: 10, width: '100%', padding: '0 2rem' }}>
+          <div className="hero-content" style={{ maxWidth: '800px', margin: '0' }}>
+            <div className="hero-eyebrow animate-bounce-twice">MSRUAS · Est. 2019</div>
+            <h1 className="hero-title" style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', lineHeight: '1.1', marginBottom: '1.5rem', textShadow: '0 4px 20px rgba(0,0,0,0.3)' }}>
+              Where Leaders<br />Are <em>Made.</em>
+            </h1>
+            <p className="hero-description" style={{ fontSize: '1.25rem', maxWidth: '600px', marginBottom: '2rem', background: 'rgba(255,255,255,0.1)', padding: '1rem', borderRadius: '12px', backdropFilter: 'blur(10px)' }}>
+              LEADS Next Gen Centre shapes students into communicators,
+              entrepreneurs, and change-makers through real-world programmes,
+              industry mentorship, and India's premier leadership summit.
+              <br/><br/>
+              <em>"Empowering visions, engineering the future, inspiring minds."</em>
+            </p>
+            <div className="hero-actions" style={{ justifyContent: 'flex-start' }}>
+              <Link href="/about" className="btn btn-primary" id="hero-explore-btn">
+                Explore LEADS
+              </Link>
+              <Link href="/join" className="btn btn-outline" id="hero-join-btn">
+                Join the Movement &rarr;
+              </Link>
+            </div>
           </div>
-          <div className="social-proof">
-            <div className="avatar-stack">
-              <div className="avatar" style={{ background: 'linear-gradient(135deg, var(--teal), var(--primary))' }}>KP</div>
-              <div className="avatar" style={{ background: 'linear-gradient(135deg, var(--gold), #E65100)' }}>SR</div>
-              <div className="avatar" style={{ background: 'linear-gradient(135deg, #7B1FA2, var(--primary))' }}>AM</div>
-              <div className="avatar" style={{ background: 'linear-gradient(135deg, var(--teal), #00796B)' }}>RV</div>
-              <div className="avatar" style={{ background: 'rgba(255,255,255,0.2)', fontSize: '10px' }}>+</div>
-            </div>
-            <div className="proof-text">
-              Trusted by <strong>500+ students</strong> at MSRUAS
-            </div>
+          
+          <div className="hero-floating-elements" style={{ position: 'absolute', right: '5%', top: '20%', display: 'flex', gap: '2rem', flexWrap: 'wrap', width: '30%', justifyContent: 'center' }}>
+             <div className="animate-bounce-twice" style={{ background: 'var(--teal)', width: '80px', height: '80px', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', boxShadow: '0 10px 30px rgba(0,0,0,0.2)' }}>📈</div>
+             <div className="animate-bounce-twice" style={{ background: 'var(--gold)', width: '60px', height: '60px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', boxShadow: '0 10px 30px rgba(0,0,0,0.2)', marginTop: '40px' }}>🌍</div>
+             <div className="animate-bounce-twice" style={{ background: 'var(--primary)', width: '100px', height: '100px', borderRadius: '50% 20px 50% 50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem', boxShadow: '0 10px 30px rgba(0,0,0,0.2)' }}>💡</div>
           </div>
         </div>
       </section>
+
 
       {/* ── STATS ── */}
       <section className="section" id="stats">

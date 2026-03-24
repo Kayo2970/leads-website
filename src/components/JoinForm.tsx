@@ -6,14 +6,33 @@ export default function JoinForm() {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
 
+  
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
-    // Simulate submission
-    await new Promise((resolve) => setTimeout(resolve, 300))
+    const elements = e.currentTarget.elements as any;
+    const body = {
+      fullName: elements['join-name'].value,
+      email: elements['join-email'].value,
+      phone: elements['join-phone'].value,
+      year: elements['join-year'].value,
+      faculty: elements['join-faculty'].value,
+      interest: elements['join-interest'].value,
+      whyJoin: elements['join-why'].value,
+    }
+    
+    await fetch('/api/join', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    })
+    
     setSubmitted(true)
     setLoading(false)
   }
+
 
   if (submitted) {
     return (

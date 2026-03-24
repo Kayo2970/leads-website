@@ -24,7 +24,7 @@ export default function ContactPage() {
       </section>
 
       {/* ── CONTACT CONTENT ── */}
-      <section className="section" id="contact-content">
+      <section className="section contact-bg" id="contact-content">
         <div className="container">
           <div className="grid-2">
             {/* Form */}
@@ -143,7 +143,7 @@ export default function ContactPage() {
       </section>
 
       {/* ── CTAs ── */}
-      <section className="section" id="contact-cta">
+      <section className="section contact-bg" id="contact-cta">
         <div className="container">
           <div className="grid-2">
             <div className="card reveal" style={{ textAlign: 'center', padding: '40px' }}>
