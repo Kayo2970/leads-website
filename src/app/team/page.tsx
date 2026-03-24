@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import TeamCard from '@/components/TeamCard'
+import Counter from '@/components/Counter'
 
 export const metadata: Metadata = {
   title: 'Meet Our Team | LEADS Next Gen Centre',
@@ -313,19 +314,27 @@ export default function TeamPage() {
           <hr className="divider" />
           <div className="grid-4">
             <div className="card reveal" style={{ textAlign: 'center', padding: '32px 24px' }}>
-              <div style={{ fontSize: '48px', fontWeight: 700, color: 'var(--primary)', marginBottom: '8px' }}>7</div>
+              <div style={{ fontSize: '48px', fontWeight: 700, color: 'var(--primary)', marginBottom: '8px' }}>
+                <Counter value={7} />
+              </div>
               <div style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text2)', textTransform: 'uppercase', letterSpacing: '1px' }}>Executive Council Members</div>
             </div>
             <div className="card reveal" style={{ textAlign: 'center', padding: '32px 24px' }}>
-              <div style={{ fontSize: '48px', fontWeight: 700, color: 'var(--teal)', marginBottom: '8px' }}>8</div>
+              <div style={{ fontSize: '48px', fontWeight: 700, color: 'var(--teal)', marginBottom: '8px' }}>
+                <Counter value={8} />
+              </div>
               <div style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text2)', textTransform: 'uppercase', letterSpacing: '1px' }}>Senior Organizers</div>
             </div>
             <div className="card reveal" style={{ textAlign: 'center', padding: '32px 24px' }}>
-              <div style={{ fontSize: '48px', fontWeight: 700, color: 'var(--gold)', marginBottom: '8px' }}>17</div>
+              <div style={{ fontSize: '48px', fontWeight: 700, color: 'var(--gold)', marginBottom: '8px' }}>
+                <Counter value={17} />
+              </div>
               <div style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text2)', textTransform: 'uppercase', letterSpacing: '1px' }}>Committee Members</div>
             </div>
             <div className="card reveal" style={{ textAlign: 'center', padding: '32px 24px' }}>
-              <div style={{ fontSize: '48px', fontWeight: 700, color: 'var(--navy)', marginBottom: '8px' }}>32+</div>
+              <div style={{ fontSize: '48px', fontWeight: 700, color: 'var(--navy)', marginBottom: '8px' }}>
+                <Counter value={32} suffix="+" />
+              </div>
               <div style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text2)', textTransform: 'uppercase', letterSpacing: '1px' }}>Total Team Members</div>
             </div>
           </div>
