@@ -7,7 +7,18 @@ export default function ScrollReveal() {
   const pathname = usePathname()
 
   useEffect(() => {
-    // Re-run reveal setup on each route change so newly rendered pages are observed.
+    // Force-show all elements that are already in view or
+    // that never get triggered by the observer (remote/slow connections).
+    const showAll = () => {
+      document.querySelectorAll<HTMLElement>('.reveal').forEach((el) => {
+        el.classList.add('visible')
+      })
+    }
+
+    // Hard safety net: after 1.5s, show everything regardless
+    const fallback = setTimeout(showAll, 1500)
+
+    // Also use observer for elements below the fold (nice animation on scroll)
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -16,22 +27,31 @@ export default function ScrollReveal() {
           }
         })
       },
-      { threshold: 0.15 }
+      { threshold: 0.05, rootMargin: '0px 0px -40px 0px' }
     )
 
-    const elements = document.querySelectorAll<HTMLElement>('.reveal')
-    elements.forEach((el) => {
-      const rect = el.getBoundingClientRect()
-      const inView = rect.top <= window.innerHeight * 0.92 && rect.bottom >= 0
+    const run = () => {
+      const elements = document.querySelectorAll<HTMLElement>('.reveal')
+      elements.forEach((el) => {
+        const rect = el.getBoundingClientRect()
+        const inView = rect.top < window.innerHeight && rect.bottom > 0
+        if (inView) {
+          el.classList.add('visible')
+        } else {
+          observer.observe(el)
+        }
+      })
+    }
 
-      if (inView) {
-        el.classList.add('visible')
-      } else {
-        observer.observe(el)
-      }
-    })
+    // Run immediately and again after a short paint delay
+    run()
+    const paint = setTimeout(run, 200)
 
-    return () => observer.disconnect()
+    return () => {
+      clearTimeout(fallback)
+      clearTimeout(paint)
+      observer.disconnect()
+    }
   }, [pathname])
 
   return null
