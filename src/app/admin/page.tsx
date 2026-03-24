@@ -51,11 +51,9 @@ export default function AdminLoginPage() {
         <Image src="/leads-logo-thumb.png" alt="" fill style={{ objectFit: 'contain' }} />
       </div>
 
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
+      <div 
         className="glass-panel" 
-        style={{ width: '100%', maxWidth: '400px', padding: '40px', textAlign: 'center' }}
+        style={{ width: '100%', maxWidth: '400px', padding: '40px', textAlign: 'center', position: 'relative', zIndex: 10 }}
       >
         <div style={{ 
           width: '64px', 
@@ -73,15 +71,12 @@ export default function AdminLoginPage() {
         <h1 className="section-heading" style={{ fontSize: '24px', marginBottom: '8px', position: 'relative' }}>Admin Login</h1>
         
         <div style={{ height: '20px', marginBottom: '32px' }}>
-          <motion.p 
-            key={leaders[leaderIndex]}
-            initial={{ opacity: 0, y: 5 }}
-            animate={{ opacity: 1, y: 0 }}
+          <p 
             className="section-label" 
             style={{ fontSize: '11px', color: 'var(--teal)' }}
           >
             BE LIKE {leaders[leaderIndex]}
-          </motion.p>
+          </p>
         </div>
 
         <form onSubmit={handleLogin}>
@@ -119,7 +114,7 @@ export default function AdminLoginPage() {
             Sign In
           </button>
         </form>
-      </motion.div>
+      </div>
     </div>
   )
 }
