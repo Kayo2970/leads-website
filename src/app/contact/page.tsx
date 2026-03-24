@@ -5,7 +5,7 @@ import ContactForm from '@/components/ContactForm'
 export const metadata: Metadata = {
   title: 'Contact',
   description:
-    'Get in touch with LEADS Next Gen Centre at MSRUAS. Contact us for enquiries, partnerships, or event information.',
+    'Get in touch with Bharat Lead Summit and LEADS Next Gen Centre at RUAS for registrations, partnerships, and event information.',
 }
 
 export default function ContactPage() {
@@ -17,8 +17,8 @@ export default function ContactPage() {
           <div className="section-label" style={{ color: 'var(--teal)' }}>Contact</div>
           <h1 className="page-hero-title">Get in Touch</h1>
           <p className="page-hero-sub">
-            Have a question, want to partner, or just curious about LEADS?
-            We&apos;d love to hear from you.
+            Have questions? We are here to help you with Bharat Lead Summit registrations,
+            sponsorship opportunities, and collaborations.
           </p>
         </div>
       </section>
@@ -33,6 +33,9 @@ export default function ContactPage() {
               <h2 className="section-heading">Quick Contact</h2>
               <hr className="divider" />
               <ContactForm />
+              <p style={{ fontSize: '13px', color: 'var(--text2)', marginTop: '12px' }}>
+                This captures your details and lets you continue the conversation directly with our team.
+              </p>
             </div>
 
             {/* Info */}
@@ -45,7 +48,7 @@ export default function ContactPage() {
                 <div className="contact-icon">📧</div>
                 <div>
                   <h4>Email</h4>
-                  <p><a href="mailto:leads.msruas@msruas.ac.in" style={{ color: 'var(--primary)', textDecoration: 'none' }}>leads.msruas@msruas.ac.in</a></p>
+                  <p><a href="mailto:info@bharatleadsummit.com" style={{ color: 'var(--primary)', textDecoration: 'none' }}>info@bharatleadsummit.com</a></p>
                 </div>
               </div>
 
@@ -53,8 +56,9 @@ export default function ContactPage() {
                 <div className="contact-icon">📞</div>
                 <div>
                   <h4>Phone</h4>
-                  <p>+91 8910332851</p>
-                  <p>+91 8045386666 Ext 793</p>
+                  <p>+91 91106 73919</p>
+                  <p>+91 80183 75553</p>
+                  <p>+91 78992 93097</p>
                 </div>
               </div>
 
@@ -63,11 +67,9 @@ export default function ContactPage() {
                 <div>
                   <h4>Address</h4>
                   <p>
-                    LEADS Next Gen Centre<br />
-                    Faculty of Management &amp; Commerce<br />
-                    MSRUAS, Gnanagangothri Campus<br />
-                    New BEL Road, MSR Nagar<br />
-                    Bengaluru – 560054, India
+                    University House, New BEL Rd,<br />
+                    M S R Nagar, Mathikere,<br />
+                    Bengaluru, Karnataka 560054
                   </p>
                 </div>
               </div>
@@ -92,20 +94,32 @@ export default function ContactPage() {
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="MSRUAS Location"
+                  title="Bharat Lead Summit Location"
                 />
               </div>
+              <p style={{ fontSize: '12px', color: 'var(--text2)', marginTop: '10px' }}>
+                Click to interact with map.
+              </p>
 
               {/* Social Links */}
               <div style={{ marginTop: '24px' }}>
                 <h4 style={{ fontSize: '14px', fontWeight: 700, color: 'var(--text)', marginBottom: '12px' }}>
-                  Follow Us
+                  Follow Our Journey
                 </h4>
                 <div style={{ display: 'flex', gap: '12px' }}>
-                  {['Instagram', 'LinkedIn', 'Twitter'].map((platform) => (
+                  {[
+                    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/leads-next-gen-centre-ruas-700555327/' },
+                    { label: 'Summit Instagram', href: 'https://www.instagram.com/bharatlead_summit?igsh=b3c5dmtwMG43MmMw&utm_source=qr' },
+                    { label: 'Center Instagram', href: 'https://www.instagram.com/leads_next_gen_ruas?igsh=MmxhODgyOHA3N2V1&utm_source=qr' },
+                    { label: 'Facebook', href: 'https://www.facebook.com/share/1EQWdysDEx/?mibextid=wwXIfr' },
+                    { label: 'YouTube', href: 'https://youtube.com/@leads_msruas_next_gen_centre?si=o5LCtlMHXJEFnYa6' },
+                    { label: 'Threads', href: 'https://www.threads.com/@leads_next_gen_ruas?igshid=NTc4MTIwNjQ2YQ==' },
+                  ].map((platform) => (
                     <a
-                      key={platform}
-                      href="#"
+                      key={platform.label}
+                      href={platform.href}
+                      target="_blank"
+                      rel="noreferrer"
                       style={{
                         background: 'var(--surface)',
                         color: 'var(--text2)',
@@ -118,7 +132,7 @@ export default function ContactPage() {
                         transition: 'all 0.2s',
                       }}
                     >
-                      {platform}
+                      {platform.label}
                     </a>
                   ))}
                 </div>

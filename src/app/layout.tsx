@@ -18,6 +18,11 @@ export const metadata: Metadata = {
     default: 'LEADS Next Gen Centre | MSRUAS',
     template: '%s | LEADS Next Gen Centre',
   },
+  icons: {
+    icon: [{ url: '/icon.png', sizes: '64x64', type: 'image/png' }],
+    shortcut: '/icon.png',
+    apple: [{ url: '/apple-icon.png', sizes: '180x180', type: 'image/png' }],
+  },
   description:
     'LEADS Next Gen Centre at MSRUAS empowers future-ready youth leaders through experiential learning, ethical mentorship, and sustainability-driven action.',
   keywords: [

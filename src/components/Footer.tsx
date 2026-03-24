@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Footer() {
@@ -6,7 +7,13 @@ export default function Footer() {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
-            <h3>LEADS<span>.</span></h3>
+            <Image
+              src="/leads-full-logo.png"
+              alt="LEADS Next Gen Centre"
+              width={360}
+              height={110}
+              className="footer-logo-image"
+            />
             <p>
               LEADS Next Gen Centre — MSRUAS. Empowering the next generation of
               leaders, speakers, and entrepreneurs since 2019.
@@ -27,7 +34,7 @@ export default function Footer() {
             <h4>Connect</h4>
             <Link href="/join">Join Us</Link>
             <Link href="/contact">Contact</Link>
-            <a href="mailto:leads.msruas@msruas.ac.in">leads.msruas@msruas.ac.in</a>
+            <a href="mailto:info@bharatleadsummit.com">info@bharatleadsummit.com</a>
           </div>
         </div>
         <div className="footer-bottom">

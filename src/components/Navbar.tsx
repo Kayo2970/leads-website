@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
@@ -23,7 +24,15 @@ export default function Navbar() {
       <nav className="navbar" id="main-nav">
         <div className="nav-container">
           <Link href="/" className="nav-logo" id="nav-logo">
-            LEADS<span>.</span>
+            <Image
+              src="/leads-full-logo.png"
+              alt="LEADS Next Gen Centre"
+              width={320}
+              height={90}
+              className="nav-logo-image"
+              priority
+            />
+            <span className="sr-only">LEADS</span>
           </Link>
 
           <div className="nav-links">
