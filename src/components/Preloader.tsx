@@ -1,12 +1,13 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 
 export default function Preloader() {
   const [hidden, setHidden] = useState(false)
 
   useEffect(() => {
-    const timer = setTimeout(() => setHidden(true), 500)
+    const timer = setTimeout(() => setHidden(true), 3000)
     return () => clearTimeout(timer)
   }, [])
 
@@ -14,8 +15,20 @@ export default function Preloader() {
 
   return (
     <div className={`preloader ${hidden ? 'hide' : ''}`} id="preloader">
-      <div className="preloader-ring" />
-      <div className="preloader-text">LEADS</div>
+      <div className="preloader-container">
+        <div className="logo-spinner">
+          <Image
+            src="/leads-logo.png"
+            alt="LEADS Loading"
+            width={80}
+            height={80}
+            className="spinning-logo"
+            priority
+          />
+        </div>
+        <div className="loading-line" />
+      </div>
+      <div className="preloader-text">Loading...</div>
     </div>
   )
 }
