@@ -176,12 +176,7 @@ body {
 }
 
 @media (max-width: 1024px) {
-  .hero-floating-elements, .desktop-logo {
-    display: none !important;
-  }
-}
-@media (max-width: 768px) {
-  .preloader {
+  .preloader, .hero-floating-elements, .desktop-logo {
     display: none !important;
   }
 }
