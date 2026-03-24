@@ -9,7 +9,7 @@ export default function ContactForm() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    await new Promise((resolve) => setTimeout(resolve, 300))
     setSubmitted(true)
     setLoading(false)
   }

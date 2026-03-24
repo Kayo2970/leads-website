@@ -10,7 +10,7 @@ export default function JoinForm() {
     e.preventDefault()
     setLoading(true)
     // Simulate submission
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    await new Promise((resolve) => setTimeout(resolve, 300))
     setSubmitted(true)
     setLoading(false)
   }
