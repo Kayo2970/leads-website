@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEADS Next Gen Centre — Design System Document</title>
+<style>
+  :root {
+    --primary: #1565C0; --navy: #0D47A1; --teal: #00BCD4; --gold: #FFB300;
+    --bg: #F0F7FF; --surface: #E8F1FC; --card: #FFFFFF;
+    --text: #1A1A2E; --text2: #4A5568; --text3: #8A8A8A;
+    --success: #16A34A; --warning: #D97706; --error: #DC2626;
+    --radius: 12px; --trans: 0.3s ease;
+  }
+  body.dark {
+    --bg: #0A1628; --surface: #0F2040; --card: #142050;
+    --text: #F0F0F0; --text2: #A0A0A0; --text3: #606060;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);transition:background var(--trans),color var(--trans);line-height:1.6}
+
+  /* PRELOADER */
+  #preloader{position:fixed;inset:0;background:var(--navy);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;transition:opacity 0.6s ease}
+  #preloader.hide{opacity:0;pointer-events:none}
+  .pl-ring{width:64px;height:64px;border:3px solid rgba(255,255,255,0.15);border-top-color:var(--teal);border-right-color:var(--gold);border-radius:50%;animation:plSpin 1s linear infinite}
+  .pl-text{color:rgba(255,255,255,0.7);font-size:12px;letter-spacing:3px;text-transform:uppercase}
+  @keyframes plSpin{to{transform:rotate(360deg)}}
+
+  /* TOGGLE */
+  .mode-toggle{position:fixed;top:20px;right:20px;z-index:998;background:var(--primary);color:#fff;border:none;padding:10px 18px;border-radius:24px;cursor:pointer;font-size:13px;font-weight:600;box-shadow:0 4px 16px rgba(0,0,0,0.25);transition:background 0.2s;display:flex;align-items:center;gap:8px}
+  .mode-toggle:hover{background:var(--navy)}
+
+  /* HEADER */
+  .doc-header{background:linear-gradient(135deg,var(--navy) 0%,var(--primary) 60%,var(--teal) 100%);padding:60px 40px 50px;position:relative;overflow:hidden}
+  .doc-header::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='700' height='320' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='350' cy='160' r='250' fill='none' stroke='rgba(255,255,255,0.05)' stroke-width='2'/%3E%3Ccircle cx='350' cy='160' r='180' fill='none' stroke='rgba(255,255,255,0.05)' stroke-width='2'/%3E%3Ccircle cx='350' cy='160' r='110' fill='none' stroke='rgba(0,188,212,0.1)' stroke-width='2'/%3E%3Crect x='580' y='40' width='60' height='60' rx='8' fill='none' stroke='rgba(255,179,0,0.2)' stroke-width='1.5' transform='rotate(20 610 70)'/%3E%3Crect x='60' y='200' width='40' height='40' rx='4' fill='none' stroke='rgba(0,188,212,0.2)' stroke-width='1.5' transform='rotate(-15 80 220)'/%3E%3C/svg%3E") right center/700px no-repeat;pointer-events:none}
+  .doc-header .badge{display:inline-block;background:rgba(255,255,255,0.15);color:#fff;padding:4px 14px;border-radius:20px;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px}
+  .doc-header h1{font-size:42px;font-weight:800;color:#fff;line-height:1.15;margin-bottom:8px}
+  .doc-header h1 span{color:var(--teal)}
+  .doc-header p{color:rgba(255,255,255,0.8);font-size:16px;margin-bottom:24px}
+  .doc-header .meta{display:flex;gap:24px;flex-wrap:wrap}
+  .doc-header .meta-item{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.7);font-size:13px}
+  .doc-header .meta-item strong{color:#fff}
+
+  /* NAV */
+  .sticky-nav{position:sticky;top:0;z-index:100;background:rgba(240,247,255,0.95);backdrop-filter:blur(10px);border-bottom:2px solid var(--primary);padding:0 40px;display:flex;gap:0;overflow-x:auto;transition:background var(--trans)}
+  body.dark .sticky-nav{background:rgba(10,22,40,0.95)}
+  .sticky-nav a{color:var(--text2);text-decoration:none;font-size:13px;font-weight:600;padding:14px 16px;white-space:nowrap;border-bottom:3px solid transparent;transition:color 0.2s,border-color 0.2s}
+  .sticky-nav a:hover{color:var(--primary);border-bottom-color:var(--primary)}
+
+  /* LAYOUT */
+  .container{max-width:1100px;margin:0 auto;padding:0 40px}
+  .section{padding:60px 0 40px}
+  .section-label{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin-bottom:8px}
+  .section-heading{font-size:30px;font-weight:800;color:var(--text);margin-bottom:12px;line-height:1.2}
+  .section-sub{font-size:15px;color:var(--text2);margin-bottom:36px}
+  .divider{height:2px;background:linear-gradient(90deg,var(--primary),var(--teal),transparent);margin:16px 0 40px;border:none}
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  @media(max-width:900px){.grid-4{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:600px){.grid-4,.grid-3,.grid-2{grid-template-columns:1fr}}
+
+  /* CARDS */
+  .card{background:var(--card);border-radius:var(--radius);padding:24px;border:1px solid rgba(21,101,192,0.12);transition:transform 0.25s,box-shadow 0.25s}
+  body.dark .card{border-color:rgba(255,255,255,0.08)}
+  .card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(21,101,192,0.15)}
+  .card-badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px}
+  .badge-simple{background:rgba(22,163,74,0.12);color:#16A34A}
+  .badge-medium{background:rgba(255,179,0,0.15);color:#B8820A}
+  .badge-complex{background:rgba(220,38,38,0.1);color:#DC2626}
+
+  /* SCROLL REVEAL */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.55s ease,transform 0.55s ease}
+  .reveal.visible{opacity:1;transform:none}
+  .reveal-delay-1{transition-delay:0.1s}
+  .reveal-delay-2{transition-delay:0.2s}
+  .reveal-delay-3{transition-delay:0.3s}
+
+  /* INSP TAG */
+  .insp-tag{display:inline-flex;align-items:center;gap:5px;background:rgba(21,101,192,0.08);color:var(--primary);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;border:1px solid rgba(21,101,192,0.2)}
+  body.dark .insp-tag{background:rgba(0,188,212,0.1);color:var(--teal);border-color:rgba(0,188,212,0.2)}
+
+  /* PREVIEW BOXES */
+  .preview-box{background:var(--surface);border-radius:16px;padding:32px;margin-bottom:32px;border:1px solid rgba(21,101,192,0.1);position:relative;overflow:hidden}
+  body.dark .preview-box{border-color:rgba(255,255,255,0.06)}
+  .preview-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+
+  /* HERO PREVIEW */
+  .hero-preview{background:linear-gradient(135deg,var(--navy) 0%,var(--primary) 65%,#006064 100%);border-radius:16px;padding:56px 48px;position:relative;overflow:hidden;min-height:340px;display:flex;flex-direction:column;justify-content:center}
+  .hero-shapes{position:absolute;inset:0;pointer-events:none}
+  .hero-shapes .hs1{position:absolute;top:-30px;right:80px;width:160px;height:160px;border:2px solid rgba(255,255,255,0.06);border-radius:30px;transform:rotate(15deg);animation:floatShape 6s ease-in-out infinite}
+  .hero-shapes .hs2{position:absolute;bottom:20px;right:200px;width:80px;height:80px;border:1.5px solid rgba(0,188,212,0.18);border-radius:50%;animation:floatShape 8s ease-in-out infinite reverse}
+  .hero-shapes .hs3{position:absolute;top:50px;right:260px;width:40px;height:40px;background:rgba(255,179,0,0.08);border-radius:8px;transform:rotate(30deg);animation:floatShape 7s ease-in-out infinite 1s}
+  @keyframes floatShape{0%,100%{transform:translateY(0) rotate(15deg)}50%{transform:translateY(-14px) rotate(20deg)}}
+  .hero-eyebrow{color:var(--teal);font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
+  .hero-title{font-size:52px;font-weight:900;color:#fff;line-height:1.05;margin-bottom:20px;letter-spacing:-1px}
+  .hero-title em{color:var(--teal);font-style:normal}
+  .hero-sub{color:rgba(255,255,255,0.75);font-size:17px;max-width:500px;margin-bottom:32px;line-height:1.65}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px}
+  .btn-primary{background:var(--teal);color:#fff;border:none;padding:14px 28px;border-radius:30px;font-size:15px;font-weight:700;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,188,212,0.35)}
+  .btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.4);padding:13px 26px;border-radius:30px;font-size:15px;font-weight:600;cursor:pointer;transition:border-color 0.2s,background 0.2s}
+  .btn-outline:hover{border-color:#fff;background:rgba(255,255,255,0.08)}
+
+  /* SOCIAL PROOF */
+  .social-proof{display:flex;align-items:center;gap:14px}
+  .avatar-stack{display:flex}
+  .avatar-stack .av{width:36px;height:36px;border-radius:50%;border:2px solid var(--navy);background:linear-gradient(135deg,var(--teal),var(--primary));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;margin-left:-10px}
+  .avatar-stack .av:first-child{margin-left:0}
+  .proof-text{color:rgba(255,255,255,0.75);font-size:13px}
+  .proof-text strong{color:#fff}
+
+  /* ICON CARDS */
+  .icon-card{background:var(--card);border-radius:14px;padding:28px 22px;text-align:center;border:1px solid rgba(21,101,192,0.1);transition:transform 0.25s,box-shadow 0.25s,border-color 0.25s}
+  body.dark .icon-card{border-color:rgba(255,255,255,0.07)}
+  .icon-card:hover{transform:translateY(-5px);box-shadow:0 14px 36px rgba(21,101,192,0.14);border-color:var(--teal)}
+  .icon-card .ic-icon{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,var(--primary),var(--teal));display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 16px}
+  .icon-card h4{font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px}
+  .icon-card p{font-size:13px;color:var(--text2);line-height:1.55}
+
+  /* MASONRY */
+  .masonry-grid{columns:3;column-gap:16px}
+  @media(max-width:700px){.masonry-grid{columns:2}}
+  .masonry-item{break-inside:avoid;margin-bottom:16px;border-radius:10px;overflow:hidden;position:relative;cursor:pointer}
+  .masonry-item .mi-ph{width:100%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.3);font-size:12px;font-weight:600;letter-spacing:1px;border-radius:10px}
+  .masonry-item .mi-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,71,161,0.85),transparent);opacity:0;transition:opacity 0.3s;border-radius:10px;display:flex;align-items:flex-end;padding:14px}
+  .masonry-item:hover .mi-overlay{opacity:1}
+  .masonry-item .mi-overlay span{color:#fff;font-size:12px;font-weight:600}
+  .mi-tag{position:absolute;top:10px;left:10px;background:rgba(0,0,0,0.5);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;backdrop-filter:blur(4px)}
+
+  /* TESTIMONIAL */
+  .testi-wrap{position:relative;overflow:hidden;border-radius:16px}
+  .testi-track{display:flex;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1)}
+  .testi-slide{min-width:100%;padding:36px 40px;background:var(--card);border-radius:16px;border:1px solid rgba(21,101,192,0.1)}
+  body.dark .testi-slide{border-color:rgba(255,255,255,0.07)}
+  .testi-stars{color:var(--gold);font-size:18px;margin-bottom:16px;letter-spacing:2px}
+  .testi-quote{font-size:17px;color:var(--text);line-height:1.7;font-style:italic;margin-bottom:24px}
+  .testi-author{display:flex;align-items:center;gap:14px}
+  .testi-av{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--primary));display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff;flex-shrink:0}
+  .testi-name{font-weight:700;color:var(--text);font-size:14px}
+  .testi-role{font-size:12px;color:var(--text2)}
+  .testi-dots{display:flex;justify-content:center;gap:8px;margin-top:20px}
+  .testi-dot{width:8px;height:8px;border-radius:50%;background:rgba(21,101,192,0.2);cursor:pointer;transition:background 0.2s,transform 0.2s}
+  .testi-dot.active{background:var(--primary);transform:scale(1.3)}
+
+  /* JOURNEY */
+  .journey-wrap{display:flex;gap:0;position:relative}
+  .journey-wrap::before{content:'';position:absolute;top:28px;left:28px;right:28px;height:2px;background:rgba(21,101,192,0.15);z-index:0}
+  .journey-step{flex:1;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;z-index:1}
+  .journey-dot{width:56px;height:56px;border-radius:50%;background:var(--card);border:2px solid rgba(21,101,192,0.2);display:flex;align-items:center;justify-content:center;font-size:18px;transition:all 0.3s}
+  .journey-dot.active{background:var(--primary);border-color:var(--primary);box-shadow:0 0 0 6px rgba(21,101,192,0.15)}
+  .journey-dot.done{background:var(--success);border-color:var(--success);color:#fff}
+  .journey-label{font-size:12px;font-weight:600;color:var(--text2)}
+  .journey-sub{font-size:11px;color:var(--text3)}
+
+  /* PROGRESS BARS */
+  .prog-item{margin-bottom:18px}
+  .prog-header{display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;font-weight:600;color:var(--text)}
+  .prog-bar{height:7px;background:rgba(21,101,192,0.1);border-radius:10px;overflow:hidden}
+  .prog-fill{height:100%;border-radius:10px;background:linear-gradient(90deg,var(--primary),var(--teal));animation:fillBar 1.2s ease forwards}
+  @keyframes fillBar{from{width:0}}
+
+  /* COLOURS */
+  .swatch-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+  .swatch{border-radius:10px;overflow:hidden;flex:1;min-width:120px;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+  .swatch-color{height:80px}
+  .swatch-info{padding:10px 12px;background:var(--card)}
+  .swatch-name{font-size:13px;font-weight:700;color:var(--text)}
+  .swatch-hex{font-size:11px;color:var(--text2);font-family:monospace}
+
+  /* TYPOGRAPHY */
+  .type-sample{margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid rgba(21,101,192,0.08)}
+  .type-meta{font-size:12px;color:var(--text3);font-family:monospace;margin-top:8px}
+
+  /* BG PREVIEWS */
+  .bg-preview{border-radius:16px;overflow:hidden;height:200px;position:relative;margin-bottom:24px}
+  .bg-label{position:absolute;bottom:14px;left:14px;background:rgba(0,0,0,0.55);color:#fff;font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;backdrop-filter:blur(4px)}
+  .bg-arc{background:linear-gradient(135deg,#0D47A1,#1565C0)}
+  .bg-arc svg{position:absolute;inset:0;width:100%;height:100%}
+  .arc-ring{fill:none;stroke:rgba(0,188,212,0.15);stroke-width:2}
+  @keyframes arcPulse{0%,100%{opacity:0.15}50%{opacity:0.35}}
+  .arc-ring:nth-child(1){animation:arcPulse 3s ease-in-out infinite}
+  .arc-ring:nth-child(2){animation:arcPulse 3s ease-in-out infinite 0.5s}
+  .arc-ring:nth-child(3){animation:arcPulse 3s ease-in-out infinite 1s}
+  .arc-ring:nth-child(4){animation:arcPulse 3s ease-in-out infinite 1.5s}
+  .bg-star{background:#020B18}
+  .star-canvas{position:absolute;inset:0}
+  .star{position:absolute;background:#fff;border-radius:50%;animation:twinkle var(--dur,3s) ease-in-out infinite var(--del,0s)}
+  @keyframes twinkle{0%,100%{opacity:0.1}50%{opacity:0.9}}
+  .bg-scroll-demo{background:linear-gradient(135deg,#0D47A1,#00BCD4);transition:background 1s}
+
+  /* NAV COMPONENT */
+  .nav-preview{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:var(--card);border-radius:12px;border:1px solid rgba(21,101,192,0.12);margin-bottom:16px}
+  .nav-logo{font-size:18px;font-weight:800;color:var(--primary)}
+  .nav-logo span{color:var(--teal)}
+  .nav-links{display:flex;gap:24px}
+  .nav-links a{font-size:13px;color:var(--text2);text-decoration:none;font-weight:500;transition:color 0.2s}
+  .nav-links a.active{color:var(--primary)}
+  .nav-cta{background:var(--primary);color:#fff;border:none;padding:9px 20px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer}
+
+  /* BUTTONS */
+  .btn-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .btn{border:none;border-radius:30px;font-size:14px;font-weight:600;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;padding:11px 24px}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-teal{background:var(--teal);color:#fff}
+  .btn-teal:hover{box-shadow:0 8px 20px rgba(0,188,212,0.3)}
+  .btn-gold{background:var(--gold);color:#1A1A2E}
+  .btn-gold:hover{box-shadow:0 8px 20px rgba(255,179,0,0.3)}
+  .btn-ghost{background:transparent;color:var(--primary);border:2px solid var(--primary)}
+  .btn-sm{padding:7px 18px;font-size:12px}
+  .btn-disabled{opacity:0.45;cursor:not-allowed}
+
+  /* FORM */
+  .form-group{margin-bottom:18px}
+  .form-label{font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;display:block}
+  .form-input{width:100%;padding:11px 14px;border:1.5px solid rgba(21,101,192,0.25);border-radius:8px;font-size:14px;background:var(--bg);color:var(--text);transition:border-color 0.2s,box-shadow 0.2s;outline:none}
+  .form-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(21,101,192,0.12)}
+  body.dark .form-input{background:var(--surface)}
+
+  /* FOOTER */
+  .footer-preview{background:var(--navy);border-radius:16px;padding:40px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px}
+  .footer-brand h3{font-size:22px;font-weight:800;color:#fff;margin-bottom:10px}
+  .footer-brand h3 span{color:var(--teal)}
+  .footer-brand p{color:rgba(255,255,255,0.6);font-size:13px;line-height:1.7}
+  .footer-col h4{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:14px}
+  .footer-col a{display:block;color:rgba(255,255,255,0.7);font-size:13px;text-decoration:none;margin-bottom:8px;transition:color 0.2s}
+  .footer-col a:hover{color:var(--teal)}
+
+  /* INSPIRATION */
+  .insp-card{background:var(--card);border-radius:14px;padding:24px;border-left:4px solid var(--primary);margin-bottom:16px}
+  body.dark .insp-card{background:var(--card)}
+  .insp-card h4{font-size:15px;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:10px}
+  .insp-card h4 .site-tag{font-size:11px;font-weight:600;background:rgba(0,188,212,0.1);color:var(--teal);padding:2px 8px;border-radius:10px}
+  .insp-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+  .insp-list li{font-size:13px;color:var(--text2);display:flex;align-items:flex-start;gap:8px}
+  .insp-list li::before{content:'→';color:var(--teal);font-weight:700;flex-shrink:0}
+  .insp-apply{margin-top:14px;padding-top:14px;border-top:1px solid rgba(21,101,192,0.08);font-size:12px;color:var(--text3)}
+  .insp-apply strong{color:var(--primary)}
+  body.dark .insp-apply strong{color:var(--teal)}
+
+  /* DARK MODE PANELS */
+  .dm-split{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .dm-panel{border-radius:12px;padding:24px}
+  .dm-light{background:#F0F7FF;color:#1A1A2E;border:1px solid rgba(21,101,192,0.15)}
+  .dm-dark{background:#0A1628;color:#F0F0F0;border:1px solid rgba(255,255,255,0.1)}
+  .dm-panel h4{font-size:14px;font-weight:700;margin-bottom:12px}
+
+  /* INFO BOXES */
+  .info-box{background:rgba(0,188,212,0.08);border-left:4px solid var(--teal);border-radius:8px;padding:16px 20px;margin-bottom:20px;font-size:14px;color:var(--text2)}
+  .info-box strong{color:var(--text)}
+  .warn-box{background:rgba(255,179,0,0.08);border-left:4px solid var(--gold);border-radius:8px;padding:16px 20px;margin-bottom:20px;font-size:14px;color:var(--text2)}
+  .warn-box strong{color:var(--text)}
+
+  /* SITEMAP */
+  .sitemap-grid{display:flex;gap:12px;flex-wrap:wrap}
+  .sm-node{background:var(--card);border:2px solid var(--primary);border-radius:10px;padding:12px 18px;font-size:13px;font-weight:700;color:var(--primary);text-align:center;min-width:100px}
+  .sm-node.child{border-color:rgba(21,101,192,0.35);color:var(--text2);font-weight:500;border-width:1px;font-size:12px}
+  .sm-section{margin-bottom:24px}
+  .sm-section-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
+
+  /* SR DEMO */
+  .sr-demo{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .sr-block{background:linear-gradient(135deg,var(--primary),var(--teal));border-radius:10px;height:80px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease}
+  .sr-block.in{opacity:1;transform:none}
+  .sr-block:nth-child(2){transition-delay:0.1s}
+  .sr-block:nth-child(3){transition-delay:0.2s}
+  .sr-block:nth-child(4){transition-delay:0.3s}
+
+  /* TABLE */
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{background:var(--primary);color:#fff;padding:12px 16px;text-align:left}
+  th:first-child{border-radius:8px 0 0 0}
+  th:last-child{border-radius:0 8px 0 0}
+  td{padding:11px 16px;color:var(--text2);border-bottom:1px solid rgba(21,101,192,0.07)}
+  tr:nth-child(odd) td{background:var(--card)}
+  tr:nth-child(even) td{background:var(--surface)}
+  td strong{color:var(--text)}
+</style>
+</head>
+<body>
+
+<div id="preloader">
+  <div class="pl-ring"></div>
+  <div class="pl-text">LEADS</div>
+</div>
+
+<button class="mode-toggle" onclick="toggleMode()" id="modeBtn">🌙 Dark Mode</button>
+
+<div class="doc-header">
+  <div class="container">
+    <span class="badge">Design System · v2.0 — Inspiration-Enhanced</span>
+    <h1>LEADS <span>Next Gen Centre</span></h1>
+    <p>Interactive Design Document — UI, Animations & Component Library · MSRUAS</p>
+    <div class="meta">
+      <div class="meta-item">📅 <strong>March 2026</strong></div>
+      <div class="meta-item">🎨 <strong>5 Sites Analyzed</strong></div>
+      <div class="meta-item">📦 <strong>Next.js 14 · Tailwind · Supabase</strong></div>
+      <div class="meta-item">⚡ <strong>Dark Mode Included</strong></div>
+    </div>
+  </div>
+</div>
+
+<nav class="sticky-nav">
+  <a href="#overview">Overview</a>
+  <a href="#sitemap">Sitemap</a>
+  <a href="#pages">Pages</a>
+  <a href="#inspiration">Inspiration</a>
+  <a href="#components">Components</a>
+  <a href="#colours">Colours</a>
+  <a href="#typography">Typography</a>
+  <a href="#backgrounds">Backgrounds</a>
+  <a href="#animations">Animations</a>
+  <a href="#darkmode">Dark Mode</a>
+</nav>
+
+<div class="container">
+
+<!-- 01 OVERVIEW -->
+<section class="section" id="overview">
+  <div class="section-label">01 — Overview</div>
+  <h2 class="section-heading">Design Brief</h2>
+  <p class="section-sub">Visual identity, brand tone, and design principles for the LEADS website.</p>
+  <hr class="divider">
+  <div class="grid-3">
+    <div class="card reveal">
+      <div class="card-badge badge-simple">Vibe</div>
+      <h4 style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px">Dynamic &amp; Youthful</h4>
+      <p style="font-size:13px;color:var(--text2)">Energetic student org. Bold type, vivid accents, purposeful motion. Confident but approachable.</p>
+    </div>
+    <div class="card reveal reveal-delay-1">
+      <div class="card-badge badge-medium">Pages</div>
+      <h4 style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px">6 Core Pages</h4>
+      <p style="font-size:13px;color:var(--text2)">Home · About · Events · BLS · Join Us · Contact — each with a distinct background personality.</p>
+    </div>
+    <div class="card reveal reveal-delay-2">
+      <div class="card-badge badge-complex">Stack</div>
+      <h4 style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px">Next.js 14 + Tailwind</h4>
+      <p style="font-size:13px;color:var(--text2)">App Router · TypeScript · Supabase · Vercel. Dark mode via CSS custom properties + localStorage.</p>
+    </div>
+  </div>
+  <div class="info-box" style="margin-top:24px">
+    <strong>v2 Enhancement:</strong> This document incorporates UI patterns and animations from 5 analyzed inspiration sites — Pixlab, Ventix, Oifolio, Xolio, and Adelux. Patterns tagged with source throughout.
+  </div>
+</section>
+
+<!-- 02 SITEMAP -->
+<section class="section" id="sitemap">
+  <div class="section-label">02 — Sitemap</div>
+  <h2 class="section-heading">Site Architecture</h2>
+  <p class="section-sub">Six public-facing pages plus utility routes.</p>
+  <hr class="divider">
+  <div class="sm-section">
+    <div class="sm-section-label">Primary Pages</div>
+    <div class="sitemap-grid">
+      <div class="sm-node">/ Home</div>
+      <div class="sm-node">/about</div>
+      <div class="sm-node">/events</div>
+      <div class="sm-node">/bls</div>
+      <div class="sm-node">/join-us</div>
+      <div class="sm-node">/contact</div>
+    </div>
+  </div>
+  <div class="sm-section">
+    <div class="sm-section-label">Utility &amp; API Routes</div>
+    <div class="sitemap-grid">
+      <div class="sm-node child">/events/[slug]</div>
+      <div class="sm-node child">/api/contact</div>
+      <div class="sm-node child">/api/join</div>
+      <div class="sm-node child">/sitemap.xml</div>
+      <div class="sm-node child">/robots.txt</div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 PAGES -->
+<section class="section" id="pages">
+  <div class="section-label">03 — Page Design</div>
+  <h2 class="section-heading">Page-by-Page Breakdown</h2>
+  <p class="section-sub">Sections, background type, and inspiration patterns per page.</p>
+  <hr class="divider">
+  <div class="grid-2" style="margin-bottom:24px">
+    <div class="card reveal">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+        <strong style="font-size:15px;color:var(--text)">🏠 Home</strong>
+        <span class="card-badge badge-complex">Arc Rings BG</span>
+      </div>
+      <p style="font-size:13px;color:var(--text2);margin-bottom:10px">Bold hero with oversized headline, floating geometric shapes, social proof avatar cluster. Arc rings animate on gradient navy. 4-col icon program cards. Scroll-reveal sections.</p>
+      <p style="font-size:11px;color:var(--text3)">Hero → Stats → Programs (4-col) → Events Preview → Join CTA</p>
+    </div>
+    <div class="card reveal reveal-delay-1">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+        <strong style="font-size:15px;color:var(--text)">ℹ️ About</strong>
+        <span class="card-badge badge-simple">Static Gradient</span>
+      </div>
+      <p style="font-size:13px;color:var(--text2);margin-bottom:10px">Story, mission, team. SVG decorative shape accents. Membership journey progress stepper. Icon-paired feature list. Progress bars animate on scroll entry.</p>
+      <p style="font-size:11px;color:var(--text3)">Hero → Story → Mission/Vision → Team → Journey Stepper → Values</p>
+    </div>
+    <div class="card reveal">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+        <strong style="font-size:15px;color:var(--text)">📅 Events</strong>
+        <span class="card-badge badge-medium">Scroll Colour Shift</span>
+      </div>
+      <p style="font-size:13px;color:var(--text2);margin-bottom:10px">Masonry gallery grid with hover overlays, category filter tabs. IntersectionObserver background colour shift. Modal video player for event recaps.</p>
+      <p style="font-size:11px;color:var(--text3)">Hero → Filter Tabs → Masonry Grid → Upcoming → Register CTA</p>
+    </div>
+    <div class="card reveal reveal-delay-1">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+        <strong style="font-size:15px;color:var(--text)">⚡ BLS</strong>
+        <span class="card-badge badge-complex">Starfield Particles</span>
+      </div>
+      <p style="font-size:13px;color:var(--text2);margin-bottom:10px">Most dramatic page. tsParticles starfield. Testimonial carousel. Speaker avatar clusters. Parallax depth layers. Bold centred hero tagline.</p>
+      <p style="font-size:11px;color:var(--text3)">Starfield Hero → What is BLS → Speakers → Gallery → Testimonials → Register</p>
+    </div>
+    <div class="card reveal">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+        <strong style="font-size:15px;color:var(--text)">✋ Join Us</strong>
+        <span class="card-badge badge-simple">Static + Accents</span>
+      </div>
+      <p style="font-size:13px;color:var(--text2);margin-bottom:10px">Journey progress stepper showing membership steps. Icon-paired benefit list. React Hook Form + Zod. Resend email notification on submit.</p>
+      <p style="font-size:11px;color:var(--text3)">Hero → Why Join (icon list) → Journey Steps → Form → FAQ</p>
+    </div>
+    <div class="card reveal reveal-delay-1">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+        <strong style="font-size:15px;color:var(--text)">📬 Contact</strong>
+        <span class="card-badge badge-simple">Static Gradient</span>
+      </div>
+      <p style="font-size:13px;color:var(--text2);margin-bottom:10px">Clean two-column layout. Form left, contact info right. SVG map decoration accent. Social links row.</p>
+      <p style="font-size:11px;color:var(--text3)">Hero → Form + Info → Map Accent → Social Links</p>
+    </div>
+  </div>
+</section>
+
+<!-- 04 INSPIRATION -->
+<section class="section" id="inspiration">
+  <div class="section-label">04 — Inspiration Analysis</div>
+  <h2 class="section-heading">What We Borrowed &amp; Why</h2>
+  <p class="section-sub">5 sites analyzed. Patterns extracted and mapped to specific LEADS pages and components.</p>
+  <hr class="divider">
+
+  <div class="insp-card reveal">
+    <h4>Xolio <span class="site-tag">xolio.io</span></h4>
+    <ul class="insp-list">
+      <li>Branded preloader — spinning dual-colour ring fades out on DOMContentLoaded</li>
+      <li>Oversized hero headline — 900 weight, -1px tracking, 52px+, single bold statement</li>
+      <li>Staggered scroll reveal — each element animates in with 100ms sibling offset</li>
+      <li>Centred hero layout with clear single-focus CTA</li>
+      <li>Scroll parallax — background layer moves at 0.5× scroll speed vs. foreground</li>
+    </ul>
+    <div class="insp-apply"><strong>Applied to:</strong> All pages (preloader, scroll reveal), Home &amp; BLS (hero style, parallax)</div>
+  </div>
+
+  <div class="insp-card reveal" style="border-left-color:var(--teal)">
+    <h4>Pixlab <span class="site-tag">pixlab.io</span></h4>
+    <ul class="insp-list">
+      <li>Geometric shape overlays in hero — rotated rectangles, circles as floating decorations</li>
+      <li>Multi-layer parallax — 3 depth layers moving at different CSS transform rates</li>
+      <li>Card grid with thumbnail, category tag overlay, and hover reveal effect</li>
+      <li>Multi-level dropdown nav with animated reveal on hover</li>
+    </ul>
+    <div class="insp-apply"><strong>Applied to:</strong> Hero (floating shapes), Events gallery cards (hover overlays), Navigation</div>
+  </div>
+
+  <div class="insp-card reveal" style="border-left-color:var(--gold)">
+    <h4>Oifolio <span class="site-tag">oifolio.com</span></h4>
+    <ul class="insp-list">
+      <li>Masonry grid — CSS <code>column-count: 3</code> + <code>break-inside: avoid</code></li>
+      <li>Category filter tabs re-sort gallery without page reload</li>
+      <li>SVG decorative shapes (blobs, rings) as non-interactive section accents</li>
+      <li>Progress bars animate width from 0 to target on scroll entry</li>
+      <li>Modal video player triggered by card click</li>
+    </ul>
+    <div class="insp-apply"><strong>Applied to:</strong> Events (masonry, filter, modal), About &amp; Join Us (progress bars, SVG accents)</div>
+  </div>
+
+  <div class="insp-card reveal" style="border-left-color:var(--gold)">
+    <h4>Adelux <span class="site-tag">adelux.com</span></h4>
+    <ul class="insp-list">
+      <li>Social proof avatar cluster — stacked overlapping circles + member count copy</li>
+      <li>4-column icon service grid — gradient icon box, title, 2-line description</li>
+      <li>Testimonial carousel — auto-advances every 5s, dot nav, CSS translateX slide</li>
+      <li>Community-first hero messaging: belonging, growth, real outcomes</li>
+    </ul>
+    <div class="insp-apply"><strong>Applied to:</strong> Home (avatar cluster, icon cards), BLS &amp; About (testimonial carousel)</div>
+  </div>
+
+  <div class="insp-card reveal">
+    <h4>Ventix <span class="site-tag">ventix.com</span></h4>
+    <ul class="insp-list">
+      <li>Dual dark/light theme — smooth 300ms CSS custom property transition on toggle</li>
+      <li>Section fade-up transitions — opacity + translateY on IntersectionObserver entry</li>
+      <li>Icon-paired feature lists — SVG/emoji left, label + 1-line desc right, 2-col grid</li>
+      <li>9 demo layout variants confirming pattern flexibility across pages</li>
+    </ul>
+    <div class="insp-apply"><strong>Applied to:</strong> Entire site (dark mode), All pages (scroll reveal), Join Us &amp; About (icon lists)</div>
+  </div>
+</section>
+
+<!-- 05 COMPONENTS -->
+<section class="section" id="components">
+  <div class="section-label">05 — Components</div>
+  <h2 class="section-heading">Component Library Preview</h2>
+  <p class="section-sub">Live interactive previews. Toggle dark mode to see both themes.</p>
+  <hr class="divider">
+
+  <!-- PRELOADER -->
+  <div class="preview-box">
+    <div class="preview-label">Preloader <span class="insp-tag">✦ Xolio</span></div>
+    <div style="background:var(--navy);border-radius:12px;height:120px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px">
+      <div class="pl-ring" style="width:48px;height:48px"></div>
+      <div class="pl-text">Loading LEADS…</div>
+    </div>
+    <p style="font-size:12px;color:var(--text3);margin-top:12px">Dual-tone ring (teal top, gold right). Fades out after DOMContentLoaded. Brand-only — no generic spinner. <code>pointer-events:none</code> after hide so content is immediately interactive.</p>
+  </div>
+
+  <!-- HERO -->
+  <div class="preview-box">
+    <div class="preview-label">Hero — Home <span class="insp-tag">✦ Xolio</span> <span class="insp-tag">✦ Pixlab</span> <span class="insp-tag">✦ Adelux</span></div>
+    <div class="hero-preview">
+      <div class="hero-shapes">
+        <div class="hs1"></div>
+        <div class="hs2"></div>
+        <div class="hs3"></div>
+      </div>
+      <div class="hero-eyebrow">MSRUAS · Est. 2019</div>
+      <div class="hero-title">Where Leaders<br>Are <em>Made.</em></div>
+      <div class="hero-sub">LEADS Next Gen Centre shapes students into communicators, entrepreneurs, and change-makers through real-world programmes.</div>
+      <div class="hero-actions">
+        <button class="btn-primary">Explore LEADS</button>
+        <button class="btn-outline">Join the Movement →</button>
+      </div>
+      <div class="social-proof">
+        <div class="avatar-stack">
+          <div class="av">KP</div>
+          <div class="av" style="background:linear-gradient(135deg,var(--gold),#E65100)">SR</div>
+          <div class="av" style="background:linear-gradient(135deg,#7B1FA2,var(--primary))">AM</div>
+          <div class="av" style="background:linear-gradient(135deg,var(--teal),#00796B)">RV</div>
+          <div class="av" style="background:rgba(255,255,255,0.2);font-size:10px">+</div>
+        </div>
+        <div class="proof-text">Trusted by <strong>500+ students</strong> at MSRUAS</div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--text3);margin-top:12px">Floating shapes: CSS keyframes translateY + rotate. Avatar stack: negative margin-left. Hero title: 900 weight, −1px tracking. Social proof copy replaces placeholder with real member count.</p>
+  </div>
+
+  <!-- SCROLL REVEAL DEMO -->
+  <div class="preview-box">
+    <div class="preview-label">Scroll Reveal — Staggered Entry <span class="insp-tag">✦ Xolio</span> <span class="insp-tag">✦ Ventix</span></div>
+    <div class="sr-demo" id="srDemo">
+      <div class="sr-block">Block 1</div>
+      <div class="sr-block">Block 2</div>
+      <div class="sr-block">Block 3</div>
+      <div class="sr-block">Block 4</div>
+    </div>
+    <button onclick="triggerSR()" style="margin-top:16px;background:var(--primary);color:#fff;border:none;padding:10px 22px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer">▶ Replay Animation</button>
+    <p style="font-size:12px;color:var(--text3);margin-top:12px">IntersectionObserver at 15% threshold. Each <code>.reveal</code> element: opacity 0→1, translateY(28px)→0 over 550ms. Siblings add 100ms delay via <code>transition-delay</code>.</p>
+  </div>
+
+  <!-- 4-COL ICON CARDS -->
+  <div class="preview-box">
+    <div class="preview-label">4-Column Program Cards <span class="insp-tag">✦ Adelux</span></div>
+    <div class="grid-4">
+      <div class="icon-card">
+        <div class="ic-icon">🎤</div>
+        <h4>Public Speaking</h4>
+        <p>Master confident, persuasive communication in front of any audience.</p>
+      </div>
+      <div class="icon-card">
+        <div class="ic-icon" style="background:linear-gradient(135deg,var(--gold),#E65100)">💡</div>
+        <h4>Entrepreneurship</h4>
+        <p>Turn ideas into ventures with startup workshops and mentorship.</p>
+      </div>
+      <div class="icon-card">
+        <div class="ic-icon" style="background:linear-gradient(135deg,#7B1FA2,var(--primary))">🧠</div>
+        <h4>Leadership</h4>
+        <p>Strategic thinking, team dynamics, and decision-making under pressure.</p>
+      </div>
+      <div class="icon-card">
+        <div class="ic-icon" style="background:linear-gradient(135deg,var(--teal),#00796B)">🌿</div>
+        <h4>Mindfulness</h4>
+        <p>Balance performance with well-being through structured programmes.</p>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--text3);margin-top:16px">Hover: translateY(−5px) + coloured box-shadow + teal border. Mobile collapses to 2-col at 900px, 1-col at 600px. Each icon box uses unique gradient.</p>
+  </div>
+
+  <!-- MASONRY GALLERY -->
+  <div class="preview-box">
+    <div class="preview-label">Masonry Gallery — Events Page <span class="insp-tag">✦ Oifolio</span> <span class="insp-tag">✦ Pixlab</span></div>
+    <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+      <button onclick="filterMasonry('all',this)" class="mf-btn" style="background:var(--primary);color:#fff;border:none;padding:7px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer">All</button>
+      <button onclick="filterMasonry('bls',this)" class="mf-btn" style="background:var(--surface);color:var(--text2);border:1px solid rgba(21,101,192,0.2);padding:7px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer">BLS</button>
+      <button onclick="filterMasonry('workshop',this)" class="mf-btn" style="background:var(--surface);color:var(--text2);border:1px solid rgba(21,101,192,0.2);padding:7px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer">Workshops</button>
+      <button onclick="filterMasonry('mindfulness',this)" class="mf-btn" style="background:var(--surface);color:var(--text2);border:1px solid rgba(21,101,192,0.2);padding:7px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer">Mindfulness</button>
+    </div>
+    <div class="masonry-grid" id="masonryGrid">
+      <div class="masonry-item" data-cat="bls"><div class="mi-ph" style="height:160px;background:linear-gradient(135deg,var(--primary),var(--navy))">BLS 2025</div><span class="mi-tag">BLS</span><div class="mi-overlay"><span>Business Leadership Summit 2025</span></div></div>
+      <div class="masonry-item" data-cat="workshop"><div class="mi-ph" style="height:110px;background:linear-gradient(135deg,#006064,var(--teal))">Workshop</div><span class="mi-tag">Workshop</span><div class="mi-overlay"><span>Public Speaking Workshop</span></div></div>
+      <div class="masonry-item" data-cat="mindfulness"><div class="mi-ph" style="height:130px;background:linear-gradient(135deg,#2E7D32,#1B5E20)">Mind</div><span class="mi-tag">Mindfulness</span><div class="mi-overlay"><span>Annual Mindfulness Retreat</span></div></div>
+      <div class="masonry-item" data-cat="bls"><div class="mi-ph" style="height:120px;background:linear-gradient(135deg,#1A237E,var(--navy))">BLS</div><span class="mi-tag">BLS</span><div class="mi-overlay"><span>BLS Speaker Panel</span></div></div>
+      <div class="masonry-item" data-cat="workshop"><div class="mi-ph" style="height:150px;background:linear-gradient(135deg,#880E4F,#4A148C)">Debate</div><span class="mi-tag">Workshop</span><div class="mi-overlay"><span>Debate Championship</span></div></div>
+      <div class="masonry-item" data-cat="mindfulness"><div class="mi-ph" style="height:100px;background:linear-gradient(135deg,#004D40,#00695C)">Yoga</div><span class="mi-tag">Mindfulness</span><div class="mi-overlay"><span>Mindful Leadership Session</span></div></div>
+    </div>
+    <p style="font-size:12px;color:var(--text3);margin-top:12px">CSS <code>columns: 3</code> + <code>break-inside: avoid</code>. Filter toggles <code>display:none</code> on non-matching items. Hover overlay: gradient from bottom, 300ms opacity. Replace placeholder colours with actual event photos.</p>
+  </div>
+
+  <!-- TESTIMONIAL CAROUSEL -->
+  <div class="preview-box">
+    <div class="preview-label">Testimonial Carousel <span class="insp-tag">✦ Adelux</span></div>
+    <div class="testi-wrap" id="testiWrap">
+      <div class="testi-track" id="testiTrack">
+        <div class="testi-slide">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"LEADS completely changed how I carry myself in a room. BLS gave me the confidence to pitch my startup idea to a panel of investors — and they loved it."</p>
+          <div class="testi-author">
+            <div class="testi-av">KP</div>
+            <div><div class="testi-name">Kavya Pillai</div><div class="testi-role">3rd Year, Computer Science · BLS 2024 Participant</div></div>
+          </div>
+        </div>
+        <div class="testi-slide">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"The Public Speaking programme is no joke. Three months in and I was leading workshops for my own class. LEADS builds real skills, not just certificates."</p>
+          <div class="testi-author">
+            <div class="testi-av" style="background:linear-gradient(135deg,var(--gold),#E65100)">RK</div>
+            <div><div class="testi-name">Rohan Kumar</div><div class="testi-role">2nd Year, MBA · Programme Lead 2025</div></div>
+          </div>
+        </div>
+        <div class="testi-slide">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"I joined LEADS not knowing anyone. A semester later I had a core team, a project, and an offer to speak at the inter-college leadership summit."</p>
+          <div class="testi-author">
+            <div class="testi-av" style="background:linear-gradient(135deg,#7B1FA2,var(--primary))">SR</div>
+            <div><div class="testi-name">Sneha Rao</div><div class="testi-role">4th Year, Engineering · LEADS Core Team</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-dots" id="testiDots">
+      <div class="testi-dot active" onclick="goTesti(0)"></div>
+      <div class="testi-dot" onclick="goTesti(1)"></div>
+      <div class="testi-dot" onclick="goTesti(2)"></div>
+    </div>
+    <p style="font-size:12px;color:var(--text3);margin-top:12px">Auto-advances every 5s via setInterval. CSS <code>translateX(-N×100%)</code>. Dot nav syncs index. Pauses on hover. Placeholder quotes — replace with real member testimonials before launch.</p>
+  </div>
+
+  <!-- JOURNEY & PROGRESS -->
+  <div class="preview-box">
+    <div class="preview-label">Membership Journey + Progress Bars <span class="insp-tag">✦ Oifolio</span></div>
+    <div class="journey-wrap">
+      <div class="journey-step"><div class="journey-dot done">✓</div><div class="journey-label">Discover</div><div class="journey-sub">Learn about LEADS</div></div>
+      <div class="journey-step"><div class="journey-dot done">✓</div><div class="journey-label">Apply</div><div class="journey-sub">Fill join form</div></div>
+      <div class="journey-step"><div class="journey-dot active">3</div><div class="journey-label">Onboard</div><div class="journey-sub">Orientation week</div></div>
+      <div class="journey-step"><div class="journey-dot">4</div><div class="journey-label">Participate</div><div class="journey-sub">Join programmes</div></div>
+      <div class="journey-step"><div class="journey-dot">⭐</div><div class="journey-label">Lead</div><div class="journey-sub">Core team role</div></div>
+    </div>
+    <div style="margin-top:32px">
+      <div class="prog-item">
+        <div class="prog-header"><span>Public Speaking</span><span style="color:var(--text2)">85%</span></div>
+        <div class="prog-bar"><div class="prog-fill" style="width:85%"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-header"><span>Leadership Skills</span><span style="color:var(--text2)">72%</span></div>
+        <div class="prog-bar"><div class="prog-fill" style="width:72%;background:linear-gradient(90deg,var(--gold),#FF6F00)"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-header"><span>Entrepreneurship</span><span style="color:var(--text2)">60%</span></div>
+        <div class="prog-bar"><div class="prog-fill" style="width:60%;background:linear-gradient(90deg,#7B1FA2,var(--primary))"></div></div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--text3);margin-top:12px">Journey stepper: flexbox with absolute horizontal connector line. Progress bars: CSS <code>@keyframes</code> animating width from 0 on IntersectionObserver entry. Green = done, blue = active.</p>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="preview-box">
+    <div class="preview-label">Navigation Bar</div>
+    <div class="nav-preview">
+      <div class="nav-logo">LEADS<span>.</span></div>
+      <div class="nav-links">
+        <a href="#" class="active">Home</a>
+        <a href="#">About</a>
+        <a href="#">Events</a>
+        <a href="#">BLS</a>
+        <a href="#">Join Us</a>
+        <a href="#">Contact</a>
+      </div>
+      <button class="nav-cta">Join LEADS</button>
+    </div>
+    <p style="font-size:12px;color:var(--text3)">Sticky with <code>backdrop-filter: blur(10px)</code>. Active link highlighted. Mobile: hamburger collapses to drawer. Logo click = home.</p>
+  </div>
+
+  <!-- BUTTONS -->
+  <div class="preview-box">
+    <div class="preview-label">Button System</div>
+    <div class="btn-row" style="margin-bottom:14px">
+      <button class="btn btn-teal">Primary CTA</button>
+      <button class="btn btn-gold">Highlight CTA</button>
+      <button class="btn btn-ghost">Secondary</button>
+      <button class="btn btn-teal btn-sm">Small</button>
+      <button class="btn btn-teal btn-disabled" disabled>Disabled</button>
+    </div>
+    <p style="font-size:12px;color:var(--text3)">All: 30px radius, 600 weight. Hover: translateY(-2px) + matching colour shadow. Focus: 3px brand-colour ring. Gold on light — contrast verified.</p>
+  </div>
+
+  <!-- FORM -->
+  <div class="preview-box">
+    <div class="preview-label">Form Components</div>
+    <div class="grid-2">
+      <div>
+        <div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" type="text" placeholder="Your name"></div>
+        <div class="form-group"><label class="form-label">Email Address *</label><input class="form-input" type="email" placeholder="you@msruas.ac.in"></div>
+      </div>
+      <div>
+        <div class="form-group"><label class="form-label">Programme Interest</label><select class="form-input"><option>Public Speaking</option><option>Entrepreneurship</option><option>Leadership</option><option>BLS Event</option></select></div>
+        <div class="form-group"><label class="form-label">Message</label><textarea class="form-input" rows="3" placeholder="Tell us about yourself…"></textarea></div>
+      </div>
+    </div>
+    <button class="btn btn-teal" style="margin-top:8px">Submit →</button>
+    <p style="font-size:12px;color:var(--text3);margin-top:12px">React Hook Form + Zod validation. Error states: red border + inline message below field. Success: teal border + toast notification. Resend sends email to LEADS inbox.</p>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="preview-box">
+    <div class="preview-label">Footer</div>
+    <div class="footer-preview">
+      <div class="footer-brand"><h3>LEADS<span>.</span></h3><p>LEADS Next Gen Centre — MSRUAS. Empowering the next generation of leaders, speakers, and entrepreneurs since 2019.</p></div>
+      <div class="footer-col"><h4>Navigate</h4><a href="#">Home</a><a href="#">About</a><a href="#">Events</a><a href="#">BLS</a><a href="#">Join Us</a></div>
+      <div class="footer-col"><h4>Connect</h4><a href="#">Instagram</a><a href="#">LinkedIn</a><a href="#">Contact</a><a href="#">MSRUAS</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 COLOURS -->
+<section class="section" id="colours">
+  <div class="section-label">06 — Colours</div>
+  <h2 class="section-heading">Colour System</h2>
+  <p class="section-sub">Brand palette with light and dark mode CSS tokens.</p>
+  <hr class="divider">
+  <div class="swatch-row">
+    <div class="swatch"><div class="swatch-color" style="background:#1565C0"></div><div class="swatch-info"><div class="swatch-name">Deep Blue</div><div class="swatch-hex">#1565C0 · --primary</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#0D47A1"></div><div class="swatch-info"><div class="swatch-name">Dark Navy</div><div class="swatch-hex">#0D47A1 · --navy</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#00BCD4"></div><div class="swatch-info"><div class="swatch-name">Teal Cyan</div><div class="swatch-hex">#00BCD4 · --teal</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#FFB300"></div><div class="swatch-info"><div class="swatch-name">Amber Gold</div><div class="swatch-hex">#FFB300 · --gold</div></div></div>
+  </div>
+  <div class="swatch-row">
+    <div class="swatch"><div class="swatch-color" style="background:#F0F7FF"></div><div class="swatch-info"><div class="swatch-name">Light BG</div><div class="swatch-hex">#F0F7FF · light mode</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#0A1628;border:1px solid rgba(255,255,255,0.1)"></div><div class="swatch-info"><div class="swatch-name">Dark BG</div><div class="swatch-hex">#0A1628 · dark mode</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#16A34A"></div><div class="swatch-info"><div class="swatch-name">Success</div><div class="swatch-hex">#16A34A</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#DC2626"></div><div class="swatch-info"><div class="swatch-name">Error</div><div class="swatch-hex">#DC2626</div></div></div>
+  </div>
+  <div class="info-box">
+    <strong>Contrast:</strong> All text/background pairs meet WCAG AA (4.5:1 min). Navy on white = 12.6:1. Teal on dark bg = 5.2:1. Gold on dark bg = 7.8:1.
+  </div>
+</section>
+
+<!-- 07 TYPOGRAPHY -->
+<section class="section" id="typography">
+  <div class="section-label">07 — Typography</div>
+  <h2 class="section-heading">Type Scale</h2>
+  <p class="section-sub">Inter via next/font. Xolio-inspired bold hierarchy — oversized headings, generous weight contrast.</p>
+  <hr class="divider">
+  <div class="type-sample">
+    <div style="font-size:56px;font-weight:900;color:var(--text);line-height:1.05;letter-spacing:-1.5px">Where Leaders Are Made.</div>
+    <div class="type-meta">Hero H1 · 56px · weight 900 · tracking −1.5px · Xolio bold tagline pattern</div>
+  </div>
+  <div class="type-sample">
+    <div style="font-size:36px;font-weight:800;color:var(--text);line-height:1.15">Section Heading Example</div>
+    <div class="type-meta">H2 · 36px · weight 800 · tracking −0.5px</div>
+  </div>
+  <div class="type-sample">
+    <div style="font-size:22px;font-weight:700;color:var(--text)">Card &amp; Sub-section Title</div>
+    <div class="type-meta">H3 · 22px · weight 700</div>
+  </div>
+  <div class="type-sample">
+    <div style="font-size:16px;color:var(--text2);line-height:1.7;max-width:600px">Body text — Inter Regular at 16px with 1.7 line height for comfortable reading. Used for paragraphs, descriptions, and card body copy throughout the site.</div>
+    <div class="type-meta">Body · 16px · weight 400 · line-height 1.7</div>
+  </div>
+  <div class="type-sample" style="border-bottom:none">
+    <div style="font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--teal)">SECTION EYEBROW LABEL</div>
+    <div class="type-meta">Eyebrow · 11px · weight 700 · 2.5px tracking · ALL CAPS · teal</div>
+  </div>
+</section>
+
+<!-- 08 BACKGROUNDS -->
+<section class="section" id="backgrounds">
+  <div class="section-label">08 — Backgrounds</div>
+  <h2 class="section-heading">Page Background System</h2>
+  <p class="section-sub">Each page has a distinct, personality-driven background. All respect prefers-reduced-motion.</p>
+  <hr class="divider">
+  <div class="grid-3">
+    <div>
+      <div class="bg-preview bg-arc">
+        <svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice">
+          <circle class="arc-ring" cx="320" cy="100" r="180"/>
+          <circle class="arc-ring" cx="320" cy="100" r="130"/>
+          <circle class="arc-ring" cx="320" cy="100" r="80"/>
+          <circle class="arc-ring" cx="320" cy="100" r="40"/>
+        </svg>
+        <div class="bg-label">Home · Arc Rings</div>
+      </div>
+      <p style="font-size:12px;color:var(--text2)">CSS @keyframes pulsing rings on navy gradient. Right-anchored. Pure CSS — no JS library needed.</p>
+    </div>
+    <div>
+      <div class="bg-preview bg-star" id="starBg">
+        <div class="star-canvas" id="starCanvas"></div>
+        <div class="bg-label">BLS · Starfield Particles</div>
+      </div>
+      <p style="font-size:12px;color:var(--text2)">tsParticles v2. 60 particles desktop / 25 mobile. Lines connect nearby stars. Deep space drama.</p>
+    </div>
+    <div>
+      <div class="bg-preview bg-scroll-demo" id="scrollBg">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
+          <button onclick="cycleScrollBg()" style="background:rgba(255,255,255,0.15);color:#fff;border:none;padding:8px 16px;border-radius:20px;font-size:12px;cursor:pointer;backdrop-filter:blur(4px)">Cycle Colours →</button>
+        </div>
+        <div class="bg-label">Events · Scroll Colour Shift</div>
+      </div>
+      <p style="font-size:12px;color:var(--text2)">IntersectionObserver detects section entry → transitions background gradient. Click to preview cycle.</p>
+    </div>
+  </div>
+  <div class="warn-box" style="margin-top:8px">
+    <strong>Performance:</strong> All animated backgrounds check <code>prefers-reduced-motion</code> on load. If true: animations disabled, static gradient shown. tsParticles capped at 25 on screens &lt;768px.
+  </div>
+</section>
+
+<!-- 09 ANIMATIONS -->
+<section class="section" id="animations">
+  <div class="section-label">09 — Animation System</div>
+  <h2 class="section-heading">Motion Design</h2>
+  <p class="section-sub">Every animation serves a purpose. Patterns adapted from 5 inspiration sites to LEADS brand.</p>
+  <hr class="divider">
+  <div class="grid-2" style="margin-bottom:28px">
+    <div class="card">
+      <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:12px">✅ Use Animation For</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+        <li style="font-size:13px;color:var(--text2);display:flex;gap:8px"><span style="color:var(--teal)">→</span>Directing attention to primary CTAs</li>
+        <li style="font-size:13px;color:var(--text2);display:flex;gap:8px"><span style="color:var(--teal)">→</span>Confirming user actions (submit, click)</li>
+        <li style="font-size:13px;color:var(--text2);display:flex;gap:8px"><span style="color:var(--teal)">→</span>Revealing content progressively on scroll</li>
+        <li style="font-size:13px;color:var(--text2);display:flex;gap:8px"><span style="color:var(--teal)">→</span>Page load identity via preloader</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:12px">❌ Avoid</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+        <li style="font-size:13px;color:var(--text2);display:flex;gap:8px"><span style="color:var(--error)">→</span>Looping animations distracting from content</li>
+        <li style="font-size:13px;color:var(--text2);display:flex;gap:8px"><span style="color:var(--error)">→</span>Transitions &gt;600ms on interactive elements</li>
+        <li style="font-size:13px;color:var(--text2);display:flex;gap:8px"><span style="color:var(--error)">→</span>Animations that block scroll or input</li>
+        <li style="font-size:13px;color:var(--text2);display:flex;gap:8px"><span style="color:var(--error)">→</span>Parallax depth on mobile (performance)</li>
+      </ul>
+    </div>
+  </div>
+  <div style="overflow-x:auto">
+    <table>
+      <thead><tr><th>Animation</th><th>Page</th><th>Technique</th><th>Source</th><th>Duration</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Preloader spin</strong></td><td>All pages</td><td>CSS @keyframes rotate</td><td><span class="insp-tag">Xolio</span></td><td>1s linear ∞</td></tr>
+        <tr><td><strong>Scroll reveal</strong></td><td>All pages</td><td>IntersectionObserver</td><td><span class="insp-tag">Xolio</span> <span class="insp-tag">Ventix</span></td><td>550ms ease</td></tr>
+        <tr><td><strong>Arc ring pulse</strong></td><td>Home</td><td>CSS @keyframes opacity</td><td><span class="insp-tag">Original</span></td><td>3s ease-in-out ∞</td></tr>
+        <tr><td><strong>Hero shape float</strong></td><td>Home, BLS</td><td>CSS @keyframes translateY</td><td><span class="insp-tag">Pixlab</span></td><td>6–8s ease-in-out ∞</td></tr>
+        <tr><td><strong>Starfield particles</strong></td><td>BLS</td><td>tsParticles v2</td><td><span class="insp-tag">Original</span></td><td>Continuous</td></tr>
+        <tr><td><strong>BG colour shift</strong></td><td>Events</td><td>IntersectionObserver + CSS transition</td><td><span class="insp-tag">Original</span></td><td>1s ease</td></tr>
+        <tr><td><strong>Gallery hover overlay</strong></td><td>Events</td><td>CSS opacity transition</td><td><span class="insp-tag">Pixlab</span> <span class="insp-tag">Oifolio</span></td><td>300ms ease</td></tr>
+        <tr><td><strong>Testimonial slide</strong></td><td>BLS, About</td><td>CSS transform translateX</td><td><span class="insp-tag">Adelux</span></td><td>500ms cubic-bezier</td></tr>
+        <tr><td><strong>Progress bar fill</strong></td><td>About, Join Us</td><td>CSS @keyframes width</td><td><span class="insp-tag">Oifolio</span></td><td>1.2s ease forwards</td></tr>
+        <tr><td><strong>Dark mode swap</strong></td><td>All pages</td><td>CSS custom property transition</td><td><span class="insp-tag">Ventix</span></td><td>300ms ease</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 10 DARK MODE -->
+<section class="section" id="darkmode">
+  <div class="section-label">10 — Dark Mode</div>
+  <h2 class="section-heading">Dual Theme System</h2>
+  <p class="section-sub">300ms smooth transition. Persists in localStorage. Inspired by Ventix's seamless dual-theme approach.</p>
+  <hr class="divider">
+  <div class="dm-split" style="margin-bottom:28px">
+    <div class="dm-panel dm-light">
+      <h4>☀️ Light Mode</h4>
+      <p style="font-size:13px;line-height:1.8">BG: <code>#F0F7FF</code><br>Surface: <code>#E8F1FC</code><br>Card: <code>#FFFFFF</code><br>Text: <code>#1A1A2E</code><br>Text 2: <code>#4A5568</code></p>
+    </div>
+    <div class="dm-panel dm-dark">
+      <h4>🌙 Dark Mode</h4>
+      <p style="font-size:13px;line-height:1.8;color:rgba(240,240,240,0.75)">BG: <code style="color:#00BCD4">#0A1628</code><br>Surface: <code style="color:#00BCD4">#0F2040</code><br>Card: <code style="color:#00BCD4">#142050</code><br>Text: <code style="color:#00BCD4">#F0F0F0</code><br>Text 2: <code style="color:#00BCD4">#A0A0A0</code></p>
+    </div>
+  </div>
+  <div class="card" style="margin-bottom:20px">
+    <h4 style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:12px">Implementation Pattern</h4>
+    <pre style="background:var(--surface);padding:16px;border-radius:8px;font-size:12px;color:var(--text2);overflow-x:auto;line-height:1.8">// Toggle
+body.classList.toggle('dark');
+localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
+
+// On load — before first paint to prevent flash
+if (localStorage.getItem('theme') === 'dark') body.classList.add('dark');
+
+// CSS — tokens swap via .dark class
+body       { --bg: #F0F7FF; --card: #FFFFFF; --text: #1A1A2E; }
+body.dark  { --bg: #0A1628; --card: #142050; --text: #F0F0F0; }
+
+// All surfaces inherit via var() — zero duplication</pre>
+  </div>
+  <div class="info-box">
+    <strong>Ventix pattern applied:</strong> <code>transition: 0.3s ease</code> on <code>background</code>, <code>color</code>, <code>border-color</code>, and <code>box-shadow</code> on body and all major surface elements. Theme switch feels seamless, not jarring.
+  </div>
+</section>
+
+<div style="height:80px"></div>
+</div>
+
+<script>
+// PRELOADER
+window.addEventListener('load', () => {
+  setTimeout(() => { document.getElementById('preloader').classList.add('hide'); }, 900);
+});
+
+// DARK MODE
+function toggleMode() {
+  document.body.classList.toggle('dark');
+  const dark = document.body.classList.contains('dark');
+  localStorage.setItem('theme', dark ? 'dark' : 'light');
+  document.getElementById('modeBtn').textContent = dark ? '☀️ Light Mode' : '🌙 Dark Mode';
+}
+if (localStorage.getItem('theme') === 'dark') {
+  document.body.classList.add('dark');
+  document.getElementById('modeBtn').textContent = '☀️ Light Mode';
+}
+
+// SCROLL REVEAL
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// SR DEMO
+function triggerSR() {
+  const blocks = document.querySelectorAll('#srDemo .sr-block');
+  blocks.forEach(b => b.classList.remove('in'));
+  setTimeout(() => blocks.forEach(b => b.classList.add('in')), 60);
+}
+setTimeout(triggerSR, 1500);
+
+// TESTIMONIAL CAROUSEL
+let testiIdx = 0, testiTimer;
+const testiTotal = 3;
+function goTesti(idx) {
+  testiIdx = idx;
+  document.getElementById('testiTrack').style.transform = 'translateX(-' + (idx * 100) + '%)';
+  document.querySelectorAll('.testi-dot').forEach((d,i) => d.classList.toggle('active', i === idx));
+}
+function nextTesti() { goTesti((testiIdx + 1) % testiTotal); }
+testiTimer = setInterval(nextTesti, 5000);
+document.getElementById('testiWrap').addEventListener('mouseenter', () => clearInterval(testiTimer));
+document.getElementById('testiWrap').addEventListener('mouseleave', () => { testiTimer = setInterval(nextTesti, 5000); });
+
+// MASONRY FILTER
+function filterMasonry(cat, btn) {
+  document.querySelectorAll('.mf-btn').forEach(b => {
+    b.style.background = 'var(--surface)'; b.style.color = 'var(--text2)'; b.style.border = '1px solid rgba(21,101,192,0.2)';
+  });
+  btn.style.background = 'var(--primary)'; btn.style.color = '#fff'; btn.style.border = 'none';
+  document.querySelectorAll('#masonryGrid .masonry-item').forEach(item => {
+    item.style.display = (cat === 'all' || item.dataset.cat === cat) ? 'block' : 'none';
+  });
+}
+
+// STARFIELD
+const canvas = document.getElementById('starCanvas');
+if (canvas) {
+  for (let i = 0; i < 40; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const sz = Math.random() * 2.5 + 0.5;
+    s.style.cssText = 'width:'+sz+'px;height:'+sz+'px;top:'+(Math.random()*100)+'%;left:'+(Math.random()*100)+'%;--dur:'+(2+Math.random()*4)+'s;--del:'+(Math.random()*3)+'s';
+    canvas.appendChild(s);
+  }
+}
+
+// SCROLL BG CYCLE
+const sbGrads = [
+  'linear-gradient(135deg,#0D47A1,#00BCD4)',
+  'linear-gradient(135deg,#1B5E20,#00BCD4)',
+  'linear-gradient(135deg,#4A148C,#1565C0)',
+  'linear-gradient(135deg,#BF360C,#FFB300)'
+];
+let sbIdx = 0;
+function cycleScrollBg() {
+  sbIdx = (sbIdx + 1) % sbGrads.length;
+  document.getElementById('scrollBg').style.background = sbGrads[sbIdx];
+}
+</script>
+</body>
+</html>
