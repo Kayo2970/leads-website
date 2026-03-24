@@ -4,6 +4,7 @@ import TestimonialCarousel from '@/components/TestimonialCarousel'
 import ArcRings from '@/components/ArcRings'
 import InteractiveHeroShapes from '@/components/InteractiveHeroShapes'
 import InteractiveCards from '@/components/InteractiveCards'
+import StatsSection from '@/components/StatsSection'
 
 export const metadata: Metadata = {
   title: 'LEADS Next Gen Centre | Inspiring Future-Ready Youth Leaders',
@@ -62,13 +63,6 @@ const programs = [
   },
 ]
 
-const stats = [
-  { number: '1,500+', label: 'BLS Delegates' },
-  { number: '8', label: 'Core Programs' },
-  { number: '3', label: 'Global Partners' },
-  { number: '500+', label: 'Student Community' },
-]
-
 export default function HomePage() {
   return (
     <>
@@ -110,14 +104,7 @@ export default function HomePage() {
       {/* ── STATS ── */}
       <section className="section" id="stats">
         <div className="container">
-          <div className="grid-4">
-            {stats.map((stat, i) => (
-              <div key={i} className={`stat-card reveal reveal-d${i + 1}`}>
-                <div className="stat-number">{stat.number}</div>
-                <div className="stat-label">{stat.label}</div>
-              </div>
-            ))}
-          </div>
+          <StatsSection />
         </div>
       </section>
 

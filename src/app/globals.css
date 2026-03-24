@@ -456,11 +456,12 @@ body {
   position: sticky;
   top: 0;
   z-index: 9999;
-  background: rgba(240, 247, 255, 0.7);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid var(--glass-border);
+  background: rgba(224, 240, 255, 0.85);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border-bottom: 1px solid rgba(21, 101, 192, 0.12);
   transition: background var(--trans);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
 
 .dark .navbar {
@@ -962,32 +963,40 @@ body {
 /* ── CARDS ── */
 .card {
   background: var(--card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   border-radius: var(--radius);
   padding: 28px;
   border: 1px solid rgba(21,101,192,0.1);
-  transition: transform 0.25s, box-shadow 0.25s;
+  transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), 
+              box-shadow 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 .dark .card {
   border-color: rgba(255,255,255,0.06);
 }
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(21,101,192,0.12);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(21,101,192,0.15);
 }
 
 /* ── ICON CARDS (Programs) ── */
 .icon-card {
   background: var(--card);
-  border-radius: 14px;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: 20px;
   padding: 28px 22px;
   text-align: center;
   border: 1px solid rgba(21,101,192,0.1);
-  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), 
+              box-shadow 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), 
+              border-color 0.3s;
+  cursor: pointer;
 }
 .dark .icon-card { border-color: rgba(255,255,255,0.07); }
 .icon-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 14px 36px rgba(21,101,192,0.14);
+  transform: translateY(-8px) scale(1.04);
+  box-shadow: 0 20px 48px rgba(21,101,192,0.18);
   border-color: var(--teal);
 }
 .icon-card .ic-icon {
