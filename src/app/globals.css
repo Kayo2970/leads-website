@@ -252,6 +252,18 @@ body {
     width: 120px;
     height: 120px;
   }
+  /* Preloader mobile sizing */
+  .preloader-container {
+    width: 300px;
+    height: 300px;
+  }
+  .logo-spinner {
+    width: 200px;
+    height: 200px;
+  }
+  .loading-line {
+    width: 200px;
+  }
 }
 
 /* ── DARK MODE TOGGLE ── */
