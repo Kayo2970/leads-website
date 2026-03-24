@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import TestimonialCarousel from '@/components/TestimonialCarousel'
 import ArcRings from '@/components/ArcRings'
 import InteractiveHeroShapes from '@/components/InteractiveHeroShapes'
+import InteractiveCards from '@/components/InteractiveCards'
 
 export const metadata: Metadata = {
   title: 'LEADS Next Gen Centre | Inspiring Future-Ready Youth Leaders',
@@ -101,11 +102,7 @@ export default function HomePage() {
             </div>
           </div>
           
-          <div className="hero-floating-elements" style={{ position: 'absolute', right: '5%', top: '20%', display: 'flex', gap: '2rem', flexWrap: 'wrap', width: '30%', justifyContent: 'center' }}>
-             <div className="animate-bounce-twice" style={{ background: 'var(--teal)', width: '80px', height: '80px', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', boxShadow: '0 10px 30px rgba(0,0,0,0.2)' }}>📈</div>
-             <div className="animate-bounce-twice" style={{ background: 'var(--gold)', width: '60px', height: '60px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', boxShadow: '0 10px 30px rgba(0,0,0,0.2)', marginTop: '40px' }}>🌍</div>
-             <div className="animate-bounce-twice" style={{ background: 'var(--primary)', width: '100px', height: '100px', borderRadius: '50% 20px 50% 50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem', boxShadow: '0 10px 30px rgba(0,0,0,0.2)' }}>💡</div>
-          </div>
+          <InteractiveCards />
         </div>
       </section>
 
