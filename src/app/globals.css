@@ -599,9 +599,56 @@ body {
 }
 @media (max-width: 1024px) {
   .nav-links { display: none !important; }
-  .nav-hamburger { display: flex !important; align-items: center; justify-content: center; }
-  .nav-container { height: 100px; }
-  .nav-logo-image { width: 90px; height: 90px; }
+  .nav-hamburger { display: none !important; }
+  .nav-container { height: 80px; justify-content: center; }
+  .nav-logo-image { width: 80px; height: 80px; }
+  body { padding-bottom: 80px; } /* Space for bottom nav */
+}
+
+/* ── BOTTOM NAV (Mobile Only) ── */
+.bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  height: 64px;
+  background: var(--card);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 32px;
+  z-index: 9999;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 10px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+@media (max-width: 1024px) {
+  .bottom-nav { display: flex; }
+}
+
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--text2);
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: 600;
+  transition: all 0.3s;
+  padding: 8px;
+}
+
+.bottom-nav-item.active {
+  color: var(--teal);
+}
+
+.bottom-nav-icon {
+  width: 20px;
+  height: 20px;
 }
 
 /* ── DARK MODE TOGGLE ── */
@@ -684,66 +731,48 @@ body {
   .btn { padding: 12px 22px; font-size: 14px; }
 }
 /* ── PRISMATIC BACKGROUND ANIMATIONS ── */
-@keyframes prism-aurora {
-  0%, 100% { background-position: 0% 0%; }
-  50% { background-position: 100% 100%; }
-}
-@keyframes prism-shimmer {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
+@keyframes plasma-drift {
+  0%, 100% { transform: translate(-20%, -20%) scale(1); opacity: 0.2; }
+  33% { transform: translate(10%, 10%) scale(1.1); opacity: 0.4; }
+  66% { transform: translate(-10%, 20%) scale(0.95); opacity: 0.3; }
 }
 
 /* ── SHARED PRISMATIC STYLES ── */
 .hero-bg, .page-hero, .cta-section, .dynamic-bg {
   background-color: #050d1a;
   background-image: 
-    radial-gradient(ellipse at 10% 20%, rgba(25, 118, 210, 0.35) 0%, transparent 40%),
-    radial-gradient(ellipse at 90% 80%, rgba(2, 44, 102, 0.55) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(0, 188, 212, 0.15) 0%, transparent 60%);
+    radial-gradient(ellipse at 10% 20%, rgba(25, 118, 210, 0.4) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 80%, rgba(2, 44, 102, 0.6) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 50%, rgba(0, 188, 212, 0.2) 0%, transparent 70%);
   background-size: 200% 200%;
-  animation: prism-aurora 25s ease-in-out infinite;
+  animation: prism-aurora 20s ease-in-out infinite;
   overflow: hidden;
-  z-index: 0; /* Creates stacking context for pseudo-elements */
-}
-
-.hero-bg::before, .page-hero::before, .cta-section::before, .dynamic-bg::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: 
-    linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 40%),
-    radial-gradient(circle at top right, rgba(255,255,255,0.05) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: -1; 
-  mix-blend-mode: overlay;
+  z-index: 0;
 }
 
 .hero-bg::after, .page-hero::after, .cta-section::after, .dynamic-bg::after {
   content: "";
   position: absolute;
-  top: 50%; left: 50%;
-  width: 250%; height: 250%;
-  background: conic-gradient(from 180deg at 50% 50%, 
-    rgba(25,118,210,0.5) 0deg, 
-    rgba(2,44,102,0.6) 120deg, 
-    rgba(255,255,255,0.15) 240deg, 
-    rgba(25,118,210,0.5) 360deg);
-  animation: prism-shimmer 30s linear infinite;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: 
+    radial-gradient(circle at 30% 30%, var(--primary) 0%, transparent 40%),
+    radial-gradient(circle at 70% 70%, var(--teal) 0%, transparent 40%),
+    radial-gradient(circle at 50% 10%, var(--gold) 0%, transparent 30%);
+  animation: plasma-drift 25s ease-in-out infinite;
+  filter: blur(80px);
   pointer-events: none;
   z-index: -1;
-  opacity: 0.15; /* Safe for iOS, much cheaper than color-dodge */
-  filter: blur(40px); /* Safely reduced blur limit */
-  transform-origin: center center;
+  opacity: 0.25;
 }
 
 @media (max-width: 1024px) {
   .hero-bg::after, .page-hero::after, .cta-section::after, .dynamic-bg::after {
-    /* Safe mobile background: highly performant rotating mesh instead of blurry conic gradient */
-    filter: none; 
-    opacity: 0.08;
-    background: repeating-linear-gradient(45deg, var(--primary) 0%, var(--primary) 2px, transparent 2px, transparent 40px);
-    animation: prism-shimmer 40s linear infinite;
-    display: block !important;
+    filter: blur(50px);
+    opacity: 0.2;
+    background: 
+      radial-gradient(circle at 20% 20%, var(--primary) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, var(--teal) 0%, transparent 50%);
   }
 }
 

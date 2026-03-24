@@ -3,7 +3,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { Home, Users, Calendar, Award, Mail, LayoutDashboard } from 'lucide-react'
 import { useTheme } from './ThemeProvider'
 
 const links = [
@@ -39,7 +40,7 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* Desktop links — hidden on mobile via CSS class only (no inline style) */}
+          {/* Desktop links */}
           <div className="nav-links">
             {links.map((link) => (
               <Link
@@ -57,27 +58,33 @@ export default function Navbar() {
             </button>
           </div>
 
-          {/* Hamburger — shown on mobile via CSS class only (no inline style) */}
-          <button
-            id="mobile-menu-toggle"
-            className="nav-hamburger"
-            aria-label="Open navigation menu"
-            aria-expanded={menuOpen}
-            onClick={toggle}
-            style={{ 
-              padding: '16px', 
-              marginRight: '-16px',
-              cursor: 'pointer',
-              WebkitTapHighlightColor: 'transparent'
-            }}
-          >
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-              {menuOpen
-                ? <><line x1="6" y1="6" x2="18" y2="18" /><line x1="18" y1="6" x2="6" y2="18" /></>
-                : <><line x1="4" y1="7" x2="20" y2="7" /><line x1="4" y1="12" x2="20" y2="12" /><line x1="4" y1="17" x2="20" y2="17" /></>
-              }
-            </svg>
-          </button>
+          {/* Bottom Nav for Mobile */}
+          <div className="bottom-nav">
+            <Link href="/" className={`bottom-nav-item ${pathname === '/' ? 'active' : ''}`}>
+              <Home className="bottom-nav-icon" />
+              <span>Home</span>
+            </Link>
+            <Link href="/about" className={`bottom-nav-item ${pathname === '/about' ? 'active' : ''}`}>
+              <Users className="bottom-nav-icon" />
+              <span>About</span>
+            </Link>
+            <Link href="/team" className={`bottom-nav-item ${pathname === '/team' ? 'active' : ''}`}>
+              <Award className="bottom-nav-icon" />
+              <span>Team</span>
+            </Link>
+            <Link href="/events" className={`bottom-nav-item ${pathname === '/events' ? 'active' : ''}`}>
+              <Calendar className="bottom-nav-icon" />
+              <span>Events</span>
+            </Link>
+            <Link href="/contact" className={`bottom-nav-item ${pathname === '/contact' ? 'active' : ''}`}>
+              <Mail className="bottom-nav-icon" />
+              <span>Contact</span>
+            </Link>
+            <Link href="/admin" className={`bottom-nav-item ${pathname === '/admin' ? 'active' : ''}`}>
+              <LayoutDashboard className="bottom-nav-icon" />
+              <span>Admin</span>
+            </Link>
+          </div>
         </div>
       </nav>
 
