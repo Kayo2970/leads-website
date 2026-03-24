@@ -8,7 +8,7 @@
   --gold: #FFB300;
   --bg: #F0F7FF;
   --surface: rgba(232, 241, 252, 0.4);
-  --card: rgba(255, 255, 255, 0.45);
+  --card: rgba(240, 249, 255, 0.5); /* Slight blue tint */
   --glass-border: rgba(255, 255, 255, 0.4);
   --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
   --glass-blur: blur(12px);
@@ -25,7 +25,7 @@
 .dark {
   --bg: #0A1628;
   --surface: rgba(15, 32, 64, 0.4);
-  --card: rgba(20, 32, 80, 0.4);
+  --card: rgba(15, 35, 75, 0.5); /* Deeper blue tint for dark mode */
   --glass-border: rgba(255, 255, 255, 0.08);
   --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
   --text: #F0F0F0;
