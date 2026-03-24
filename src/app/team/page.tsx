@@ -265,9 +265,7 @@ export default function TeamPage() {
           <hr className="divider" />
           <div className="grid-4">
             {executiveCouncil.map((member, i) => (
-              <div key={i} style={{ animationDelay: `${i * 0.1}s` }}>
-                <TeamCard member={member} />
-              </div>
+              <TeamCard key={i} member={member} index={i} />
             ))}
           </div>
         </div>
@@ -284,9 +282,7 @@ export default function TeamPage() {
           <hr className="divider" />
           <div className="grid-4">
             {organizingCommittee.map((member, i) => (
-              <div key={i} style={{ animationDelay: `${i * 0.1}s` }}>
-                <TeamCard member={member} />
-              </div>
+              <TeamCard key={i} member={member} index={i} />
             ))}
           </div>
         </div>
@@ -303,9 +299,7 @@ export default function TeamPage() {
           <hr className="divider" />
           <div className="grid-4">
             {organizers.map((member, i) => (
-              <div key={i} style={{ animationDelay: `${i * 0.1}s` }}>
-                <TeamCard member={member} />
-              </div>
+              <TeamCard key={i} member={member} index={i} />
             ))}
           </div>
         </div>
