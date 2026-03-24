@@ -80,7 +80,6 @@ export default function TeamCard({ member }: { member: TeamMember }) {
         style={{
           fontSize: '12px',
           fontWeight: 600,
-          color: 'var(--teal)',
           textTransform: 'uppercase',
           letterSpacing: '1px',
           marginBottom: '6px',
