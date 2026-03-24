@@ -48,7 +48,7 @@ export default function ContactPage() {
                 <div className="contact-icon">📧</div>
                 <div>
                   <h4>Email</h4>
-                  <p><a href="mailto:info@bharatleadsummit.com" style={{ color: 'var(--primary)', textDecoration: 'none' }}>info@bharatleadsummit.com</a></p>
+                  <p><a href="mailto:leads.ngc@msruas.ac.in" style={{ color: 'var(--primary)', textDecoration: 'none' }}>leads.ngc@msruas.ac.in</a></p>
                 </div>
               </div>
 

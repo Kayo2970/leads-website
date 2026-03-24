@@ -49,7 +49,7 @@ export default function Footer() {
             <h4>Connect</h4>
             <Link href="/join">Join Us</Link>
             <Link href="/contact">Contact</Link>
-            <a href="mailto:info@bharatleadsummit.com">info@bharatleadsummit.com</a>
+            <a href="mailto:leads.ngc@msruas.ac.in">leads.ngc@msruas.ac.in</a>
           </div>
         </div>
         <div className="footer-bottom">
