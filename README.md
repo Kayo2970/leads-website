@@ -84,6 +84,3 @@ This software and all contained digital assets (UX patterns, custom graphics, so
 For technical inquiries, departmental review, or maintenance support:
 - **Email**: [leads.ngc@msruas.ac.in](mailto:leads.ngc@msruas.ac.in)
 - **Location**: University House, New BEL Rd, M S R Nagar, Mathikere, Bengaluru, Karnataka 560054
-
----
-*Powered by MSRUAS Engineering Standards*
