@@ -600,7 +600,18 @@ body {
 @media (max-width: 1024px) {
   .nav-links { display: none !important; }
   .nav-hamburger { display: none !important; }
-  .nav-container { height: 70px; justify-content: center; padding: 0 16px; }
+  .nav-container { 
+    height: 70px; 
+    justify-content: center; 
+    padding: 0 16px;
+    pointer-events: auto; /* Only logo is clickable at top */
+  }
+  .navbar {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    pointer-events: none; /* Let clicks pass through to content */
+  }
   .nav-logo { height: 60px; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
   .mobile-logo { display: block !important; }
   .desktop-logo { display: none !important; }
@@ -610,22 +621,23 @@ body {
 /* ── BOTTOM NAV (Mobile Only) ── */
 .bottom-nav {
   display: none;
-  position: fixed;
-  bottom: 20px; /* Force to bottom */
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(92vw, 420px);
+  position: fixed !important;
+  bottom: 20px !important; /* Force to bottom */
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: min(92vw, 420px) !important;
   height: 64px;
   background: var(--card);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--glass-border);
   border-radius: 32px;
-  z-index: 9999;
+  z-index: 9999 !important;
   justify-content: space-around;
   align-items: center;
   padding: 0 10px;
   box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  pointer-events: auto !important;
 }
 
 @media (max-width: 1024px) {
