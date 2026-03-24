@@ -658,7 +658,7 @@ body {
 .hero-bg, .page-hero, .cta-section, .dynamic-bg {
   background-color: #050d1a;
   background-image: 
-    radial-gradient(ellipse at 10% 20%, rgba(0, 188, 212, 0.35) 0%, transparent 40%),
+    radial-gradient(ellipse at 10% 20%, rgba(41, 121, 255, 0.35) 0%, transparent 40%),
     radial-gradient(ellipse at 90% 80%, rgba(123, 31, 162, 0.35) 0%, transparent 50%),
     radial-gradient(ellipse at 50% 50%, rgba(21, 101, 192, 0.25) 0%, transparent 60%);
   background-size: 200% 200%;
@@ -685,10 +685,10 @@ body {
   top: 50%; left: 50%;
   width: 250%; height: 250%;
   background: conic-gradient(from 180deg at 50% 50%, 
-    rgba(0,188,212,0.5) 0deg, 
+    rgba(41,121,255,0.5) 0deg, 
     rgba(123,31,162,0.6) 120deg, 
-    rgba(255,179,0,0.4) 240deg, 
-    rgba(0,188,212,0.5) 360deg);
+    rgba(156,39,176,0.4) 240deg, 
+    rgba(41,121,255,0.5) 360deg);
   animation: prism-shimmer 30s linear infinite;
   pointer-events: none;
   z-index: -1;
@@ -699,8 +699,12 @@ body {
 
 @media (max-width: 1024px) {
   .hero-bg::after, .page-hero::after, .cta-section::after, .dynamic-bg::after {
-    /* Disable expensive blur and animation on mobile devices entirely to prevent iOS Safari crashing */
-    display: none !important;
+    /* Safe mobile background: highly performant rotating mesh instead of blurry conic gradient */
+    filter: none; 
+    opacity: 0.08;
+    background: repeating-linear-gradient(45deg, var(--primary) 0%, var(--primary) 2px, transparent 2px, transparent 40px);
+    animation: prism-shimmer 40s linear infinite;
+    display: block !important;
   }
 }
 
