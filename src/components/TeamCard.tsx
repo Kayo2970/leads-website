@@ -48,7 +48,7 @@ export default function TeamCard({ member, index = 0 }: { member: TeamMember, in
             width: '100%',
             height: '100%',
             objectFit: 'cover',
-            objectPosition: 'center',
+            objectPosition: 'top center',
             transition: 'all 0.4s ease',
             transform: isHovered ? 'scale(1.08)' : 'scale(1)',
             filter: isHovered ? 'brightness(1.1)' : 'brightness(1)',
