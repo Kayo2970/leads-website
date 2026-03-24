@@ -35,7 +35,7 @@ export default function Navbar() {
               <Image src="/leads-logo-large.png" alt="LEADS Next Gen Centre" width={200} height={57} priority style={{ objectFit: 'contain' }} />
             </div>
             <div className="mobile-logo">
-              <Image src="/leads-logo-thumb.png" alt="LEADS" width={50} height={50} priority style={{ objectFit: 'contain' }} />
+              <Image src="/leads-logo-thumb.png" alt="LEADS" width={90} height={90} priority style={{ objectFit: 'contain' }} />
             </div>
           </Link>
 
@@ -52,7 +52,7 @@ export default function Navbar() {
               </Link>
             ))}
             <Link href="/join" className="nav-cta" id="nav-join-cta">Join LEADS</Link>
-            <button className="theme-toggle" onClick={toggleTheme} id="theme-toggle" aria-label="Toggle dark mode">
+            <button className="theme-toggle" onClick={toggleTheme} id="theme-toggle" aria-label="Toggle dark mode" suppressHydrationWarning>
               {theme === 'light' ? '🌙' : '☀️'}
             </button>
           </div>
@@ -64,6 +64,12 @@ export default function Navbar() {
             aria-label="Open navigation menu"
             aria-expanded={menuOpen}
             onClick={toggle}
+            style={{ 
+              padding: '16px', 
+              marginRight: '-16px',
+              cursor: 'pointer',
+              WebkitTapHighlightColor: 'transparent'
+            }}
           >
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
               {menuOpen
