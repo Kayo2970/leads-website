@@ -5,18 +5,9 @@ import Image from 'next/image'
 
 export default function Preloader() {
   const [hidden, setHidden] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
-
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 768)
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    
     const timer = setTimeout(() => setHidden(true), 800)
-    return () => {
-      clearTimeout(timer)
-      window.removeEventListener('resize', checkMobile)
-    }
+    return () => clearTimeout(timer)
   }, [])
 
   if (hidden) return null
@@ -41,10 +32,11 @@ export default function Preloader() {
           <Image
             src="/leads-logo-thumb.png"
             alt="LEADS Loading"
-            width={isMobile ? 200 : 500}
-            height={isMobile ? 200 : 500}
+            width={500}
+            height={500}
             className="spinning-logo"
             priority
+            style={{ maxWidth: '100%', height: 'auto' }}
           />
         </div>
         <div className="loading-line" />
