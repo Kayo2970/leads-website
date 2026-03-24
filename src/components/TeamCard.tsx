@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { motion } from 'framer-motion'
 import Image from 'next/image'
 
 interface TeamMember {
@@ -17,111 +16,85 @@ export default function TeamCard({ member, index = 0 }: { member: TeamMember, in
   const [isHovered, setIsHovered] = useState(false)
 
   return (
-    <motion.div
+    <div
       className="card reveal"
       style={{
-        padding: '0',
+        borderTop: '3px solid var(--primary)',
         overflow: 'hidden',
-        borderRadius: '16px',
-        background: 'var(--card)',
-        position: 'relative',
-        cursor: 'pointer',
+        transition: 'opacity 1s cubic-bezier(0.165, 0.84, 0.44, 1), transform 1s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s ease',
+        transitionDelay: `${(index % 4) * 0.15}s`,
+        transform: isHovered ? 'translateY(-8px)' : 'none',
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1 }}
     >
       <div
         style={{
-          paddingTop: '125%', // 4:5 Professional Vertical Aspect Ratio
-          position: 'relative',
+          marginBottom: '16px',
+          height: '240px',
+          borderRadius: '8px',
           overflow: 'hidden',
+          background: 'var(--surface)',
+          position: 'relative',
         }}
       >
         <img
           src={imgSrc}
           alt={member.name}
           onError={() => {
-            setImgSrc(`data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='500'%3E%3Crect fill='%231565C0' width='400' height='500'/%3E%3Ctext x='50%25' y='50%25' fill='white' text-anchor='middle' dy='.3em' font-size='24'%3E${encodeURIComponent(member.name.split(' ')[0])}'s Photo%3C/text%3E%3C/svg%3E`)
+            setImgSrc(`data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Crect fill='%231565C0' width='240' height='240'/%3E%3Ctext x='50%25' y='50%25' fill='white' text-anchor='middle' dy='.3em' font-size='14'%3E${encodeURIComponent(member.name.split(' ')[0])}'s Photo%3C/text%3E%3C/svg%3E`)
           }}
           style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
             width: '100%',
             height: '100%',
             objectFit: 'cover',
-            transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
-            transform: isHovered ? 'scale(1.1)' : 'scale(1)',
+            objectPosition: 'center',
+            transition: 'all 0.4s ease',
+            transform: isHovered ? 'scale(1.08)' : 'scale(1)',
+            filter: isHovered ? 'brightness(1.1)' : 'brightness(1)',
           }}
         />
-
-        {/* ── AGENZ-INSPIRED SLIDE UP OVERLAY ── */}
-        <motion.div
-          initial={{ opacity: 0, y: '100%' }}
-          animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : '100%' }}
-          transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'linear-gradient(to top, rgba(13, 71, 161, 0.95), rgba(13, 71, 161, 0.3))',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'flex-end',
-            padding: '24px',
-            color: 'white',
-            backdropFilter: 'blur(4px)',
-          }}
-        >
-          <motion.h4 
-            animate={{ y: isHovered ? 0 : 20 }}
-            transition={{ delay: 0.1 }}
-            style={{ fontSize: '18px', fontWeight: 700, margin: '0 0 4px 0' }}
-          >
-            {member.name}
-          </motion.h4>
-          <motion.p 
-            animate={{ y: isHovered ? 0 : 20 }}
-            transition={{ delay: 0.15 }}
-            style={{ fontSize: '12px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.9, margin: '0 0 8px 0' }}
-          >
-            {member.role}
-          </motion.p>
-          <motion.p 
-            animate={{ y: isHovered ? 0 : 20 }}
-            transition={{ delay: 0.2 }}
-            style={{ fontSize: '13px', opacity: 0.8, marginBottom: '16px' }}
-          >
-            {member.org}
-          </motion.p>
-          
-          {member.linkedin && (
-            <motion.a
-              animate={{ opacity: isHovered ? 1 : 0 }}
-              href={member.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: 'inline-block',
-                fontSize: '13px',
-                color: 'var(--teal)',
-                textDecoration: 'none',
-                fontWeight: 700,
-                border: '1px solid var(--teal)',
-                padding: '6px 14px',
-                borderRadius: '20px',
-                width: 'fit-content'
-              }}
-              whileHover={{ background: 'var(--teal)', color: 'white' }}
-            >
-              LinkedIn Profile →
-            </motion.a>
-          )}
-        </motion.div>
       </div>
-    </motion.div>
+      <h4 style={{ fontSize: '16px', fontWeight: 700, color: 'var(--text)', marginBottom: '4px', minHeight: '1.5em' }}>
+        {member.name}
+      </h4>
+      <p
+        style={{
+          fontSize: '12px',
+          fontWeight: 600,
+          textTransform: 'uppercase',
+          letterSpacing: '1px',
+          marginBottom: '6px',
+          minHeight: '2em',
+          transition: 'color 0.3s ease',
+          color: isHovered ? 'var(--primary)' : 'var(--teal)',
+        }}
+      >
+        {member.role}
+      </p>
+      <p style={{ fontSize: '13px', color: 'var(--text2)', marginBottom: '12px', minHeight: '1.5em' }}>
+        {member.org}
+      </p>
+      {member.linkedin && (
+        <a
+          href={member.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: 'inline-block',
+            fontSize: '12px',
+            color: 'var(--primary)',
+            textDecoration: 'none',
+            fontWeight: 600,
+            borderBottom: '2px solid transparent',
+            transition: 'border-color 0.3s',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.borderColor = 'var(--primary)')}
+          onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'transparent')}
+        >
+          View LinkedIn →
+        </a>
+      )}
+    </div>
   )
 }

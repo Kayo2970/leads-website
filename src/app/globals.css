@@ -688,17 +688,9 @@ body {
   0%, 100% { background-position: 0% 0%; }
   50% { background-position: 100% 100%; }
 }
-@keyframes plasma-drift {
-  0% { transform: translate(-30%, -30%) scale(1); opacity: 0.3; }
-  33% { transform: translate(10%, 20%) scale(1.2); opacity: 0.5; }
-  66% { transform: translate(-10%, 40%) scale(0.9); opacity: 0.3; }
-  100% { transform: translate(-30%, -30%) scale(1); opacity: 0.3; }
-}
-
-@keyframes plasma-drift-alt {
-  0% { transform: translate(20%, 40%) scale(1.1); opacity: 0.2; }
-  50% { transform: translate(-40%, -10%) scale(0.8); opacity: 0.4; }
-  100% { transform: translate(20%, 40%) scale(1.1); opacity: 0.2; }
+@keyframes prism-shimmer {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 /* ── SHARED PRISMATIC STYLES ── */
@@ -746,29 +738,11 @@ body {
 
 @media (max-width: 1024px) {
   .hero-bg::after, .page-hero::after, .cta-section::after, .dynamic-bg::after {
-    /* Premium Liquid Plasma Effect: Soft drifting organic orbs */
-    filter: blur(60px); 
-    opacity: 0.4;
-    width: 150%; height: 150%;
-    top: -25%; left: -25%;
-    background: 
-      radial-gradient(circle at 30% 30%, var(--primary) 0%, transparent 50%),
-      radial-gradient(circle at 70% 70%, var(--teal) 0%, transparent 50%);
-    animation: plasma-drift 15s ease-in-out infinite;
-    display: block !important;
-    transform-origin: center center;
-  }
-  .hero-bg::before, .page-hero::before, .cta-section::before, .dynamic-bg::before {
-    /* Adding a second drifting layer for depth */
-    content: "";
-    position: absolute;
-    width: 150%; height: 150%;
-    top: -25%; left: -25%;
-    background: radial-gradient(circle at 80% 20%, var(--navy) 0%, transparent 40%);
-    animation: plasma-drift-alt 20s ease-in-out infinite;
-    filter: blur(80px);
-    opacity: 0.3;
-    z-index: -2;
+    /* Safe mobile background: highly performant rotating mesh instead of blurry conic gradient */
+    filter: none; 
+    opacity: 0.08;
+    background: repeating-linear-gradient(45deg, var(--primary) 0%, var(--primary) 2px, transparent 2px, transparent 40px);
+    animation: prism-shimmer 40s linear infinite;
     display: block !important;
   }
 }
@@ -1679,43 +1653,7 @@ body {
   inset: 0;
 }
 
-/* ── TEAM CARD OVERLAY REFINEMENT ── */
-.team-card-overlay {
-  transform: translateY(100%);
-  opacity: 0;
+.contact-bg {
+  background: radial-gradient(circle at top left, rgba(0, 150, 136, 0.1), transparent),
+              radial-gradient(circle at bottom right, rgba(0, 77, 64, 0.2), transparent);
 }
-
-.team-card-extra {
-  height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Hover behaviors for Desktop */
-@media (min-width: 1025px) {
-  .card:hover .team-card-overlay {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  .card:hover .team-card-extra {
-    height: auto;
-    opacity: 1;
-    margin-top: 10px;
-  }
-}
-
-/* Permanent visibility for Mobile/Tablet */
-@media (max-width: 1024px) {
-  .team-card-overlay {
-    transform: translateY(0) !important;
-    opacity: 1 !important;
-    background: linear-gradient(to top, rgba(13, 71, 161, 0.98), rgba(13, 71, 161, 0.45)) !important;
-    padding: 15px !important;
-  }
-  .team-card-extra {
-    height: 0 !important; /* Keep it minimal on mobile to see the face */
-    opacity: 0 !important;
-  }
-}
-
