@@ -15,32 +15,12 @@ import {
   Clock
 } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function AdminDashboard() {
   const router = useRouter()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
-  const [leaderIndex, setLeaderIndex] = useState(0)
-
-  const leaders = [
-    "Mahatma Gandhi",
-    "Nelson Mandela",
-    "Martin Luther King Jr.",
-    "Steve Jobs",
-    "Abraham Lincoln",
-    "Mother Teresa",
-    "APJ Abdul Kalam",
-    "Winston Churchill",
-    "Malala Yousafzai",
-    "Dalai Lama"
-  ]
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setLeaderIndex((prev) => (prev + 1) % leaders.length)
-    }, 2000)
-    return () => clearInterval(timer)
-  }, [leaders.length])
 
   useEffect(() => {
     const auth = localStorage.getItem('admin_auth')
@@ -73,7 +53,12 @@ export default function AdminDashboard() {
   ]
 
   return (
-    <div className="hero-bg" style={{ minHeight: '100vh', display: 'flex' }}>
+    <div className="hero-bg" style={{ minHeight: '100vh', display: 'flex', position: 'relative', overflow: 'hidden' }}>
+      {/* Faded Background Logo */}
+      <div style={{ position: 'absolute', opacity: 0.1, zIndex: 0, width: '900px', height: '900px', bottom: '-20%', right: '-10%', transform: 'rotate(-15deg)', pointerEvents: 'none' }}>
+        <Image src="/leads-logo-thumb.png" alt="" fill style={{ objectFit: 'contain' }} />
+      </div>
+
       {/* Sidebar */}
       <aside className="glass-panel" style={{ 
         width: '260px', 
@@ -89,17 +74,7 @@ export default function AdminDashboard() {
           <div style={{ width: '40px', height: '40px', background: 'var(--primary)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <LayoutDashboard color="white" size={24} style={{ margin: 'auto' }} />
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <motion.span 
-              key={leaders[leaderIndex]}
-              initial={{ opacity: 0, y: 5 }}
-              animate={{ opacity: 1, y: 0 }}
-              style={{ fontSize: '14px', fontWeight: 800, color: 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '140px' }}
-            >
-              {leaders[leaderIndex]}
-            </motion.span>
-            <span style={{ fontSize: '10px', fontWeight: 600, color: 'var(--text3)', textTransform: 'uppercase', letterSpacing: '1px' }}>Dashboard</span>
-          </div>
+          <span style={{ fontSize: '20px', fontWeight: 800, color: 'var(--text)' }}>Admin</span>
         </div>
 
         <nav style={{ display: 'flex', flexDirection: 'column', gap: '8px', flex: 1 }}>
@@ -123,7 +98,7 @@ export default function AdminDashboard() {
       <main style={{ flex: 1, padding: '20px 20px 20px 0', overflowY: 'auto' }}>
         <header style={{ marginBottom: '32px' }}>
           <p className="section-label">Overview</p>
-          <h1 className="section-heading">Welcome back, {leaders[leaderIndex]}!</h1>
+          <h1 className="section-heading">Welcome back, Admin!</h1>
         </header>
 
         {/* Stats Grid */}

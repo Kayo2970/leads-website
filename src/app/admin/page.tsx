@@ -1,15 +1,35 @@
-'use client'
-
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Lock } from 'lucide-react'
+import Image from 'next/image'
 
 export default function AdminLoginPage() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [leaderIndex, setLeaderIndex] = useState(0)
   const router = useRouter()
+
+  const leaders = [
+    "Mahatma Gandhi",
+    "Nelson Mandela",
+    "Martin Luther King Jr.",
+    "Steve Jobs",
+    "Abraham Lincoln",
+    "Mother Teresa",
+    "APJ Abdul Kalam",
+    "Winston Churchill",
+    "Malala Yousafzai",
+    "Dalai Lama"
+  ]
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setLeaderIndex((prev) => (prev + 1) % leaders.length)
+    }, 2000)
+    return () => clearInterval(timer)
+  }, [leaders.length])
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
@@ -23,7 +43,12 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="hero-bg" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+    <div className="hero-bg" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px', position: 'relative', overflow: 'hidden' }}>
+      {/* Faded Background Logo */}
+      <div style={{ position: 'absolute', opacity: 0.1, zIndex: 0, width: '800px', height: '800px', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', pointerEvents: 'none' }}>
+        <Image src="/leads-logo-thumb.png" alt="" fill style={{ objectFit: 'contain' }} />
+      </div>
+
       <motion.div 
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -43,8 +68,19 @@ export default function AdminLoginPage() {
           <Lock color="white" size={32} />
         </div>
         
-        <h1 className="section-heading" style={{ fontSize: '24px', marginBottom: '8px' }}>Admin Login</h1>
-        <p className="section-sub" style={{ fontSize: '14px', marginBottom: '32px' }}>Access LEADS management dashboard</p>
+        <h1 className="section-heading" style={{ fontSize: '24px', marginBottom: '8px', position: 'relative' }}>Admin Login</h1>
+        
+        <div style={{ height: '20px', marginBottom: '32px' }}>
+          <motion.p 
+            key={leaders[leaderIndex]}
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="section-label" 
+            style={{ fontSize: '11px', color: 'var(--teal)' }}
+          >
+            BE LIKE {leaders[leaderIndex]}
+          </motion.p>
+        </div>
 
         <form onSubmit={handleLogin}>
           <div className="form-group" style={{ textAlign: 'left' }}>
