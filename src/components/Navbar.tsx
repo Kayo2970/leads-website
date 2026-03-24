@@ -25,10 +25,10 @@ export default function Navbar() {
         <div className="nav-container">
           <Link href="/" className="nav-logo" id="nav-logo">
             <Image
-              src="/leads-logo.png"
+              src="/leads-logo-large.png"
               alt="LEADS Next Gen Centre"
-              width={200}
-              height={60}
+              width={320}
+              height={92}
               className="nav-logo-image"
               priority
             />

@@ -18,10 +18,10 @@ export default function Preloader() {
       <div className="preloader-container">
         <div className="logo-spinner">
           <Image
-            src="/leads-logo-large.png"
+            src="/leads-logo-thumb.png"
             alt="LEADS Loading"
-            width={720}
-            height={208}
+            width={500}
+            height={500}
             className="spinning-logo"
             priority
           />

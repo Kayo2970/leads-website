@@ -8,10 +8,10 @@ export default function Footer() {
         <div className="footer-grid">
           <div className="footer-brand">
             <Image
-              src="/leads-logo.png"
+              src="/leads-logo-large.png"
               alt="LEADS Next Gen Centre"
-              width={280}
-              height={80}
+              width={400}
+              height={116}
               className="footer-logo-image"
             />
             <p>

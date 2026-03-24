@@ -71,17 +71,16 @@ body {
 }
 .preloader-container {
   position: relative;
-  width: 800px;
-  height: 400px;
+  width: 600px;
+  height: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .logo-spinner {
   position: relative;
-  width: 100%;
-  max-width: 720px;
-  height: auto;
+  width: 500px;
+  height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,7 +92,7 @@ body {
 }
 .loading-line {
   position: absolute;
-  width: 720px;
+  width: 500px;
   height: 12px;
   bottom: 0;
   background: linear-gradient(90deg, transparent, var(--teal), transparent);
@@ -162,9 +161,9 @@ body {
   border: 1px solid rgba(21,101,192,0.18);
 }
 .nav-logo-image {
-  width: 200px;
-  max-width: 100%;
-  height: 60px;
+  width: 320px;
+  max-width: 90%;
+  height: 92px;
   object-fit: contain;
   object-position: left center;
   display: block;
@@ -835,8 +834,8 @@ body {
 .footer-brand h3 span { color: var(--teal); }
 .footer-logo-image {
   width: 100%;
-  max-width: 280px;
-  height: 80px;
+  max-width: 400px;
+  height: 116px;
   object-fit: contain;
   object-position: left center;
   margin-bottom: 14px;
