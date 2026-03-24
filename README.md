@@ -10,6 +10,9 @@ This repository contains the source code and technical documentation for the off
 
 The platform is architected using a **Modern Monolith** pattern via **Next.js 16 (App Router)**, ensuring strict type-safety, high-performance server-side rendering (SSR), and seamless client-side interactivity.
 
+### 🛠️ Development Methodology: The "Blueprint-to-Build" Workflow
+This project was executed through an intensive, two-phase development lifecycle designed to move from raw vision to a polished institutional grade product. It began with the deployment of a custom **Site Documentation Kit** — a specialized intelligence layer I designed to bridge the gap between business requirements and technical execution. This kit processed years of LEADS institutional data, brochures, and summit materials to generate a complete, agency-grade foundation of ten professional documents, ranging from PRDs and Sitemaps to Tech Specs and Post-Launch manuals. This allowed us to make every technical and design decision silently and strategically before a single line of code was written. Once this roadmap was solidified, the project transitioned into an active coding engine where I manually performed thousands of "tweaks" — refining the CSS logic, tuning the background hydraulics, and evolving the initial wireframes into the final **Liquid Glass** design language you see today. This iterative, human-led refinement process is what transformed a standard technical plan into the high-fidelity, high-emotion platform that now defines the LEADS digital identity.
+
 ### Core Philosophy: The "Liquid Glass" Design System
 Designed to withstand academic scrutiny and aesthetic critique, the UI is based on a proprietary design language:
 - **Refractive Aesthetics**: Utilizing `backdrop-filter` with variable saturation (180%) and blur (20px-32px) to simulate physical glass panes.
