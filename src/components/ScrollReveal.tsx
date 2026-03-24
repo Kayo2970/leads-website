@@ -7,6 +7,12 @@ export default function ScrollReveal() {
   const pathname = usePathname()
 
   useEffect(() => {
+    // Only on desktop (>1024px) — mobile always shows via CSS
+    if (window.innerWidth <= 1024) return
+
+    // Opt-in to the CSS animation system
+    document.documentElement.classList.add('js-reveal-ready')
+
     // Force-show all elements that are already in view or
     // that never get triggered by the observer (remote/slow connections).
     const showAll = () => {
@@ -51,6 +57,7 @@ export default function ScrollReveal() {
       clearTimeout(fallback)
       clearTimeout(paint)
       observer.disconnect()
+      document.documentElement.classList.remove('js-reveal-ready')
     }
   }, [pathname])
 

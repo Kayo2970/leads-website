@@ -1229,18 +1229,27 @@ body {
 }
 
 /* ── SCROLL REVEAL ── */
+/* Elements are visible by default — JS adds `js-reveal-ready` to <html>
+   to opt-in to the animation. This prevents blank pages if JS is slow/blocked. */
 .reveal {
-  opacity: 0;
-  transform: translateY(30px);
+  opacity: 1;
+  transform: translateY(0);
   transition: opacity 1s cubic-bezier(0.165, 0.84, 0.44, 1),
     transform 1s cubic-bezier(0.165, 0.84, 0.44, 1);
   will-change: opacity, transform;
 }
-.reveal.visible {
+
+/* When JS has loaded and ScrollReveal is active, hide until triggered */
+.js-reveal-ready .reveal {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.js-reveal-ready .reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
+/* On mobile/tablet — always show, never animate */
 @media (max-width: 1024px) {
   .reveal {
     opacity: 1 !important;
