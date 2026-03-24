@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useTheme } from './ThemeProvider'
 
 const links = [
@@ -18,18 +18,15 @@ const links = [
 export default function Navbar() {
   const pathname = usePathname()
   const { theme, toggleTheme } = useTheme()
-  const [mobileMenuPath, setMobileMenuPath] = useState<string | null>(null)
-  useEffect(() => {
-    // Component mounted logic
-  }, [])
+  const [menuOpen, setMenuOpen] = useState(false)
 
-  const mobileOpen = mobileMenuPath === pathname
+  const close = () => setMenuOpen(false)
 
   return (
     <>
       <nav className="navbar" id="main-nav">
         <div className="nav-container">
-          <Link href="/" className="nav-logo" id="nav-logo">
+          <Link href="/" className="nav-logo" id="nav-logo" onClick={close}>
             {/* Desktop Logo */}
             <div className="desktop-logo">
               <Image
@@ -41,13 +38,13 @@ export default function Navbar() {
                 priority
               />
             </div>
-            {/* Mobile Logo */}
+            {/* Mobile/Tablet Logo */}
             <div className="mobile-logo">
               <Image
                 src="/leads-logo-thumb.png"
                 alt="LEADS"
-                width={80}
-                height={80}
+                width={60}
+                height={60}
                 className="nav-logo-image"
                 priority
               />
@@ -55,6 +52,7 @@ export default function Navbar() {
             <span className="sr-only">LEADS</span>
           </Link>
 
+          {/* Desktop nav links */}
           <div className="nav-links">
             {links.map((link) => (
               <Link
@@ -79,51 +77,58 @@ export default function Navbar() {
             </button>
           </div>
 
-          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-            <button
-              className="nav-hamburger"
-              onClick={() => setMobileMenuPath(mobileOpen ? null : pathname)}
-              id="mobile-menu-toggle"
-              aria-label="Toggle menu"
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                {mobileOpen ? (
-                  <path d="M6 6l12 12M6 18L18 6" />
-                ) : (
-                  <path d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
-            </button>
-          </div>
+          {/* Hamburger — always in DOM, shown via CSS on tablet/mobile */}
+          <button
+            className="nav-hamburger"
+            onClick={() => setMenuOpen((o) => !o)}
+            id="mobile-menu-toggle"
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              {menuOpen ? (
+                <path d="M6 6l12 12M6 18L18 6" />
+              ) : (
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
         </div>
       </nav>
 
+      {/* Backdrop */}
       <button
         type="button"
-        className={`mobile-menu-backdrop ${mobileOpen ? 'open' : ''}`}
-        onClick={() => setMobileMenuPath(null)}
+        className={`mobile-menu-backdrop ${menuOpen ? 'open' : ''}`}
+        onClick={close}
         aria-label="Close mobile menu"
       />
 
-      <div className={`mobile-menu ${mobileOpen ? 'open' : ''}`} id="mobile-menu">
+      {/* Slide-in drawer */}
+      <div className={`mobile-menu ${menuOpen ? 'open' : ''}`} id="mobile-menu">
         {links.map((link) => (
           <Link
             key={link.href}
             href={link.href}
             className={`nav-link ${pathname === link.href ? 'active' : ''}`}
-            onClick={() => setMobileMenuPath(null)}
+            onClick={close}
           >
             {link.label}
           </Link>
         ))}
-        <Link
-          href="/join"
-          className="nav-cta"
-          onClick={() => setMobileMenuPath(null)}
-        >
+        <Link href="/join" className="nav-cta" onClick={close}>
           Join LEADS
         </Link>
+        <button
+          className="theme-toggle"
+          onClick={toggleTheme}
+          style={{ marginTop: '16px', width: '100%', justifyContent: 'center' }}
+          aria-label="Toggle dark mode"
+        >
+          {theme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode'}
+        </button>
       </div>
     </>
   )
 }
+
