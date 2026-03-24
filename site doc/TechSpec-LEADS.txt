@@ -1,0 +1,492 @@
+LEADS NEXT GEN CENTRE — MSRUAS
+Technical Specification Document
+Version 2.0  ·  March 2026  ·  Inspiration-Enhanced
+Updates in this version: Animation library decisions, preloader implementation, masonry grid, testimonial carousel, scroll-reveal system, geometric parallax shapes, social proof component — all drawn from 5 analyzed inspiration sites.
+1. Technology Stack
+No changes from v1. Stack confirmed:
+Layer
+Technology
+Version
+Purpose
+Framework
+Next.js
+14.2+
+App Router, SSR/SSG, file routing
+Language
+TypeScript
+5.x
+Type safety throughout
+Styling
+Tailwind CSS
+3.4+
+Utility classes, dark mode variant
+Database
+Supabase
+Latest
+Auth, Postgres, storage
+Hosting
+Vercel
+Pro/Hobby
+Auto-deploy from GitHub
+Email
+Resend
+Latest
+Form submission notifications
+Forms
+React Hook Form + Zod
+Latest
+Validation + type inference
+Analytics
+GA4 + GTM + Hotjar
+Latest
+Tracking, heatmaps
+Particles
+tsParticles
+v2.x
+BLS page starfield
+Fonts
+next/font (Inter)
+Latest
+Zero-layout-shift font loading
+────────────────────────────────────────────────────────────
+2. Project File Structure
+App Router structure. Components colocated with pages.
+leads-website/
+├── app/
+│   ├── layout.tsx             # Root layout, theme provider, nav, footer
+│   ├── page.tsx               # Home — arc rings bg, hero, icon cards
+│   ├── about/page.tsx         # Static gradient, journey steps, progress bars
+│   ├── events/
+│   │   ├── page.tsx           # Masonry gallery, filter tabs, scroll colour shift
+│   │   └── [slug]/page.tsx    # Individual event detail
+│   ├── bls/page.tsx           # Starfield particles, testimonial carousel
+│   ├── join-us/page.tsx       # Journey stepper, icon list, join form
+│   ├── contact/page.tsx       # Contact form, Resend
+│   └── api/
+│       ├── contact/route.ts   # Contact form handler
+│       └── join/route.ts      # Join form handler
+├── components/
+│   ├── layout/
+│   │   ├── Navbar.tsx         # Sticky nav, dark mode toggle, mobile drawer
+│   │   └── Footer.tsx
+│   ├── ui/
+│   │   ├── Preloader.tsx      # ← NEW: Xolio-pattern spinning ring
+│   │   ├── ScrollReveal.tsx   # ← NEW: IntersectionObserver wrapper
+│   │   ├── HeroShapes.tsx     # ← NEW: Pixlab floating geometry
+│   │   ├── SocialProof.tsx    # ← NEW: Adelux avatar cluster
+│   │   ├── IconCard.tsx       # ← NEW: Adelux 4-col service card
+│   │   ├── TestiCarousel.tsx  # ← NEW: Adelux testimonial carousel
+│   │   ├── MasonryGrid.tsx    # ← NEW: Oifolio masonry gallery
+│   │   ├── JourneySteps.tsx   # ← NEW: Oifolio progress stepper
+│   │   ├── ProgressBar.tsx    # ← NEW: Oifolio animated progress bar
+│   │   ├── Button.tsx
+│   │   └── FormInput.tsx
+│   └── sections/
+│       ├── Hero.tsx
+│       ├── ArcRingsBg.tsx
+│       ├── StarfieldBg.tsx
+│       └── ScrollColourBg.tsx
+├── lib/
+│   ├── supabase.ts
+│   └── animations.ts          # ← NEW: shared scroll reveal hooks
+├── styles/
+│   └── globals.css            # CSS custom properties, dark mode tokens
+└── public/
+────────────────────────────────────────────────────────────
+3. Animation Library & Implementation
+This section updated in v2 to include all inspiration-derived animations.
+3.1 Preloader
+Source:  [Xolio]
+A full-screen branded spinner shown on first page load. Fades out after DOMContentLoaded.
+Component: components/ui/Preloader.tsx
+// globals.css
+.preloader { position:fixed; inset:0; background:#0D47A1; z-index:9999;
+  display:flex; align-items:center; justify-content:center;
+  transition: opacity 0.6s ease; }
+.preloader.hide { opacity:0; pointer-events:none; }
+.pl-ring { width:64px; height:64px; border:3px solid rgba(255,255,255,0.15);
+  border-top-color:#00BCD4; border-right-color:#FFB300;
+  border-radius:50%; animation:plSpin 1s linear infinite; }
+@keyframes plSpin { to { transform:rotate(360deg); } }
+
+// Preloader.tsx
+useEffect(() => {
+  window.addEventListener('load', () => {
+    setTimeout(() => setHide(true), 900);
+  });
+}, []);
+3.2 Scroll Reveal (Staggered Entry)
+Source:  [Xolio] [Ventix]
+Every section and card enters the viewport with opacity + translateY animation. Siblings stagger by 100ms.
+Hook: lib/animations.ts — useScrollReveal(threshold = 0.15)
+// ScrollReveal.tsx — wrapper component
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.15 });
+CSS class rules:
+.reveal { opacity:0; transform:translateY(28px);
+  transition: opacity 0.55s ease, transform 0.55s ease; }
+.reveal.visible { opacity:1; transform:none; }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+Respect prefers-reduced-motion:
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity:1; transform:none; transition:none; }
+}
+3.3 Floating Geometric Hero Shapes
+Source:  [Pixlab]
+Decorative rotated rectangles, circles, and diamond shapes float behind the hero headline. Pure CSS — zero JS dependency. Desktop only (display:none below 768px).
+Component: components/ui/HeroShapes.tsx
+.hero-shape { position:absolute; pointer-events:none; }
+.hs-rect { border:2px solid rgba(255,255,255,0.06); border-radius:12px;
+  animation: floatShape 6s ease-in-out infinite; }
+.hs-circle { border:1.5px solid rgba(0,188,212,0.18); border-radius:50%;
+  animation: floatShape 8s ease-in-out infinite reverse; }
+@keyframes floatShape {
+  0%, 100% { transform: translateY(0) rotate(15deg); }
+  50%       { transform: translateY(-14px) rotate(20deg); }
+}
+@media (max-width:768px) { .hero-shape { display:none; } }
+3.4 Social Proof Avatar Cluster
+Source:  [Adelux]
+Stacked overlapping avatar circles in the hero section. Shows real LEADS member initials. Paired with "500+ students" social proof copy. Updates when member count milestone changes.
+Component: components/ui/SocialProof.tsx
+.avatar-stack { display:flex; }
+.avatar-stack .av {
+  width:36px; height:36px; border-radius:50%;
+  border:2px solid #0D47A1; margin-left:-10px; }
+.avatar-stack .av:first-child { margin-left:0; }
+Each avatar is a gradient circle with initials. In production, replace with actual member profile photos from Supabase storage.
+3.5 4-Column Icon Service Cards
+Source:  [Adelux]
+4-column grid on Home page showcasing LEADS programmes. Each card: gradient icon box (56×56px, 14px radius), programme name, 2-line description. Hover: translateY(-5px) + teal border + shadow.
+Component: components/ui/IconCard.tsx
+Tailwind classes: grid grid-cols-4 gap-5 / md:grid-cols-2 / sm:grid-cols-1
+Hover: hover:-translate-y-1 hover:shadow-lg hover:border-teal transition-all duration-250
+3.6 Masonry Gallery Grid
+Source:  [Oifolio]
+Events page photo/video gallery. Variable-height items flow into 3 CSS columns. Category filter tabs (All, BLS, Workshops, Mindfulness) toggle display without reload.
+Component: components/ui/MasonryGrid.tsx
+.masonry { columns:3; column-gap:16px; }
+@media (max-width:768px) { .masonry { columns:2; } }
+@media (max-width:480px) { .masonry { columns:1; } }
+.masonry-item { break-inside:avoid; margin-bottom:16px;
+  position:relative; overflow:hidden; border-radius:10px; }
+/* Hover overlay */
+.masonry-item .overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(13,71,161,0.85), transparent);
+  opacity:0; transition:opacity 0.3s; }
+.masonry-item:hover .overlay { opacity:1; }
+Filter logic: React useState tracks active category. Items filtered client-side from Supabase events table (category column).
+3.7 Testimonial Carousel
+Source:  [Adelux]
+BLS and About pages. CSS translateX slide. Auto-advances every 5s. Dot navigation syncs to index. Pauses on mouse hover. Avatar initials alongside each quote.
+Component: components/ui/TestiCarousel.tsx
+.testi-track { display:flex;
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+.testi-slide { min-width:100%; }
+// goTo(idx): track.style.transform = `translateX(-${idx*100}%)`
+// setInterval(nextSlide, 5000)
+// mouseenter → clearInterval, mouseleave → restart
+Storage: Testimonials stored in Supabase testimonials table with fields: name, role, quote, avatar_initials, rating. Fetched at build time for SSG.
+3.8 Membership Journey Stepper
+Source:  [Oifolio]
+Join Us and About pages. 5-step horizontal stepper: Discover → Apply → Onboard → Participate → Lead. Horizontal connector line via CSS ::before. Steps colored: done (green), active (blue pulse ring), upcoming (outline only).
+Component: components/ui/JourneySteps.tsx
+.journey { display:flex; position:relative; }
+.journey::before { content:''; position:absolute;
+  top:28px; left:28px; right:28px; height:2px;
+  background:rgba(21,101,192,0.15); }
+.journey-dot.done  { background:#16A34A; border-color:#16A34A; }
+.journey-dot.active { background:#1565C0;
+  box-shadow: 0 0 0 6px rgba(21,101,192,0.15); }
+3.9 Animated Progress Bars
+Source:  [Oifolio]
+About and Join Us pages. Programme skill/completion bars animate width from 0 to target value when the section enters the viewport (IntersectionObserver). Each bar uses a distinct gradient.
+Component: components/ui/ProgressBar.tsx
+.prog-bar { height:7px; background:rgba(21,101,192,0.1); border-radius:10px; }
+.prog-fill { height:100%; border-radius:10px;
+  background:linear-gradient(90deg,#1565C0,#00BCD4);
+  animation: fillBar 1.2s ease forwards; }
+@keyframes fillBar { from { width:0; } }
+// Width set via inline style: style={{ width: `${value}%` }}
+// Animation restarts each time element enters viewport
+3.10 Dark Mode Theme System
+Source:  [Ventix]
+CSS custom properties swapped by toggling body.dark class. 300ms transition on all surfaces for seamless feel. Preference stored in localStorage to persist across sessions.
+Implementation in globals.css:
+body       { --bg:#F0F7FF; --card:#FFFFFF; --text:#1A1A2E; }
+body.dark  { --bg:#0A1628; --card:#142050; --text:#F0F0F0; }
+body, .card, .nav, .modal {
+  transition: background 0.3s ease, color 0.3s ease,
+              border-color 0.3s ease, box-shadow 0.3s ease; }
+Tailwind dark mode variant (class strategy) configured in tailwind.config.ts:
+module.exports = { darkMode: 'class', ... }
+────────────────────────────────────────────────────────────
+4. Background Animation Details
+4.1 Home — Animated Arc Rings
+Pure CSS. No JS library. Four concentric SVG circle elements with staggered opacity pulse animation. Anchored to the right side of the hero section.
+@keyframes arcPulse {
+  0%, 100% { opacity:0.15; }
+  50%       { opacity:0.35; }
+}
+.arc-ring:nth-child(1) { animation: arcPulse 3s ease-in-out infinite 0s; }
+.arc-ring:nth-child(2) { animation: arcPulse 3s ease-in-out infinite 0.5s; }
+.arc-ring:nth-child(3) { animation: arcPulse 3s ease-in-out infinite 1s; }
+.arc-ring:nth-child(4) { animation: arcPulse 3s ease-in-out infinite 1.5s; }
+4.2 BLS — tsParticles Starfield
+Most dramatic effect. Deep space dark background with twinkling star particles and connecting lines between nearby stars.
+Library: tsparticles v2. Install: npm install tsparticles @tsparticles/slim
+Config in StarfieldBg.tsx:
+particles: {
+  number: { value: window.innerWidth > 768 ? 60 : 25 },
+  color: { value: '#ffffff' },
+  opacity: { value: { min:0.1, max:0.9 }, animation: { enable:true } },
+  size: { value: { min:0.5, max:2.5 } },
+  move: { enable:true, speed:0.3 },
+  links: { enable:true, distance:120, opacity:0.2, color:'#00BCD4' },
+}
+Particles capped at 25 on mobile for performance. Disabled entirely if prefers-reduced-motion: reduce.
+4.3 Events — Scroll Colour Shift
+IntersectionObserver watches each page section. When a new section crosses 50% threshold, the hero background transitions to a section-specific gradient over 1 second.
+const colourMap = {
+  '#hero':     'linear-gradient(135deg,#0D47A1,#00BCD4)',
+  '#upcoming': 'linear-gradient(135deg,#1B5E20,#00BCD4)',
+  '#past':     'linear-gradient(135deg,#4A148C,#1565C0)',
+};
+const bgObserver = new IntersectionObserver(entries => {
+  const visible = entries.find(e => e.isIntersecting);
+  if (visible) hero.style.background = colourMap[visible.target.id];
+}, { threshold: 0.5 });
+────────────────────────────────────────────────────────────
+5. CSS Custom Property Tokens
+Token
+Light Value
+Dark Value
+Usage
+--primary
+#1565C0
+#1565C0
+Buttons, links, active states
+--navy
+#0D47A1
+#0D47A1
+Header, footer, hero bg
+--teal
+#00BCD4
+#00BCD4
+Accents, eyebrows, progress fills
+--gold
+#FFB300
+#FFB300
+Highlight CTAs, star ratings
+--bg
+#F0F7FF
+#0A1628
+Page background
+--surface
+#E8F1FC
+#0F2040
+Nav, preview boxes, section bg
+--card
+#FFFFFF
+#142050
+Cards, modals, tooltips
+--text
+#1A1A2E
+#F0F0F0
+Primary body text
+--text2
+#4A5568
+#A0A0A0
+Secondary, descriptions
+--text3
+#8A8A8A
+#606060
+Muted, labels, placeholders
+--success
+#16A34A
+#16A34A
+Success states, done steps
+--error
+#DC2626
+#DC2626
+Error states, form validation
+────────────────────────────────────────────────────────────
+6. Supabase Data Models
+Table: events
+Column
+Type
+Notes
+id
+uuid
+Primary key
+title
+text
+Event name
+slug
+text
+URL-safe identifier
+category
+text
+'bls' | 'workshop' | 'mindfulness' | 'other'
+description
+text
+Full event description
+date
+timestamptz
+Event date/time
+image_url
+text
+Cover photo from Supabase Storage
+video_url
+text
+Optional recap video (YouTube/Vimeo)
+is_upcoming
+boolean
+Controls upcoming vs. past display
+registration_url
+text
+External form or internal route
+Table: testimonials
+Column
+Type
+Notes
+id
+uuid
+Primary key
+name
+text
+Member full name
+role
+text
+Year, dept, programme role
+quote
+text
+Testimonial body (max 300 chars)
+rating
+int2
+1–5 star rating
+avatar_initials
+text
+2-letter fallback (e.g. "KP")
+avatar_url
+text
+Optional profile photo
+page
+text
+'bls' | 'about' — carousel placement
+is_published
+boolean
+Toggle visibility
+Table: join_requests
+Column
+Type
+Notes
+id
+uuid
+Primary key
+full_name
+text
+Applicant name
+email
+text
+Applicant email
+usn
+text
+University seat number
+year
+text
+'1st' | '2nd' | '3rd' | '4th'
+programme_interest
+text
+Selected programme
+message
+text
+Optional application note
+submitted_at
+timestamptz
+Auto-set by default
+status
+text
+'pending' | 'reviewed' | 'accepted'
+────────────────────────────────────────────────────────────
+7. Performance & Accessibility
+Core Web Vitals Targets
+Metric
+Target
+Strategy
+LCP (Largest Contentful Paint)
+< 2.5s
+next/image, priority prop on hero image
+FID / INP (Interaction)
+< 100ms
+No blocking JS on main thread
+CLS (Layout Shift)
+< 0.1
+next/font eliminates FOUT, image dimensions set
+Lighthouse Score
+> 90
+Checked on each Vercel preview deploy
+Animation Performance Rules
+	•	Only animate transform and opacity — never width, height, top, left, margin
+	•	tsParticles uses requestAnimationFrame — stays off main thread
+	•	All CSS animations: will-change:transform on animated elements (sparingly)
+	•	Scroll reveal uses passive:true option on IntersectionObserver
+	•	Testimonial carousel: setInterval cleared on component unmount
+	•	Floating shapes: display:none below 768px — zero cost on mobile
+Accessibility Checklist
+	•	prefers-reduced-motion media query disables all keyframe animations
+	•	All interactive elements: visible focus ring (3px offset, brand colour)
+	•	Images: descriptive alt text (from Content-LEADS.docx image alt guide)
+	•	Form errors: announced via aria-live="polite" region
+	•	Colour contrast: WCAG AA minimum 4.5:1 on all text/background pairs
+	•	Keyboard navigation: Tab order follows visual reading order
+	•	Carousel: arrow key nav + pause on focus for testimonial carousel
+────────────────────────────────────────────────────────────
+8. Environment Variables
+Store in .env.local (never commit). Add to Vercel project settings.
+Variable
+Where Used
+NEXT_PUBLIC_SUPABASE_URL
+Supabase client init
+NEXT_PUBLIC_SUPABASE_ANON_KEY
+Supabase client init
+SUPABASE_SERVICE_ROLE_KEY
+Server-side API routes only
+RESEND_API_KEY
+api/contact and api/join routes
+NEXT_PUBLIC_GTM_ID
+Google Tag Manager container ID
+NEXT_PUBLIC_HOTJAR_ID
+Hotjar site ID
+NEXT_PUBLIC_SITE_URL
+Canonical URL for OG tags + sitemap
+────────────────────────────────────────────────────────────
+9. Deployment Guide
+Initial Setup
+	•	1. Create GitHub repo, push code
+	•	2. Connect repo to Vercel (automatic)
+	•	3. Add all environment variables in Vercel project → Settings → Environment Variables
+	•	4. Vercel auto-deploys main branch to production URL
+	•	5. Set custom domain in Vercel → Domains
+Ongoing Workflow
+	•	Feature branches → PR → preview deploy URL auto-generated
+	•	Merge to main → production deploy triggered automatically
+	•	Supabase migrations run via Supabase CLI: supabase db push
+New Component Checklist (from v2)
+	•	[ ] Does it have a dark mode variant (dark: Tailwind prefix or CSS var)?
+	•	[ ] Does it respect prefers-reduced-motion?
+	•	[ ] Is IntersectionObserver observer.disconnect() called on unmount?
+	•	[ ] Are carousel/timer intervals cleared on component unmount?
+	•	[ ] Does it have appropriate ARIA roles/labels?
+	•	[ ] Is it responsive at 900px, 768px, 480px breakpoints?
+────────────────────────────────────────────────────────────
+END OF DOCUMENT  ·  TechSpec-LEADS v2.0  ·  LEADS Next Gen Centre — MSRUAS
