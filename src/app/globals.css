@@ -276,7 +276,7 @@ body {
   justify-content: center;
 }
 .spinning-logo {
-  animation: spinAndBounce 2s ease-in-out 1;
+  animation: spinAndBounce 1.5s ease-in infinite;
   will-change: transform;
   filter: drop-shadow(0 0 16px rgba(0, 188, 212, 0.5));
 }
@@ -300,13 +300,13 @@ body {
   z-index: 11;
 }
 @keyframes spinAndBounce {
-  0% { 
-    transform: rotateY(0deg) scale(1);
-    perspective: 1000px;
+  0%, 100% { 
+    transform: translateY(0);
+    animation-timing-function: ease-in;
   }
-  100% { 
-    transform: rotateY(1080deg) scale(1);
-  }
+  25% { transform: translateY(-30px); animation-timing-function: ease-out; }
+  50% { transform: translateY(0); animation-timing-function: ease-in; }
+  75% { transform: translateY(-15px); animation-timing-function: ease-out; }
 }
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
