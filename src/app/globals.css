@@ -685,15 +685,23 @@ body {
   top: 50%; left: 50%;
   width: 250%; height: 250%;
   background: conic-gradient(from 180deg at 50% 50%, 
-    rgba(0,188,212,0.15) 0deg, 
-    rgba(123,31,162,0.2) 120deg, 
-    rgba(255,179,0,0.1) 240deg, 
-    rgba(0,188,212,0.15) 360deg);
+    rgba(0,188,212,0.5) 0deg, 
+    rgba(123,31,162,0.6) 120deg, 
+    rgba(255,179,0,0.4) 240deg, 
+    rgba(0,188,212,0.5) 360deg);
   animation: prism-shimmer 30s linear infinite;
   pointer-events: none;
   z-index: -1;
-  mix-blend-mode: color-dodge;
-  filter: blur(80px);
+  opacity: 0.15; /* Safe for iOS, much cheaper than color-dodge */
+  filter: blur(40px); /* Safely reduced blur limit */
+  transform-origin: center center;
+}
+
+@media (max-width: 1024px) {
+  .hero-bg::after, .page-hero::after, .cta-section::after, .dynamic-bg::after {
+    /* Disable expensive blur and animation on mobile devices entirely to prevent iOS Safari crashing */
+    display: none !important;
+  }
 }
 
 .hero-bg {
