@@ -56,6 +56,7 @@ export default function EventsFilter({ events }: { events: Event[] }) {
                 fontSize: '14px',
                 fontWeight: 600,
                 letterSpacing: '1px',
+                position: 'relative',
               }}
             >
               {event.featured && (
