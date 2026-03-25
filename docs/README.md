@@ -40,34 +40,37 @@ Business-critical documents for stakeholders and planning.
 
 | Document | Updated | Purpose |
 |----------|---------|---------|
-| PRD-LEADS.docx | - | Core product vision and requirements |
-| CompetitorBrief-LEADS.docx | - | Market positioning & competition analysis |
-| Analytics-LEADS.docx | - | KPIs, metrics, and analytics framework |
+| PRD-LEADS.docx | 2026-03-25 | Core product vision and requirements (v2.0) |
+| CompetitorBrief-LEADS.docx | 2026-03-25 | Market positioning & competition analysis (v2.0) |
+| Analytics-LEADS.docx | 2026-03-25 | KPIs, metrics, and analytics framework (v2.0) |
 
 ### Technical (`/technical`)
 Technical specifications and design systems for developers.
 
 | Document | Updated | Purpose |
 |----------|---------|---------|
-| TechSpec-LEADS.docx | - | Architecture, stack, and technical requirements |
-| DesignDocument-LEADS.html | - | Component library and design tokens |
+| TechSpec-LEADS.docx | 2026-03-25 | Architecture, stack, and technical requirements (v3.0) |
+| TechSpec-LEADS.txt | 2026-03-25 | Text version of TechSpec (v3.0) |
+| DesignDocument-LEADS.html | 2026-03-25 | Component library and design tokens (v3.0) |
 
 ### Content (`/content`)
 Copy, messaging, and information structure.
 
 | Document | Updated | Purpose |
 |----------|---------|---------|
-| Content-LEADS.docx | - | All website copy and messaging |
-| SocialKit-LEADS.docx | - | Social media templates and guidelines |
-| Sitemap-LEADS.docx | - | Information architecture and navigation |
+| Content-LEADS.docx | 2026-03-25 | All website copy and messaging (incl. Team page) |
+| Content-LEADS.txt | 2026-03-25 | Text version (incl. Team page content) |
+| SocialKit-LEADS.docx | 2026-03-25 | Social media templates and guidelines |
+| Sitemap-LEADS.docx | 2026-03-25 | Information architecture and navigation (incl. Team, Admin) |
+| Sitemap-LEADS.txt | 2026-03-25 | Text version of Sitemap |
 
 ### Operational (`/operational`)
 Checklists and guides for daily operations and deployment.
 
 | Document | Updated | Purpose |
 |----------|---------|---------|
-| LaunchChecklist-LEADS.docx | - | Go-live checklist and pre-launch tasks |
-| Maintenance-LEADS.docx | - | Routine maintenance, updates, monitoring |
+| LaunchChecklist-LEADS.docx | 2026-03-25 | Go-live checklist (updated for Prisma/SQLite, new pages) |
+| Maintenance-LEADS.docx | 2026-03-25 | Routine maintenance guide (updated for Prisma/SQLite) |
 
 ## 📝 Change Tracking
 
@@ -96,4 +99,4 @@ See CHANGELOG.md for current roster and recent team changes.
 
 ---
 
-**Last Updated**: 2026-03-24
+**Last Updated**: 2026-03-25

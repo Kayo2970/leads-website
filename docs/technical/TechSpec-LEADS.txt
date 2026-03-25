@@ -1,7 +1,7 @@
 LEADS NEXT GEN CENTRE — MSRUAS
 Technical Specification Document
-Version 2.0  ·  March 2026  ·  Inspiration-Enhanced
-Updates in this version: Animation library decisions, preloader implementation, masonry grid, testimonial carousel, scroll-reveal system, geometric parallax shapes, social proof component — all drawn from 5 analyzed inspiration sites.
+Version 3.0  ·  March 2026  ·  Current Release
+Updates in this version (v3.0): Database migrated from Supabase to Prisma ORM with libsql/SQLite adapter (dev.db). CSS framework changed from Tailwind CSS to custom CSS (globals.css). Added Framer Motion v12+ for D-shape interactive card animations. Added Admin dashboard with login at /admin. Added Team page at /team. Updated file structure to src/ layout. New components: ArcRings, InteractiveCards, InteractiveHeroShapes, StatsSection, InteractiveCursor, ThemeProvider, Starfield, TeamCard, EventsFilter, JoinForm, ContactForm.
 1. Technology Stack
 No changes from v1. Stack confirmed:
 Layer
@@ -17,13 +17,13 @@ TypeScript
 5.x
 Type safety throughout
 Styling
-Tailwind CSS
-3.4+
-Utility classes, dark mode variant
-Database
-Supabase
+Custom CSS (globals.css)
 Latest
-Auth, Postgres, storage
+CSS custom properties, dark/light mode tokens, no utility framework
+Database
+Prisma ORM + libsql
+v7.5+
+SQLite via libsql adapter (dev.db), schema in prisma/schema.prisma
 Hosting
 Vercel
 Pro/Hobby
@@ -33,17 +33,23 @@ Resend
 Latest
 Form submission notifications
 Forms
-React Hook Form + Zod
+Custom React forms
 Latest
-Validation + type inference
+Custom validation with useState + server actions
 Analytics
-GA4 + GTM + Hotjar
-Latest
-Tracking, heatmaps
+Pending setup
+–
+Not yet configured — see Analytics plan
 Particles
-tsParticles
-v2.x
-BLS page starfield
+Custom Starfield component
+Latest
+Custom CSS/JS starfield on BLS page (no external library)
+Framer Motion
+v12+
+D-shape fan interactive cards (InteractiveCards.tsx)
+Lucide React
+v1+
+Icon library for Navbar and Admin UI
 Fonts
 next/font (Inter)
 Latest
@@ -51,46 +57,47 @@ Zero-layout-shift font loading
 ────────────────────────────────────────────────────────────
 2. Project File Structure
 App Router structure. Components colocated with pages.
-leads-website/
-├── app/
-│   ├── layout.tsx             # Root layout, theme provider, nav, footer
-│   ├── page.tsx               # Home — arc rings bg, hero, icon cards
-│   ├── about/page.tsx         # Static gradient, journey steps, progress bars
-│   ├── events/
-│   │   ├── page.tsx           # Masonry gallery, filter tabs, scroll colour shift
-│   │   └── [slug]/page.tsx    # Individual event detail
-│   ├── bls/page.tsx           # Starfield particles, testimonial carousel
-│   ├── join-us/page.tsx       # Journey stepper, icon list, join form
-│   ├── contact/page.tsx       # Contact form, Resend
-│   └── api/
-│       ├── contact/route.ts   # Contact form handler
-│       └── join/route.ts      # Join form handler
-├── components/
-│   ├── layout/
-│   │   ├── Navbar.tsx         # Sticky nav, dark mode toggle, mobile drawer
-│   │   └── Footer.tsx
-│   ├── ui/
-│   │   ├── Preloader.tsx      # ← NEW: Xolio-pattern spinning ring
-│   │   ├── ScrollReveal.tsx   # ← NEW: IntersectionObserver wrapper
-│   │   ├── HeroShapes.tsx     # ← NEW: Pixlab floating geometry
-│   │   ├── SocialProof.tsx    # ← NEW: Adelux avatar cluster
-│   │   ├── IconCard.tsx       # ← NEW: Adelux 4-col service card
-│   │   ├── TestiCarousel.tsx  # ← NEW: Adelux testimonial carousel
-│   │   ├── MasonryGrid.tsx    # ← NEW: Oifolio masonry gallery
-│   │   ├── JourneySteps.tsx   # ← NEW: Oifolio progress stepper
-│   │   ├── ProgressBar.tsx    # ← NEW: Oifolio animated progress bar
-│   │   ├── Button.tsx
-│   │   └── FormInput.tsx
-│   └── sections/
-│       ├── Hero.tsx
-│       ├── ArcRingsBg.tsx
-│       ├── StarfieldBg.tsx
-│       └── ScrollColourBg.tsx
+leads-website/  (src/ layout)
+├── src/
+│   └── app/
+│       ├── layout.tsx          # Root layout, ThemeProvider, Navbar, Footer
+│       ├── page.tsx            # Home — ArcRings, InteractiveCards, StatsSection, programs
+│       ├── about/page.tsx      # Story, values, vision/mission, governance, journey stepper
+│       ├── team/page.tsx       # Executive Council, Senior Committee, Organizing Members
+│       ├── events/
+│       │   ├── page.tsx        # EventsFilter with category tabs, event cards
+│       │   └── bharat-lead-summit/page.tsx  # Starfield hero, highlights, schedule
+│       ├── join/page.tsx       # Benefits, journey roles, JoinForm, FAQs
+│       ├── contact/page.tsx    # ContactForm, map embed, social links
+│       ├── admin/
+│       │   ├── page.tsx        # Admin login (username/password)
+│       │   └── dashboard/page.tsx  # View Applications & Enquiries
+│       ├── actions/
+│       │   └── enquiry.ts      # Server actions: submitEnquiry, getEnquiries, updateEnquiryStatus
+│       └── api/join/route.ts   # Join form API handler
+├── components/  (flat, no subdirectories)
+│   ├── ArcRings.tsx           # Concentric SVG pulse rings (Home hero)
+│   ├── InteractiveCards.tsx   # Framer Motion D-shape fan card layout
+│   ├── InteractiveHeroShapes.tsx  # Floating CSS geometry (Home hero)
+│   ├── InteractiveCursor.tsx  # Custom cursor with follow effect
+│   ├── StatsSection.tsx       # Animated counter stats
+│   ├── TestimonialCarousel.tsx  # Auto-advancing carousel with dots
+│   ├── Starfield.tsx          # Custom starfield (BLS page)
+│   ├── TeamCard.tsx           # Team member card with hover effects
+│   ├── Navbar.tsx             # Sticky nav, bottom mobile nav, dark mode toggle
+│   ├── Footer.tsx             # 4-column footer with dynamic background
+│   ├── EventsFilter.tsx       # Client-side event filter tabs
+│   ├── JoinForm.tsx           # Join application form
+│   ├── ContactForm.tsx        # Contact enquiry form
+│   ├── Preloader.tsx          # Physics bounce preloader
+│   ├── ScrollReveal.tsx       # IntersectionObserver animations
+│   └── ThemeProvider.tsx      # Dark/light + system time auto-trigger
 ├── lib/
-│   ├── supabase.ts
-│   └── animations.ts          # ← NEW: shared scroll reveal hooks
-├── styles/
-│   └── globals.css            # CSS custom properties, dark mode tokens
+│   ├── prisma.ts              # Prisma client singleton (libsql adapter)
+│   └── store.ts               # Client-side state
+├── prisma/
+│   └── schema.prisma          # Models: Application (join form), Enquiry (contact form)
+├── src/app/globals.css       # CSS custom properties, dark/light mode tokens
 └── public/
 ────────────────────────────────────────────────────────────
 3. Animation Library & Implementation
@@ -184,7 +191,7 @@ Component: components/ui/MasonryGrid.tsx
   background:linear-gradient(to top, rgba(13,71,161,0.85), transparent);
   opacity:0; transition:opacity 0.3s; }
 .masonry-item:hover .overlay { opacity:1; }
-Filter logic: React useState tracks active category. Items filtered client-side from Supabase events table (category column).
+Filter logic: React useState tracks active category. Items filtered client-side from hardcoded events array in EventsFilter.tsx.
 3.7 Testimonial Carousel
 Source:  [Adelux]
 BLS and About pages. CSS translateX slide. Auto-advances every 5s. Dot navigation syncs to index. Pauses on mouse hover. Avatar initials alongside each quote.
@@ -195,7 +202,7 @@ Component: components/ui/TestiCarousel.tsx
 // goTo(idx): track.style.transform = `translateX(-${idx*100}%)`
 // setInterval(nextSlide, 5000)
 // mouseenter → clearInterval, mouseleave → restart
-Storage: Testimonials stored in Supabase testimonials table with fields: name, role, quote, avatar_initials, rating. Fetched at build time for SSG.
+Storage: Testimonials are hardcoded in TestimonialCarousel.tsx. Future: migrate to database-driven content.
 3.8 Membership Journey Stepper
 Source:  [Oifolio]
 Join Us and About pages. 5-step horizontal stepper: Discover → Apply → Onboard → Participate → Lead. Horizontal connector line via CSS ::before. Steps colored: done (green), active (blue pulse ring), upcoming (outline only).
@@ -220,7 +227,7 @@ Component: components/ui/ProgressBar.tsx
 // Animation restarts each time element enters viewport
 3.10 Dark Mode Theme System
 Source:  [Ventix]
-CSS custom properties swapped by toggling body.dark class. 300ms transition on all surfaces for seamless feel. Preference stored in localStorage to persist across sessions.
+CSS custom properties swapped by toggling body.dark class. 300ms transition on all surfaces for seamless feel. Preference stored in localStorage. ThemeProvider also auto-enables dark mode if system time is past 6 PM (device-side time detection).
 Implementation in globals.css:
 body       { --bg:#F0F7FF; --card:#FFFFFF; --text:#1A1A2E; }
 body.dark  { --bg:#0A1628; --card:#142050; --text:#F0F0F0; }
@@ -320,103 +327,65 @@ Success states, done steps
 #DC2626
 Error states, form validation
 ────────────────────────────────────────────────────────────
-6. Supabase Data Models
-Table: events
-Column
+6. Database Schema (Prisma + SQLite via libsql)
+Model: Application (stores join form submissions)
+Field
 Type
 Notes
 id
-uuid
+Int (autoincrement)
 Primary key
-title
-text
-Event name
-slug
-text
-URL-safe identifier
-category
-text
-'bls' | 'workshop' | 'mindfulness' | 'other'
-description
-text
-Full event description
-date
-timestamptz
-Event date/time
-image_url
-text
-Cover photo from Supabase Storage
-video_url
-text
-Optional recap video (YouTube/Vimeo)
-is_upcoming
-boolean
-Controls upcoming vs. past display
-registration_url
-text
-External form or internal route
-Table: testimonials
-Column
+fullName
+String
+Applicant full name
+email
+String
+Applicant email address
+phone
+String?
+Optional phone number
+year
+String
+Year of study
+faculty
+String
+Faculty/department
+interest
+String
+Area of interest in LEADS
+whyJoin
+String
+Motivation statement
+createdAt
+DateTime
+Auto-set on creation
+Model: Enquiry (stores contact form submissions)
+Field
 Type
 Notes
 id
-uuid
+Int (autoincrement)
 Primary key
 name
-text
-Member full name
-role
-text
-Year, dept, programme role
-quote
-text
-Testimonial body (max 300 chars)
-rating
-int2
-1–5 star rating
-avatar_initials
-text
-2-letter fallback (e.g. "KP")
-avatar_url
-text
-Optional profile photo
-page
-text
-'bls' | 'about' — carousel placement
-is_published
-boolean
-Toggle visibility
-Table: join_requests
-Column
-Type
-Notes
-id
-uuid
-Primary key
-full_name
-text
-Applicant name
+String
+Sender name
 email
-text
-Applicant email
-usn
-text
-University seat number
-year
-text
-'1st' | '2nd' | '3rd' | '4th'
-programme_interest
-text
-Selected programme
+String
+Sender email
+subject
+String
+Enquiry subject
 message
-text
-Optional application note
-submitted_at
-timestamptz
-Auto-set by default
+String
+Enquiry message body
 status
-text
-'pending' | 'reviewed' | 'accepted'
+String
+Default: "new" | "read" | "replied"
+createdAt
+DateTime
+Auto-set on creation
+Note: Testimonials and Events are currently hardcoded in their respective React components (TestimonialCarousel.tsx, events/page.tsx). Future versions may migrate to database-driven content.
+
 ────────────────────────────────────────────────────────────
 7. Performance & Accessibility
 Core Web Vitals Targets
@@ -437,7 +406,7 @@ Lighthouse Score
 Checked on each Vercel preview deploy
 Animation Performance Rules
 	•	Only animate transform and opacity — never width, height, top, left, margin
-	•	tsParticles uses requestAnimationFrame — stays off main thread
+	•	Custom Starfield uses requestAnimationFrame — stays off main thread
 	•	All CSS animations: will-change:transform on animated elements (sparingly)
 	•	Scroll reveal uses passive:true option on IntersectionObserver
 	•	Testimonial carousel: setInterval cleared on component unmount
@@ -455,20 +424,19 @@ Accessibility Checklist
 Store in .env.local (never commit). Add to Vercel project settings.
 Variable
 Where Used
-NEXT_PUBLIC_SUPABASE_URL
-Supabase client init
-NEXT_PUBLIC_SUPABASE_ANON_KEY
-Supabase client init
-SUPABASE_SERVICE_ROLE_KEY
-Server-side API routes only
+DATABASE_URL
+Prisma client (default: file:./dev.db)
 RESEND_API_KEY
-api/contact and api/join routes
-NEXT_PUBLIC_GTM_ID
-Google Tag Manager container ID
-NEXT_PUBLIC_HOTJAR_ID
-Hotjar site ID
+Email notifications (optional — configure when ready)
 NEXT_PUBLIC_SITE_URL
-Canonical URL for OG tags + sitemap
+Canonical URL for OG tags
+ADMIN_USERNAME
+Admin panel login (currently hardcoded "admin" — move to env for production)
+ADMIN_PASSWORD
+Admin panel password (currently hardcoded "admin" — move to env for production)
+# Not yet configured:
+# NEXT_PUBLIC_GTM_ID  — Google Tag Manager
+# NEXT_PUBLIC_HOTJAR_ID  — Hotjar site ID
 ────────────────────────────────────────────────────────────
 9. Deployment Guide
 Initial Setup
@@ -480,7 +448,7 @@ Initial Setup
 Ongoing Workflow
 	•	Feature branches → PR → preview deploy URL auto-generated
 	•	Merge to main → production deploy triggered automatically
-	•	Supabase migrations run via Supabase CLI: supabase db push
+	•	Prisma migrations: npx prisma migrate dev (local) or npx prisma db push (Turso/production)
 New Component Checklist (from v2)
 	•	[ ] Does it have a dark mode variant (dark: Tailwind prefix or CSS var)?
 	•	[ ] Does it respect prefers-reduced-motion?
