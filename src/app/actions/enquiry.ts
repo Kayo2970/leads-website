@@ -10,7 +10,7 @@ export async function submitEnquiry(formData: FormData) {
   const message = formData.get('message') as string
 
   if (!name || !email || !subject || !message) {
-    throw new Error('Missing required fields')
+    return { success: false, error: 'Missing required fields' }
   }
 
   try {

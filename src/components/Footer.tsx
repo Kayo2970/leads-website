@@ -28,10 +28,6 @@ export default function Footer() {
               LEADS Next Gen Centre — MSRUAS. Empowering the next generation of
               leaders, speakers, and entrepreneurs since 2019.
             </p>
-            <p>
-              LEADS Next Gen Centre — MSRUAS. Empowering the next generation of
-              leaders, speakers, and entrepreneurs since 2019.
-            </p>
           </div>
           <div className="footer-col">
             <h4>Organisation</h4>

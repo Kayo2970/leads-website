@@ -21,13 +21,14 @@ export default function StatsSection() {
 
     // Desktop: animate from 0
     setCounts([0, 0, 0, 0])
-    const timer = setTimeout(() => {
-      const totalDuration = 2000
-      const steps = 60
-      const stepTime = totalDuration / steps
-      let currentStep = 0
+    const totalDuration = 2000
+    const steps = 60
+    const stepTime = totalDuration / steps
+    let currentStep = 0
+    let interval: ReturnType<typeof setInterval>
 
-      const interval = setInterval(() => {
+    const timer = setTimeout(() => {
+      interval = setInterval(() => {
         currentStep++
         const progress = Math.min(currentStep / steps, 1)
         const eased = 1 - Math.pow(1 - progress, 3)
@@ -41,7 +42,10 @@ export default function StatsSection() {
       }, stepTime)
     }, 500)
 
-    return () => clearTimeout(timer)
+    return () => {
+      clearTimeout(timer)
+      clearInterval(interval)
+    }
   }, [])
 
   return (
