@@ -2,8 +2,10 @@
 
 import { useState, useRef } from 'react'
 import { submitEnquiry } from '@/app/actions/enquiry'
+import { useAnalytics } from '@/hooks/useAnalytics'
 
 export default function ContactForm() {
+  const { trackFormSubmit } = useAnalytics()
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -19,6 +21,7 @@ export default function ContactForm() {
     try {
       const result = await submitEnquiry(formData)
       if (result.success) {
+        trackFormSubmit('contact')
         setSubmitted(true)
         formRef.current?.reset()
       } else {

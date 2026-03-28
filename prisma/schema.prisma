@@ -7,7 +7,7 @@ datasource db {
 }
 
 model Application {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   fullName  String
   email     String
   phone     String?
@@ -15,15 +15,39 @@ model Application {
   faculty   String
   interest  String
   whyJoin   String
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
 }
 
 model Enquiry {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   name      String
   email     String
   subject   String
   message   String
-  status    String   @default("new")
+  status    String    @default("new")
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
+}
+
+model PageView {
+  id          Int      @id @default(autoincrement())
+  sessionId   String
+  page        String
+  referrer    String?
+  utmSource   String?
+  utmMedium   String?
+  utmCampaign String?
+  device      String?
+  browser     String?
+  os          String?
+  country     String?
+  createdAt   DateTime @default(now())
+}
+
+model FormEvent {
+  id        Int      @id @default(autoincrement())
+  sessionId String
+  formName  String
   createdAt DateTime @default(now())
 }

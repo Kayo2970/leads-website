@@ -7,6 +7,8 @@ import Footer from '@/components/Footer'
 import Preloader from '@/components/Preloader'
 import ScrollReveal from '@/components/ScrollReveal'
 import InteractiveCursor from '@/components/InteractiveCursor'
+import AnalyticsProvider from '@/components/AnalyticsProvider'
+import { Suspense } from 'react'
 
 const inter = Inter({
   variable: '--font-inter',
@@ -57,6 +59,9 @@ export default function RootLayout({
       </head>
       <body>
         <ThemeProvider>
+          <Suspense fallback={null}>
+            <AnalyticsProvider />
+          </Suspense>
           <InteractiveCursor />
           <Preloader />
           <Navbar />
