@@ -28,6 +28,7 @@ Designed to withstand academic scrutiny and aesthetic critique, the UI is based 
 - **Tailwind CSS 4**: A utility-first approach for responsive scaling, utilizing custom design tokens for brand-consistent spacing and typography.
 - **Client-Side Hydraulics**: Custom-built `CountUp` and `StatsSection` engines utilizing `setInterval` loops instead of heavy external libraries, reducing the JS bundle size and increasing stability across browser vendors.
 - **Framer Motion Integration**: Used strategically for layout transitions and complex orchestrations that require hardware-accelerated motion paths.
+- **Cloudflare Insights**: Integration of privacy-first, real-time analytics for performance monitoring and diagnostic oversight.
 
 ### ⚙️ Backend & Data Layer
 - **Persistent Storage**: [SQLite](https://www.sqlite.org/) implementation for high-speed, local data persistence, managed via [Prisma ORM](https://www.prisma.io/).
@@ -68,12 +69,14 @@ A secure, responsive cockpit designed for leadership oversight:
 
 ## 📅 Version Control & Release Strategy
 
-### **v1.0.0 - "Prismatic Release" (Current)**
+### **v1.0.1 - "Analytics & Attribution Update" (Current)**
 - ✅ Implementation of the **Liquid Glass** design system.
 - ✅ Official **MSRUAS** email integration (`leads.ngc@msruas.ac.in`).
 - ✅ Full mobile responsive optimization for iPhone/Android.
 - ✅ Inclusion of standardized Legal and IP documentation.
 - ✅ Performance-tuned background animations (18s duration).
+- ✅ Cloudflare Analytics integration for real-time monitoring.
+- ✅ Official footer attribution for the Head of Design and Social Media.
 
 ---
 
