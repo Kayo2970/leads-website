@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
     }
 
     const headers = Object.keys(data[0]).join(',');
-    const rows = data.map(item => Object.values(item).map(val => `"${val}"`).join(','));
+    const rows = data.map((item: any) => Object.values(item).map(val => `"${val}"`).join(','));
     const csvContent = [headers, ...rows].join('\n');
 
     return new NextResponse(csvContent, {

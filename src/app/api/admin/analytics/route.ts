@@ -24,13 +24,19 @@ export async function GET() {
     });
 
     // Chart data: Page views per day (last 30 days)
-    const viewsPerDay = await prisma.$queryRaw`
+    const viewsPerDayRaw = await prisma.$queryRaw`
       SELECT date(createdAt) as date, count(*) as count 
       FROM PageView 
       WHERE createdAt >= date('now', '-30 days')
       GROUP BY date(createdAt)
       ORDER BY date(createdAt) ASC
-    `;
+    ` as any[];
+
+    // Convert BigInt to Number for JSON serialization
+    const viewsPerDay = (viewsPerDayRaw || []).map((item: any) => ({
+      ...item,
+      count: Number(item.count)
+    }));
 
     // Chart data: Device breakdown
     const deviceBreakdown = await prisma.pageView.groupBy({
@@ -68,14 +74,14 @@ export async function GET() {
       },
       charts: {
         viewsPerDay,
-        deviceBreakdown: deviceBreakdown.map(d => ({ name: d.device || 'unknown', value: d._count.device })),
-        topPages: topPages.map(p => ({ name: p.page, count: p._count.page })),
+        deviceBreakdown: deviceBreakdown.map((d: any) => ({ name: d.device || 'unknown', value: d._count.device })),
+        topPages: topPages.map((p: any) => ({ name: p.page, count: p._count.page })),
         formStats,
       },
-      referrers: referrers.map(r => ({ domain: r.referrer || 'direct', count: r._count.referrer })),
+      referrers: referrers.map((r: any) => ({ domain: r.referrer || 'direct', count: r._count.referrer })),
     });
   } catch (error) {
     console.error('Admin stats error:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    return NextResponse.json({ error: 'Internal Server Error', message: (error as Error).message }, { status: 500 });
   }
 }

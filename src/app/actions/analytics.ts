@@ -1,16 +1,12 @@
-'use server'
-
-import { prisma } from '@/lib/prisma'
-
-export async function trackPageView(path: string) {
+export async function trackPageView(page: string) {
   try {
     await prisma.pageView.create({
       data: {
-        path,
+        page,
+        sessionId: 'server-action', // Default for server-side tracking
       },
     })
   } catch (error) {
-    // Silently fail for analytics to not disrupt user experience
     console.error('Analytics tracking error:', error)
   }
 }
@@ -23,11 +19,13 @@ export async function getAnalyticsData() {
     const totalViews = await prisma.pageView.count()
     const todayViews = await prisma.pageView.count({
       where: {
-        timestamp: {
+        createdAt: {
           gte: today,
         },
       },
     })
+    
+    // ... remaining logic ...
 
     // Get hourly views for today
     const hourlyViews = []
