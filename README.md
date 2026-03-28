@@ -21,6 +21,12 @@ Designed to withstand academic scrutiny and aesthetic critique, the UI is based 
 
 ---
 
+## ✍️ Credits & Creative Direction
+This digital experience was envisioned and meticulously crafted by:
+**Kayomarz M Pavri** — *Head of Design and Social Media, LEADS Next Gen Centre*.
+
+---
+
 ## 🔬 Technical Specifications
 
 ### 📱 Frontend Engineering
