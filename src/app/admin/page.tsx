@@ -36,7 +36,10 @@ export default function AdminLoginPage() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
     if (username === 'admin' && password === 'admin') {
-      // Small delay for effect
+      // Set a 7-day session cookie to persist login across sessions
+      const sevenDays = 7 * 24 * 60 * 60
+      document.cookie = `admin_session=true; path=/; max-age=${sevenDays}; SameSite=Lax`
+      
       localStorage.setItem('admin_auth', 'true')
       router.push('/admin/dashboard')
     } else {

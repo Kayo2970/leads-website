@@ -16,7 +16,7 @@ export default function TermsPage() {
 
           <div className="glass-panel" style={{ padding: '40px', lineHeight: '1.8', fontSize: '15px', color: 'var(--text2)' }}>
             <p style={{ color: 'var(--text3)', fontSize: '13px', marginBottom: '32px' }}>
-              <strong>Effective Date:</strong> 1 January 2025 &nbsp;|&nbsp; <strong>Last Updated:</strong> 25 March 2025
+              <strong>Effective Date:</strong> 1 January 2025 &nbsp;|&nbsp; <strong>Last Updated:</strong> 28 March 2026
             </p>
 
             <h2 style={{ fontSize: '18px', fontWeight: 700, color: 'var(--text)', marginBottom: '12px' }}>1. Acceptance of Terms</h2>
@@ -91,8 +91,8 @@ export default function TermsPage() {
             <p style={{ marginBottom: '24px' }}>
               Your use of this website is also governed by our Privacy practices. Any personal information collected 
               through this website — including names, email addresses, and enquiry details submitted via forms — is stored 
-              securely and used solely for the purpose of responding to your queries and improving our services. We do not 
-              sell, trade, or otherwise transfer your personally identifiable information to outside parties.
+              securely and used solely for the purpose of responding to your queries and improving our services. We also collect 
+              anonymous usage data through analytics to understand user behavior and optimize the platform experience.
             </p>
 
             <h2 style={{ fontSize: '18px', fontWeight: 700, color: 'var(--text)', marginBottom: '12px' }}>9. Indemnification</h2>
@@ -116,10 +116,25 @@ export default function TermsPage() {
               time. Material changes will be posted on this page with an updated revision date. Your continued use of the 
               website after any such changes constitutes your acceptance of the new Terms.
             </p>
+            
+            <h2 style={{ fontSize: '18px', fontWeight: 700, color: 'var(--text)', marginBottom: '12px' }}>12. Cookie Policy</h2>
+            <p style={{ marginBottom: '24px' }}>
+              Our website uses cookies and similar tracking technologies to enhance your browsing experience and analyze site traffic. 
+              Cookies are small data files stored on your device. We use them for:
+            </p>
+            <ul style={{ marginBottom: '24px', paddingLeft: '24px' }}>
+              <li style={{ marginBottom: '8px' }}><strong>Authentication:</strong> Preserving your admin login session so you don&apos;t have to log in repeatedly.</li>
+              <li style={{ marginBottom: '8px' }}><strong>Analytics:</strong> Gathering anonymous data on visitor interactions (pages visited, device types, etc.) to improve our services.</li>
+              <li style={{ marginBottom: '8px' }}><strong>Performance:</strong> Ensuring the website loads efficiently and consistently across different sessions.</li>
+            </ul>
+            <p style={{ marginBottom: '24px' }}>
+              By using this website, you consent to our use of cookies. You can manage or disable cookies through your browser settings, 
+              though this may affect the functionality of certain parts of the website, such as the administrative dashboard.
+            </p>
 
-            <h2 style={{ fontSize: '18px', fontWeight: 700, color: 'var(--text)', marginBottom: '12px' }}>12. Contact Us</h2>
+            <h2 style={{ fontSize: '18px', fontWeight: 700, color: 'var(--text)', marginBottom: '12px' }}>13. Contact Us</h2>
             <p>
-              If you have any questions about these Terms, please contact us at:{' '}
+              If you have any questions about these Terms or our Cookie Policy, please contact us at:{' '}
               <Link href="/contact" style={{ color: 'var(--primary)', fontWeight: 600 }}>Contact Page</Link>.
             </p>
 
