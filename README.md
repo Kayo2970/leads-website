@@ -42,10 +42,11 @@ This digital experience was envisioned and meticulously crafted by:
 - **Server Actions**: Secure, typed form handling for Enquiries and Memberships, bypassing the need for redundant API endpoints and reducing latency.
 
 ### 🛡️ Administrative Portal
-A secure, responsive cockpit designed for leadership oversight:
+A secure, high-performance cockpit designed for leadership oversight:
 - **Enquiry Management**: Real-time status tracking (`New`, `Read`, `Replied`) with atomic updates.
-- **Device-Agnostic Dashboard**: CSS-variable-driven layout that collapses from a fixed multi-column desktop view to a vertically optimized mobile stack.
-- **Authentication**: Client-side session persistence with encrypted-ready local storage (transitioning to NextAuth in v1.1).
+- **Executive Data Visualization**: Integrated Recharts for monitoring traffic trends, device demographics, and top content.
+- **Persistent Sessions**: 7-day cookie-based authentication ensuring administrators remain logged in across browser sessions.
+- **Data Portability**: Integrated CSV export for all form submissions to facilitate offline auditing and archival.
 
 ---
 
@@ -75,14 +76,13 @@ A secure, responsive cockpit designed for leadership oversight:
 
 ## 📅 Version Control & Release Strategy
 
-### **v1.0.1 - "Analytics & Attribution Update" (Current)**
-- ✅ Implementation of the **Liquid Glass** design system.
-- ✅ Official **MSRUAS** email integration (`leads.ngc@msruas.ac.in`).
-- ✅ Full mobile responsive optimization for iPhone/Android.
-- ✅ Inclusion of standardized Legal and IP documentation.
-- ✅ Performance-tuned background animations (18s duration).
-- ✅ Cloudflare Analytics integration for real-time monitoring.
-- ✅ Official footer attribution for the Head of Design and Social Media.
+### **v1.1.0 - "Intelligence & Persistence Update" (Current)**
+- ✅ **Custom Analytics System**: Full-stack tracking for views, unique visitors, and device metrics.
+- ✅ **Persistent Admin Sessions**: 7-day secure cookie implementation for the leadership portal.
+- ✅ **Recharts Visualization**: High-fidelity line and pie charts for real-time site intelligence.
+- ✅ **Improved Data Management**: Global search, sorting, and CSV exports for all form submissions.
+- ✅ **Legal Compliance**: Updated Terms & Conditions with a comprehensive Cookie Policy.
+- ✅ **Direct Admin Access**: Integrated 'Admin' link in the desktop navigation for streamlined workflow.
 
 ---
 
