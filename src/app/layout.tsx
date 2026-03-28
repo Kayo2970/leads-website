@@ -52,6 +52,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
+      <head>
+        <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "edc6acebaad34f76a57c25783df697fe"}'></script>
+      </head>
       <body>
         <ThemeProvider>
           <InteractiveCursor />

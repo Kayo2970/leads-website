@@ -53,7 +53,10 @@ export default function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
-          © {new Date().getFullYear()} LEADS Next Gen Centre, MSRUAS. All rights reserved.
+          <p>© {new Date().getFullYear()} LEADS Next Gen Centre, MSRUAS. All rights reserved.</p>
+          <p style={{ marginTop: '8px', fontSize: '13px', opacity: 0.9 }}>
+            Created by Kayomarz M Pavri — Head of Design and Social Media, LEADS Next Gen Center
+          </p>
         </div>
       </div>
     </footer>
