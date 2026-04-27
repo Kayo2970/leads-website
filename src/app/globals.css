@@ -7,19 +7,31 @@
   --teal: #00BCD4;
   --gold: #FFB300;
   --bg: #F0F7FF;
+  --bg-tinted: #edf4ff;         /* Notion-style alternating section tint */
   --surface: rgba(232, 241, 252, 0.4);
-  --card: rgba(224, 242, 254, 0.4); /* Frosted Ice Blue Tint */
+  --card: rgba(224, 242, 254, 0.4);
   --glass-blur: blur(16px);
   --glass-border: rgba(255, 255, 255, 0.3);
   --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-  --text: #1A1A2E;
-  --text2: #4A5568;
-  --text3: #8A8A8A;
+  --text: #1c1f2e;              /* Warm near-black — Airbnb/Notion pattern */
+  --text2: #4a5270;             /* Warm secondary text */
+  --text3: #8A8A9A;
   --success: #16A34A;
   --warning: #D97706;
   --error: #DC2626;
-  --radius: 20px;
+  --radius: 16px;
+  --radius-sm: 8px;
   --trans: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  /* Premium shadow system — Stripe blue-tinted + Airbnb warm */
+  --shadow-card: rgba(50, 50, 93, 0.18) 0px 30px 60px -20px, rgba(0, 0, 0, 0.08) 0px 18px 36px -18px;
+  --shadow-card-hover: rgba(50, 50, 93, 0.28) 0px 30px 60px -16px, rgba(0, 0, 0, 0.15) 0px 18px 36px -18px;
+  --shadow-card-warm: rgba(0, 0, 0, 0.02) 0px 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 2px 6px, rgba(0, 0, 0, 0.09) 0px 6px 16px; /* Airbnb 3-layer */
+  --shadow-border: rgba(0, 0, 0, 0.07) 0px 0px 0px 1px;
+  --shadow-whisper: 1px solid rgba(0, 0, 0, 0.08); /* Notion whisper border */
+  --shadow-ambient: rgba(21, 101, 192, 0.06) 0px 15px 35px 0px;
+  --shadow-blue-ring: rgba(0, 153, 255, 0.15) 0px 0px 0px 2px; /* Framer blue ring */
+  /* Font families */
+  --font-display: var(--font-outfit), 'Outfit', 'Inter', system-ui, sans-serif;
   /* Admin Sidebar Defaults */
   --sidebar-width: 260px;
   --sidebar-height: calc(100vh - 40px);
@@ -85,9 +97,11 @@ html {
 
 body {
   font-family: var(--font-inter), 'Inter', system-ui, -apple-system, sans-serif;
-  background: linear-gradient(120deg, #fdfcfb, #fce4ec, #e8eaf6, #e0f7fa, #fdfcfb);
+  /* Framer: OpenType features for refined micro-typography */
+  font-feature-settings: 'cv01', 'cv05', 'cv09', 'ss03';
+  background: linear-gradient(150deg, #f8fbff 0%, #eef5ff 40%, #f0fafc 70%, #f8fbff 100%);
   background-size: 300% 300%;
-  animation: pearlPulse 18s ease infinite;
+  animation: pearlPulse 24s ease infinite;
   color: var(--text);
   transition: color var(--trans);
   line-height: 1.6;
@@ -95,9 +109,9 @@ body {
 }
 
 .dark body {
-  background: linear-gradient(120deg, #0A1628, #1E1A33, #0F2040, #16243A, #0A1628);
+  background: linear-gradient(150deg, #060e1c 0%, #0a1628 40%, #0a1f3a 70%, #060e1c 100%);
   background-size: 300% 300%;
-  animation: pearlPulse 18s ease infinite;
+  animation: pearlPulse 24s ease infinite;
 }
 
 /* ── SCROLLBAR ── */
@@ -543,16 +557,17 @@ body {
   color: #1A1A2E;
   border: none;
   padding: 10px 22px;
-  border-radius: 24px;
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
   text-decoration: none;
   transition: transform 0.2s, box-shadow 0.2s;
+  letter-spacing: -0.1px;
 }
 .nav-cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255,179,0,0.35);
+  box-shadow: rgba(255, 179, 0, 0.4) 0px 6px 20px -4px;
 }
 
 /* Mobile nav */
@@ -715,39 +730,69 @@ body {
   padding: 0 24px;
 }
 .section {
-  padding: 80px 0;
+  padding: 96px 0; /* Framer: 80–120px generous section rhythm */
+}
+.section-wide {
+  padding: 120px 0; /* Hero-adjacent sections — maximum breathing room */
+}
+.section-tight {
+  padding: 56px 0; /* Denser sections — stats, between-CTAs */
 }
 @media (max-width: 1024px) {
-  .section { padding: 40px 0; }
-  .section-heading { font-size: 26px; }
-  .divider { margin: 16px 0 24px; }
+  .section { padding: 56px 0; }
+  .section-wide { padding: 72px 0; }
+  .section-tight { padding: 40px 0; }
+  .section-heading { font-size: 28px; letter-spacing: -0.5px; }
+  .divider { margin: 16px 0 28px; }
 }
+/* ── Notion-style section alternation ── */
+.section-tinted {
+  background: var(--bg-tinted);
+}
+.dark .section-tinted {
+  background: rgba(255, 255, 255, 0.025);
+}
+/* ── Pill Badge Labels (Notion + Airbnb) ── */
 .section-label {
-  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 2.5px;
+  letter-spacing: 2px;
   text-transform: uppercase;
+  color: var(--primary);
+  background: rgba(21, 101, 192, 0.08);
+  border: 1px solid rgba(21, 101, 192, 0.15);
+  padding: 5px 12px;
+  border-radius: 9999px; /* Full pill — Notion badge system */
+  margin-bottom: 16px;
+}
+.dark .section-label {
+  background: rgba(0, 188, 212, 0.1);
+  border-color: rgba(0, 188, 212, 0.2);
   color: var(--teal);
-  margin-bottom: 10px;
 }
 .section-heading {
-  font-size: 36px;
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 48px);
   font-weight: 800;
   color: var(--text);
-  margin-bottom: 14px;
-  line-height: 1.15;
-  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
 }
 .section-sub {
-  font-size: 16px;
+  font-size: 17px;
   color: var(--text2);
-  max-width: 600px;
+  max-width: 580px;
   line-height: 1.7;
+  font-weight: 400;
 }
 .divider {
-  height: 2px;
-  background: linear-gradient(90deg, var(--primary), var(--teal), transparent);
-  margin: 24px 0 40px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(21,101,192,0.3), rgba(0,188,212,0.3), transparent);
+  margin: 32px 0 48px;
   border: none;
 }
 
@@ -759,15 +804,31 @@ body {
   display: flex;
   align-items: center;
 }
+/* Superhuman "cinematic curtain" fade — dissolves hero into the page */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  background: linear-gradient(to bottom, transparent 0%, var(--bg) 100%);
+  pointer-events: none;
+  z-index: 5;
+}
+.dark .hero::after {
+  background: linear-gradient(to bottom, transparent 0%, #060e1c 100%);
+}
 @media (max-width: 1024px) {
   .hero {
     min-height: auto;
-    padding: 48px 0 40px;
+    padding: 48px 0 60px;
   }
-  .hero-title { font-size: 32px; letter-spacing: -0.5px; }
+  .hero::after { height: 80px; }
+  .hero-title { font-size: 40px; letter-spacing: -1.5px; }
   .hero-description { font-size: 15px; margin-bottom: 20px; }
   .hero-actions { gap: 10px; margin-bottom: 20px; }
-  .btn { padding: 12px 22px; font-size: 14px; }
+  .btn { padding: 11px 20px; font-size: 14px; }
 }
 /* ── PRISMATIC BACKGROUND ANIMATIONS ── */
 @keyframes plasma-drift {
@@ -877,19 +938,31 @@ body {
 }
 .hero-eyebrow {
   color: var(--teal);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  margin-bottom: 14px;
+  margin-bottom: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 2px;
+  background: var(--teal);
+  border-radius: 2px;
 }
 .hero-title {
-  font-size: clamp(36px, 6vw, 56px);
+  font-family: var(--font-display);
+  font-size: clamp(48px, 7.5vw, 80px);
   font-weight: 900;
   color: #fff;
-  line-height: 1.05;
-  letter-spacing: -1.5px;
-  margin-bottom: 20px;
+  line-height: 1.0;
+  letter-spacing: -2.5px;
+  margin-bottom: 24px;
 }
 .hero-title em {
   color: var(--teal);
@@ -915,42 +988,45 @@ body {
   align-items: center;
   gap: 8px;
   border: none;
-  border-radius: 30px;
+  border-radius: 8px;
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-  padding: 14px 28px;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  padding: 13px 26px;
   text-decoration: none;
+  letter-spacing: -0.1px;
 }
 .btn:hover { transform: translateY(-2px); }
 .btn-primary {
   background: var(--teal);
   color: #fff;
+  box-shadow: rgba(0, 188, 212, 0.25) 0px 8px 20px -6px;
 }
-.btn-primary:hover { box-shadow: 0 8px 24px rgba(0,188,212,0.35); }
+.btn-primary:hover { box-shadow: rgba(0, 188, 212, 0.45) 0px 12px 28px -6px; }
 .btn-gold {
   background: var(--gold);
   color: #1A1A2E;
+  box-shadow: rgba(255, 179, 0, 0.25) 0px 8px 20px -6px;
 }
-.btn-gold:hover { box-shadow: 0 8px 24px rgba(255,179,0,0.35); }
+.btn-gold:hover { box-shadow: rgba(255, 179, 0, 0.45) 0px 12px 28px -6px; }
 .btn-outline {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.05);
   color: #fff;
-  border: 2px solid rgba(255,255,255,0.4);
-  padding: 13px 26px;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  padding: 12px 24px;
 }
 .btn-outline:hover {
-  border-color: #fff;
-  background: rgba(255,255,255,0.08);
+  border-color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.1);
 }
 .btn-ghost {
   background: transparent;
   color: var(--primary);
-  border: 2px solid var(--primary);
-  padding: 13px 26px;
+  border: 1.5px solid rgba(21, 101, 192, 0.4);
+  padding: 12px 24px;
 }
-.btn-sm { padding: 9px 18px; font-size: 13px; }
+.btn-sm { padding: 9px 18px; font-size: 13px; border-radius: 6px; }
 
 /* ── SOCIAL PROOF ── */
 .social-proof {
@@ -983,84 +1059,105 @@ body {
 
 /* ── CARDS ── */
 .card {
-  background: var(--card);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: var(--radius);
   padding: 28px;
-  border: 1px solid rgba(21,101,192,0.1);
+  /* Airbnb 3-layer warm shadow for light mode */
+  box-shadow: var(--shadow-card-warm);
+  border: 1px solid rgba(0, 0, 0, 0.06); /* Notion whisper border */
   transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), 
               box-shadow 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 .dark .card {
-  border-color: rgba(255,255,255,0.06);
+  background: rgba(15, 32, 64, 0.7);
+  border-color: rgba(255, 255, 255, 0.07);
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 20px 40px -10px;
 }
 .card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 16px 40px rgba(21,101,192,0.15);
+  transform: translateY(-5px);
+  /* Framer blue ring glow on hover */
+  box-shadow: var(--shadow-card-hover), var(--shadow-blue-ring);
 }
 
 /* ── ICON CARDS (Programs) ── */
 .icon-card {
-  background: var(--card);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border-radius: 20px;
-  padding: 28px 22px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius);
+  padding: 32px 24px;
   text-align: center;
-  border: 1px solid rgba(21,101,192,0.1);
+  /* Airbnb 3-layer warm shadow + Notion whisper border */
+  box-shadow: var(--shadow-card-warm);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), 
-              box-shadow 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), 
-              border-color 0.3s;
+              box-shadow 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
   cursor: pointer;
 }
-.dark .icon-card { border-color: rgba(255,255,255,0.07); }
+.dark .icon-card {
+  background: rgba(15, 30, 70, 0.75);
+  border-color: rgba(255, 255, 255, 0.07);
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 0px 1px, rgba(0, 0, 0, 0.15) 0px 15px 35px 0px;
+}
 .icon-card:hover {
-  transform: translateY(-8px) scale(1.04);
-  box-shadow: 0 20px 48px rgba(21,101,192,0.18);
-  border-color: var(--teal);
+  transform: translateY(-8px);
+  /* Framer blue ring glow on hover */
+  box-shadow: var(--shadow-card-hover), var(--shadow-blue-ring);
+}
+.dark .icon-card:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 0px 1px, rgba(0, 0, 0, 0.25) 0px 30px 60px -10px, var(--shadow-blue-ring);
 }
 .icon-card .ic-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
   background: linear-gradient(135deg, var(--primary), var(--teal));
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
-  margin: 0 auto 16px;
+  font-size: 26px;
+  margin: 0 auto 20px;
+  box-shadow: 0 8px 24px rgba(21, 101, 192, 0.25);
 }
 .icon-card h4 {
-  font-size: 16px;
+  font-family: var(--font-display);
+  font-size: 17px;
   font-weight: 700;
   color: var(--text);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  letter-spacing: -0.3px;
 }
 .icon-card p {
   font-size: 14px;
   color: var(--text2);
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 /* ── STAT CARDS ── */
 .stat-card {
   text-align: center;
-  padding: 28px;
+  padding: 32px 20px;
 }
 .stat-number {
-  font-size: 42px;
+  font-family: var(--font-display);
+  font-size: clamp(44px, 5vw, 58px);
   font-weight: 900;
-  background: linear-gradient(135deg, var(--primary), var(--teal));
+  background: linear-gradient(135deg, var(--primary) 0%, var(--teal) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+  line-height: 1;
+  letter-spacing: -2px;
 }
 .stat-label {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text2);
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 /* ── MASONRY GALLERY ── */
@@ -1131,7 +1228,7 @@ body {
 .testi-wrap {
   position: relative;
   overflow: hidden;
-  border-radius: 16px;
+  border-radius: var(--radius);
 }
 .testi-track {
   display: flex;
@@ -1139,24 +1236,50 @@ body {
 }
 .testi-slide {
   min-width: 100%;
-  padding: 40px;
-  background: var(--card);
-  border-radius: 16px;
-  border: 1px solid rgba(21,101,192,0.1);
+  padding: 48px 52px 44px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius);
+  /* Airbnb warm shadow + Notion whisper border */
+  box-shadow: var(--shadow-card-warm);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  position: relative;
 }
-.dark .testi-slide { border-color: rgba(255,255,255,0.07); }
+/* Superhuman lavender/teal decorative large opening quote */
+.testi-slide::before {
+  content: '\201C'; /* Left double quotation mark */
+  position: absolute;
+  top: 20px;
+  left: 40px;
+  font-family: var(--font-display);
+  font-size: 96px;
+  line-height: 1;
+  color: var(--teal);
+  opacity: 0.15;
+  pointer-events: none;
+  font-weight: 900;
+  user-select: none;
+}
+.dark .testi-slide {
+  background: rgba(12, 28, 60, 0.88);
+  border-color: rgba(255, 255, 255, 0.07);
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 20px 40px -10px;
+}
 .testi-stars {
   color: var(--gold);
-  font-size: 20px;
-  margin-bottom: 16px;
-  letter-spacing: 2px;
+  font-size: 18px;
+  margin-bottom: 20px;
+  letter-spacing: 3px;
 }
 .testi-quote {
   font-size: 18px;
   color: var(--text);
-  line-height: 1.7;
+  line-height: 1.75;
   font-style: italic;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
+  position: relative; /* sits above the ::before pseudo */
+  z-index: 1;
 }
 .testi-author {
   display: flex;
@@ -1293,38 +1416,73 @@ body {
   transition: width 1.2s ease;
 }
 
-/* ── FORM ── */
-.form-group { margin-bottom: 20px; }
+/* ── FORM (Notion/Stripe premium input system) ── */
+.form-group { margin-bottom: 24px; }
 .form-label {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--text);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   display: block;
+  letter-spacing: 0.2px;
 }
 .form-input {
   width: 100%;
   padding: 12px 16px;
-  border: 1.5px solid rgba(21,101,192,0.2);
-  border-radius: 10px;
+  /* Notion whisper border — thin, barely-there */
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 8px; /* Notion: 4–8px for inputs */
   font-size: 15px;
-  background: var(--bg);
+  background: #fff;
   color: var(--text);
-  transition: border-color 0.2s, box-shadow 0.2s;
+  /* Smooth all transitions */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
   outline: none;
   font-family: inherit;
+  line-height: 1.5;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.form-input:hover {
+  border-color: rgba(0, 0, 0, 0.22);
 }
 .form-input:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(21,101,192,0.12);
+  /* Stripe-style layered focus ring: inner blue + outer blue-tint */
+  box-shadow: 0 0 0 1px var(--primary), 0 0 0 4px rgba(21, 101, 192, 0.1);
 }
-.dark .form-input { background: var(--surface); }
-.form-input::placeholder { color: var(--text3); }
+.form-input::placeholder { 
+  color: var(--text3);
+  font-weight: 400;
+}
+.dark .form-input { 
+  background: rgba(15, 28, 56, 0.8);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.9);
+}
+.dark .form-input:hover { border-color: rgba(255, 255, 255, 0.22); }
+.dark .form-input:focus {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 1px var(--teal), 0 0 0 4px rgba(0, 188, 212, 0.12);
+}
+/* Select inputs */
+select.form-input {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234a5270' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 40px;
+  cursor: pointer;
+}
+/* Textarea */
+textarea.form-input {
+  resize: vertical;
+  min-height: 120px;
+}
 
 /* ── FOOTER ── */
 .footer {
-  background: var(--navy);
-  padding: 60px 0 30px;
+  background: #061b31;
+  padding: 64px 0 32px;
   margin-top: 80px;
 }
 .footer-grid {
@@ -1445,6 +1603,33 @@ body {
   inset: 0;
   background: #020B18;
   overflow: hidden;
+}
+
+/* ── STATS SECTION DARK SURFACE ── */
+.stats-dark-surface {
+  background: linear-gradient(135deg, #061b31 0%, #0a1f3a 50%, #061b31 100%);
+  border-radius: 24px;
+  padding: 60px 40px;
+  box-shadow: rgba(50, 50, 93, 0.3) 0px 30px 60px -20px, rgba(0, 0, 0, 0.2) 0px 18px 36px -18px;
+  position: relative;
+  overflow: hidden;
+}
+.stats-dark-surface::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(0, 188, 212, 0.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 50%, rgba(21, 101, 192, 0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+.stats-dark-surface .stat-number {
+  background: linear-gradient(135deg, #64b5f6 0%, #00e5ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stats-dark-surface .stat-label {
+  color: rgba(255, 255, 255, 0.55);
 }
 .star {
   position: absolute;
@@ -1617,23 +1802,27 @@ body {
 /* ── CTA SECTION ── */
 .cta-section {
   border-radius: 24px;
-  padding: 60px 40px;
+  padding: 72px 48px;
   text-align: center;
   position: relative;
 }
 .cta-section h2 {
-  font-size: 32px;
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.5vw, 40px);
   font-weight: 800;
   color: #fff;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
+  line-height: 1.1;
+  letter-spacing: -1.2px;
 }
 .cta-section p {
-  color: rgba(255,255,255,0.7);
-  font-size: 16px;
-  margin-bottom: 28px;
-  max-width: 500px;
+  color: rgba(255,255,255,0.72);
+  font-size: 17px;
+  margin-bottom: 32px;
+  max-width: 520px;
   margin-left: auto;
   margin-right: auto;
+  line-height: 1.65;
 }
 
 /* ── INFO BOX ── */
@@ -1651,30 +1840,42 @@ body {
 /* ── COLLABORATION LOGOS ── */
 .collab-grid {
   display: flex;
-  gap: 40px;
-  align-items: center;
+  gap: 24px;
+  align-items: stretch;
   justify-content: center;
   flex-wrap: wrap;
 }
 .collab-item {
-  background: var(--card);
-  border: 1px solid rgba(21,101,192,0.1);
-  border-radius: 16px;
-  padding: 32px 40px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow-border), var(--shadow-ambient);
+  border-radius: var(--radius);
+  padding: 36px 44px;
   text-align: center;
-  transition: transform 0.25s;
+  transition: transform 0.25s, box-shadow 0.25s;
   min-width: 200px;
+  flex: 1;
+  max-width: 280px;
 }
-.collab-item:hover { transform: translateY(-3px); }
+.dark .collab-item {
+  background: rgba(12, 28, 60, 0.7);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 0px 1px, rgba(0, 0, 0, 0.14) 0px 12px 28px 0px;
+}
+.collab-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-border), var(--shadow-card-hover);
+}
 .collab-item h4 {
-  font-size: 16px;
+  font-family: var(--font-display);
+  font-size: 17px;
   font-weight: 700;
   color: var(--text);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  letter-spacing: -0.3px;
 }
 .collab-item p {
   font-size: 13px;
   color: var(--text2);
+  line-height: 1.5;
 }
 
 /* ── CONTACT INFO ── */

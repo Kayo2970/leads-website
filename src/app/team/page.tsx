@@ -114,126 +114,126 @@ const organizers = [
   {
     name: 'Nuthan H',
     role: 'PRESIDENT',
-    org: 'Organizing Committee',
+    org: 'Core Committee',
     image: '/team-photos/nuthan-h.webp',
     linkedin: '',
   },
   {
     name: 'Kunal Bhadauria',
     role: 'VICE PRESIDENT',
-    org: 'Organizing Committee',
+    org: 'Core Committee',
     image: '/team-photos/kunal-bhadauria.webp',
     linkedin: '',
   },
   {
     name: 'Sudev Mitra',
     role: 'CHIEF COORDINATOR',
-    org: 'Organizing Committee',
+    org: 'Core Committee',
     image: '/team-photos/sudev-mitra.webp',
     linkedin: '',
   },
   {
     name: 'Jyotsna Karn',
     role: 'CHIEF COORDINATOR',
-    org: 'Organizing Committee',
+    org: 'Core Committee',
     image: '/team-photos/jyotsna-karn.webp',
     linkedin: '',
   },
   {
     name: 'Pranav P J',
     role: 'CHIEF COORDINATOR',
-    org: 'Organizing Committee',
+    org: 'Core Committee',
     image: '/team-photos/pranav-pj.webp',
     linkedin: '',
   },
   {
     name: 'Shravya T',
     role: 'CHIEF COORDINATOR',
-    org: 'Organizing Committee',
+    org: 'Core Committee',
     image: '/team-photos/shravya-t.webp',
     linkedin: '',
   },
   {
     name: 'Shriram SG',
     role: 'GENERAL SECRETARY',
-    org: 'Organizing Committee',
+    org: 'Core Committee',
     image: '/team-photos/shriram-sg.webp',
     linkedin: '',
   },
   {
     name: 'S Bhavya Shree',
     role: 'GENERAL SECRETARY',
-    org: 'Organizing Committee',
+    org: 'Core Committee',
     image: '/team-photos/bhavya-shree.webp',
     linkedin: '',
   },
   {
     name: 'Manoj Petakamsetty',
     role: 'GENERAL SECRETARY',
-    org: 'Organizing Committee',
+    org: 'Core Committee',
     image: '/team-photos/manoj-petakamsetty.webp',
     linkedin: '',
   },
   {
     name: 'Yash Chandak',
     role: 'HEAD-OPERATIONS AND LOGISTICS',
-    org: 'Organizing Committee',
+    org: 'Core Committee',
     image: '/team-photos/yash-chandak.webp',
     linkedin: '',
   },
   {
     name: 'Kayomarz Pavri',
     role: 'HEAD-DESIGN AND SOCIAL MEDIA',
-    org: 'Organizing Committee',
+    org: 'Core Committee',
     image: '/team-photos/kayomarz-pavri.webp',
     linkedin: '',
   },
   {
     name: 'Shwetha S',
     role: 'HEAD-DESIGN AND SOCIAL MEDIA',
-    org: 'Organizing Committee',
+    org: 'Core Committee',
     image: '/team-photos/shwetha-s.webp',
     linkedin: '',
   },
   {
     name: 'Niyati Chawra',
     role: 'HEAD-LEADERSHIP AND DEVELOPMENT',
-    org: 'Organizing Committee',
+    org: 'Core Committee',
     image: '/team-photos/niyati-chawra.webp',
     linkedin: '',
   },
   {
     name: 'Sadiya Sawood',
     role: 'HEAD-LEADERSHIP AND DEVELOPMENT',
-    org: 'Organizing Committee',
+    org: 'Core Committee',
     image: '/team-photos/sadiya-sawood.webp',
     linkedin: '',
   },
   {
     name: 'Nimisha K M',
     role: 'HEAD-SUSTAINABILITY AND INNOVATION',
-    org: 'Organizing Committee',
+    org: 'Core Committee',
     image: '/team-photos/nimisha-km.webp',
     linkedin: '',
   },
   {
     name: 'Kishan KP',
     role: 'HEAD-MARKETING AND BRANDING',
-    org: 'Organizing Committee',
+    org: 'Core Committee',
     image: '/team-photos/kishan-kp.webp',
     linkedin: '',
   },
   {
     name: 'Aravind Manashetti',
     role: 'HEAD-FINANCE AND SPONSORSHIP',
-    org: 'Organizing Committee',
+    org: 'Core Committee',
     image: '/team-photos/arvind-manashetti.webp',
     linkedin: '',
   },
   {
     name: 'Mr. Syed Furqaan Ahmed',
     role: 'HEAD-RESEARCH & DEVELOPMENT',
-    org: 'Organizing Committee',
+    org: 'Core Committee',
     image: '/team-photos/syed-furqaan.webp',
     linkedin: 'https://www.linkedin.com/in/sydkwests/',
   },
@@ -271,11 +271,11 @@ export default function TeamPage() {
         </div>
       </section>
 
-      {/* ── ORGANIZING COMMITTEE SENIORS ── */}
+      {/* ── EXECUTIVE COMMITTEE ── */}
       <section className="section" id="organizing-committee" style={{ background: 'var(--surface)' }}>
         <div className="container">
           <div className="section-label reveal">Management</div>
-          <h2 className="section-heading reveal">Senior Organizing Committee</h2>
+          <h2 className="section-heading reveal">Executive Committee</h2>
           <p className="section-sub reveal">
             Eight senior leaders driving strategic initiatives and operational excellence across all functions.
           </p>
@@ -288,11 +288,11 @@ export default function TeamPage() {
         </div>
       </section>
 
-      {/* ── ORGANIZING COMMITTEE MEMBERS ── */}
+      {/* ── CORE COMMITTEE ── */}
       <section className="section" id="organizing-members">
         <div className="container">
           <div className="section-label reveal">Execution</div>
-          <h2 className="section-heading reveal">Organizing Committee Members</h2>
+          <h2 className="section-heading reveal">Core Committee</h2>
           <p className="section-sub reveal">
             The dedicated team executing the summit vision with passion, precision, and purpose.
           </p>

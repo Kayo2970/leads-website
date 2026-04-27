@@ -102,14 +102,16 @@ export default function HomePage() {
 
 
       {/* ── STATS ── */}
-      <section className="section" id="stats">
+      <section className="section section-tight" id="stats">
         <div className="container">
-          <StatsSection />
+          <div className="stats-dark-surface">
+            <StatsSection />
+          </div>
         </div>
       </section>
 
       {/* ── PROGRAMS ── */}
-      <section className="section" id="programs">
+      <section className="section section-wide section-tinted" id="programs">
         <div className="container">
           <div className="section-label reveal">Our Programs</div>
           <h2 className="section-heading reveal">Eight Ways to Grow</h2>
@@ -133,10 +135,10 @@ export default function HomePage() {
       </section>
 
       {/* ── BLS HIGHLIGHT ── */}
-      <section className="section" id="bls-highlight">
+      <section className="section section-tight" id="bls-highlight">
         <div className="container">
           <div className="cta-section reveal">
-            <div className="section-label" style={{ color: 'var(--teal)' }}>
+            <div className="section-label" style={{ color: 'var(--teal)', background: 'rgba(0,188,212,0.12)', borderColor: 'rgba(0,188,212,0.25)' }}>
               Flagship Event
             </div>
             <h2>Bharat Lead Summit 2026</h2>
@@ -156,7 +158,7 @@ export default function HomePage() {
       </section>
 
       {/* ── COLLABORATIONS ── */}
-      <section className="section" id="collaborations">
+      <section className="section section-tinted" id="collaborations">
         <div className="container text-center">
           <div className="section-label reveal">Industry Partners</div>
           <h2 className="section-heading reveal">
@@ -201,7 +203,7 @@ export default function HomePage() {
       </section>
 
       {/* ── JOIN CTA ── */}
-      <section className="section" id="join-cta">
+      <section className="section section-tight" id="join-cta">
         <div className="container">
           <div className="cta-section reveal">
             <h2>Ready to Lead?</h2>

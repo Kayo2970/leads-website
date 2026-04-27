@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Outfit } from 'next/font/google'
 import './globals.css'
 import ThemeProvider from '@/components/ThemeProvider'
 import Navbar from '@/components/Navbar'
@@ -14,6 +14,14 @@ const inter = Inter({
   variable: '--font-inter',
   subsets: ['latin'],
   display: 'swap',
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+})
+
+const outfit = Outfit({
+  variable: '--font-outfit',
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
 })
 
 export const metadata: Metadata = {
@@ -53,7 +61,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
       <head>
         <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "edc6acebaad34f76a57c25783df697fe"}'></script>
       </head>
