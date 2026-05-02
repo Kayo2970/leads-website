@@ -2,6 +2,50 @@
 
 ## Version History & Changes Tracking
 
+### [2026-03-25] - Documentation Updated to Match Current Website Release
+
+#### All DOCX/TXT/HTML Documentation Updated
+Updated all 10 project documents to accurately reflect the current state of the live LEADS website. The original documents described a planned/earlier version of the site; this update aligns them with what is actually built and deployed.
+
+**Key changes documented across all files:**
+
+| Topic | Old (Planned) | New (Actual) |
+|-------|--------------|--------------|
+| Database | Supabase (Postgres) | Prisma ORM + libsql SQLite adapter (`dev.db`) |
+| CSS Framework | Tailwind CSS 3.4+ | Custom CSS (`globals.css`) with CSS custom properties |
+| Forms Handling | React Hook Form + Zod | Custom React forms with useState + server actions |
+| Analytics | GA4 + GTM + Hotjar (planned) | Not yet configured |
+| Particle Library | tsParticles v2 | Custom Starfield component (no library) |
+| Animation Library | CSS-only | Framer Motion v12+ (InteractiveCards D-shape) |
+| Join URL | `/join-us` | `/join` |
+| BLS URL | `/bls` | `/events/bharat-lead-summit` |
+| File Structure | `app/` root | `src/app/` root |
+| Component Structure | Subdirectories (layout/, ui/, sections/) | Flat in `src/components/` |
+| New Pages | N/A | `/team` (team hierarchy), `/admin` (login), `/admin/dashboard` |
+| Home H1 | "Build the Leadership India Needs. Starting Now." | "Where Leaders Are Made." |
+| Hero CTA | "Explore Our Programs" | "Explore LEADS" |
+| Hero CTA 2 | "Register for BLS 2026" | "Join the Movement →" |
+| Contact Email | leads.msruas@msruas.ac.in | leads.ngc@msruas.ac.in |
+| Contact Phone | +91 8910332851 / +91 8045386666 Ext 793 | +91 91106 73919 / +91 80183 75553 / +91 78992 93097 |
+| New Components | - | ArcRings, InteractiveCards, InteractiveHeroShapes, InteractiveCursor, StatsSection, Starfield, TeamCard, ThemeProvider, EventsFilter, JoinForm, ContactForm |
+
+#### Files Updated
+- `docs/technical/TechSpec-LEADS.docx` — v3.0, full stack, components, DB schema update
+- `docs/technical/TechSpec-LEADS.txt` — text version of same
+- `docs/technical/DesignDocument-LEADS.html` — version badge, stack refs, tsParticles → Starfield
+- `docs/content/Content-LEADS.docx` — home H1, CTAs, team page (PAGE 7), contact details
+- `docs/content/Content-LEADS.txt` — same plus full Team page content section
+- `docs/content/Sitemap-LEADS.docx` — added /team, /admin, /admin/dashboard pages and nav
+- `docs/content/Sitemap-LEADS.txt` — same
+- `docs/strategic/PRD-LEADS.docx` — v2.0, updated assumptions, admin dashboard now in scope
+- `docs/strategic/Analytics-LEADS.docx` — v2.0, Prisma form tracking, analytics pending
+- `docs/strategic/CompetitorBrief-LEADS.docx` — v2.0, updated with actual launch state
+- `docs/content/SocialKit-LEADS.docx` — BLS 2026 hashtag, Threads social account
+- `docs/operational/LaunchChecklist-LEADS.docx` — mark completed items, Prisma refs
+- `docs/operational/Maintenance-LEADS.docx` — Supabase → Prisma, file paths, event editing
+
+---
+
 ### [2026-03-24] - Structural, Pearl Theme, Database & Fan Interactive Cards
 
 #### Visual & Structure Update

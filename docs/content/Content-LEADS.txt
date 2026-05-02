@@ -1,6 +1,6 @@
 LEADS Next Gen Centre
 Content & Copy Document
-MSRUAS – 2026
+MSRUAS – 2026 (Updated: 2026-03-24)
 
 Inspiring Future-Ready Youth Leaders for Sustainability
 TABLE OF CONTENTS
@@ -11,6 +11,69 @@ PART 1 – WEBSITE COPY
 4. Bharat Lead Summit (/events/bharat-lead-summit)
 5. Join Us Page (/join)
 6. Contact Page (/contact)
+
+PAGE 7: TEAM (/TEAM)
+Page Title
+Meet Our Team | LEADS Next Gen Centre
+Meta Description
+Meet the leadership, executive council, and dedicated team members driving LEADS Next Gen Centre and Bharat Lead Summit.
+URL Slug
+/team
+H1
+Meet Our Team
+Hero Subheading
+The passionate leaders, dedicated committee members, and talented organizers driving LEADS Next Gen Centre and the Bharat Lead Summit vision forward.
+
+Section: Executive Council
+Guiding LEADS Next Gen Centre with strategic vision and institutional excellence.
+Members:
+- Prof. Kuldeep Kumar Raina — PATRON (LEADS NEXT GEN CENTRE), Honourable Vice-Chancellor of RUAS
+- Dr. K. M. Sharath Kumar — CHIEF ADVISER (LEADS NEXT GEN CENTRE), Professor and Dean of FMC, RUAS
+- Dr. Subhadeep Mukherjee — CENTRE HEAD (LEADS NEXT GEN CENTRE), Associate Professor of FMC, RUAS
+- Mr. Ajay R — FINANCE HEAD AND AUDITOR, Assistant Professor of FMC, RUAS
+- Dr. Kiran Kumar B M — HEAD EVENT & CAMPUS COORDINATION (RT CAMPUS), Associate Professor of FET, RUAS
+- Dr. Pallabi Mund — HEAD EVENT & CAMPUS COORDINATION (GG CAMPUS), Associate Professor of FMC, RUAS
+- Ms. Sujata Bijwe — HEAD INDUSTRY CONNECT, Adjunct Faculty of FMC, RUAS
+
+Section: Senior Organizing Committee
+Eight senior leaders driving strategic initiatives and operational excellence across all functions.
+Members:
+- Mr. Gurutejas C — SR. PRESIDENT
+- Mr. Abhijit Arya — SR. VICE PRESIDENT
+- Mr. Laksh Soorya Singh — SR. EVENTS & OPERATIONS HEAD
+- Mr. Bhawen Maroo — SR. EVENTS & OPERATIONS HEAD
+- Ms. Shreesha S.N — SR. SOCIAL MEDIA & DESIGN HEAD
+- Ms. Bharvi A Padia — SR. PR HEAD
+- Mr. Arvind Rakshith G — SR. FINANCE & SPONSORSHIP HEAD
+
+Section: Organizing Committee Members
+The dedicated team executing the summit vision with passion, precision, and purpose.
+Members:
+- Nuthan H — PRESIDENT
+- Kunal Bhadauria — VICE PRESIDENT
+- Sudev Mitra — CHIEF COORDINATOR
+- Jyotsna Karn — CHIEF COORDINATOR
+- Pranav P J — CHIEF COORDINATOR
+- Shravya T — CHIEF COORDINATOR
+- Shriram SG — GENERAL SECRETARY
+- S Bhavya Shree — GENERAL SECRETARY
+- Manoj Petakamsetty — GENERAL SECRETARY
+- Yash Chandak — HEAD-OPERATIONS AND LOGISTICS
+- Kayomarz Pavri — HEAD-DESIGN AND SOCIAL MEDIA
+- Shwetha S — HEAD-DESIGN AND SOCIAL MEDIA
+- Niyati Chawra — HEAD-LEADERSHIP AND DEVELOPMENT
+- Sadiya Sawood — HEAD-LEADERSHIP AND DEVELOPMENT
+- Nimisha K M — HEAD-SUSTAINABILITY AND INNOVATION
+- Kishan KP — HEAD-MARKETING AND BRANDING
+- Aravind Manashetti — HEAD-FINANCE AND SPONSORSHIP
+- Syed Furqaan Ahmed — HEAD-RESEARCH & DEVELOPMENT
+
+Section: Team Stats
+- 7 Executive Council Members
+- 8 Senior Organizers
+- 17+ Committee Members
+- 32+ Total Team Members
+
 PART 2 – COMPANY PROFILE
 Company Profile 2026 (Shareable Document)
 PART 1 – WEBSITE COPY
@@ -22,13 +85,13 @@ LEADS Next Gen Centre at MSRUAS empowers students with leadership programs, indu
 URL Slug
 /
 H1
-Build the Leadership India Needs. Starting Now.
+Where Leaders Are Made.
 Subheading
-LEADS Next Gen Centre is where MSRUAS students gain real industry skills, sustainability leadership, and career-defining connections — starting in their first year.
+LEADS Next Gen Centre shapes students into communicators, entrepreneurs, and change-makers through real-world programmes, industry mentorship, and India's premier leadership summit. "Empowering visions, engineering the future, inspiring minds."
 Hero CTA Button
-Explore Our Programs
+Explore LEADS
 Secondary CTA Button
-Register for BLS 2026
+Join the Movement →
 Section: What Is LEADS?
 LEADS Next Gen Centre – the Centre for Leadership Empowering Attitude Development for Sustainability – is MSRUAS's dedicated hub for building the next generation of purpose-driven leaders. We evolved from E-Cell (Entrepreneurship Cell) to become a movement that goes beyond entrepreneurship. Today, LEADS brings together students from every discipline and every batch, paired with mentors from McKinsey, World Resources Institute (WRI), and Tata Sustainability Group.
 We're not here to teach generic leadership frameworks. You'll work on real challenges—from innovation competitions to sustainability initiatives—and build connections with industry leaders who are actively solving India's biggest problems. Whether your passion is technology, commerce, arts, or engineering, LEADS is where you become a leader, not just a student.
@@ -50,7 +113,7 @@ Multi-Disciplinary. Unlike business-focused clubs, LEADS welcomes students from 
 Sustainability-First. We're not chasing buzzwords. Every program ties to solving real sustainability challenges. Your projects matter beyond the classroom.
 National Platform. Through BLS and our industry partnerships, you're not just building skills locally. You're building a national network and visibility.
 Footer CTA
-Ready to lead? Join LEADS.
+Ready to Lead? Apply to LEADS →
 Image/Photo Alt Text Suggestions (Home Page)
 1. "LEADS Next Gen Centre students collaborating in a workshop with McKinsey mentor at MSRUAS campus"
 2. "Bharat Lead Summit 2026: 1,500+ delegates gathering for the national sustainability leadership conference"
@@ -63,7 +126,7 @@ Learn about LEADS Next Gen Centre at MSRUAS: From E-Cell roots to a multi-discip
 URL Slug
 /about
 H1
-Where Leaders Are Built, Not Born
+Inspiring Future-Ready Youth Leaders
 Full About Page Copy
 Three years ago, LEADS Next Gen Centre didn't exist. What existed was E-Cell FMC RUAS—an entrepreneurship club focused on startups and business ideas. But as we worked with our students, we realized something: the challenges they face go far beyond entrepreneurship. They're asking how to be ethical leaders in a climate crisis. How to build teams across difference. How to use innovation for purpose, not just profit. That realization became a transformation.
 E-Cell evolved into LEADS. We kept the entrepreneurial spirit—the audacity to imagine and build—but expanded our mission to develop leaders for the complex problems India actually faces. Today, LEADS is a movement across all disciplines, all batches, powered by mentors from McKinsey, World Resources Institute, and Tata Sustainability Group.
@@ -114,7 +177,7 @@ Bharat Lead Summit 2026: 1,500+ delegates exploring Sustainable Leadership & AI.
 URL Slug
 /events/bharat-lead-summit
 H1
-The Stage for Sustainable Leadership
+Bharat Lead Summit 2026
 What Is Bharat Lead Summit?
 Bharat Lead Summit (BLS) is LEADS's flagship national event. Held annually at MSRUAS with 1,500+ delegates from across India, BLS brings together student leaders, professionals, and changemakers to explore the themes shaping India's future.
 2026 Theme: Sustainable Leadership & AI
@@ -140,7 +203,7 @@ Volunteer – Help us run the event. Volunteers gain insider access and leadersh
 Past Editions
 BLS has grown each year, with previous editions attracting delegates interested in entrepreneurship, climate action, and leadership development. Past attendees now work at McKinsey, WRI, leading startups, and social impact organizations. Your BLS network often becomes your professional network.
 CTA Button
-Register as a Delegate
+Register for BLS 2026 →
 PAGE 5: JOIN US (/JOIN)
 Page Title
 Join LEADS – Become a Student Leader
@@ -149,7 +212,7 @@ Join LEADS Next Gen Centre at MSRUAS. Apply for Trainee Associate role and start
 URL Slug
 /join
 H1
-Your Leadership Journey Starts Here
+Ready to Lead?
 What Joining LEADS Means
 Joining LEADS isn't just joining a club. You're joining a structured leadership development program. You're committing to learning through doing—running real programs, building your network, and developing the attitudes and skills that define purpose-driven leaders. In return, you get mentorship from industry, access to our partner network, and a community of ambitious peers committed to building something bigger than themselves.
 The LEADS Journey
@@ -163,7 +226,7 @@ Network – 1,500+ contacts through BLS alone. Plus, your peer network—student
 Portfolio – You build a portfolio of real work. When you interview for internships, jobs, or further education, you can talk about the programs you've led, the teams you've built, and the impact you've created.
 First-Mover Advantage – LEADS is still relatively young. Early joiners help shape the culture and programs. You're not just participating in LEADS; you're building it.
 Open Roles
-We typically recruit Trainee Associates in September and January (start of academic years). If you're a second-year or beyond student and passionate about leadership, sustainability, or community building, we also look for mentors and event leads year-round. The best time to join is when you're ready. The best way to apply is to reach out directly—either email leads.msruas@msruas.ac.in or attend a LEADS event to connect with current leaders.
+We typically recruit Trainee Associates in September and January (start of academic years). If you're a second-year or beyond student and passionate about leadership, sustainability, or community building, we also look for mentors and event leads year-round. The best time to join is when you're ready. The best way to apply is to reach out directly—either email leads.ngc@msruas.ac.in or attend a LEADS event to connect with current leaders.
 How to Apply
 Recruitment Season: LEADS opens applications after summer break (September) and mid-year (January). We announce recruitment through email and social channels—watch for the call.
 Informal First: Don't wait for official recruitment. Attend a LEADS event, talk to current members, ask questions. Many of our strongest members came through informal conversations, not formal applications.
@@ -178,15 +241,78 @@ Contact LEADS Next Gen Centre at MSRUAS. Reach us via email, phone, or visit our
 URL Slug
 /contact
 H1
-Get in Touch with LEADS
+Get in Touch
 Intro Paragraph
 We're always eager to hear from students, corporate partners, faculty, and anyone interested in the work we're doing. Whether you want to join, propose a partnership, attend an event, or just learn more, reach out. We read every message and respond promptly.
 Contact Details
-Email: leads.msruas@msruas.ac.in
-Phone: +91 8910332851 | +91 8045386666 Ext 793
-Address: LEADS Next Gen Centre, Faculty of Management & Commerce, MSRUAS, Gnanagangothri Campus, New BEL Road, MSR Nagar, Bengaluru – 560054, India
+Email: leads.ngc@msruas.ac.in
+Phone: +91 91106 73919 | +91 80183 75553 | +91 78992 93097
+Address: University House, New BEL Rd, M S R Nagar, Mathikere, Bengaluru, Karnataka 560054
 Contact Form CTA
 Send Your Message
+
+PAGE 7: TEAM (/TEAM)
+Page Title
+Meet Our Team | LEADS Next Gen Centre
+Meta Description
+Meet the leadership, executive council, and dedicated team members driving LEADS Next Gen Centre and Bharat Lead Summit.
+URL Slug
+/team
+H1
+Meet Our Team
+Hero Subheading
+The passionate leaders, dedicated committee members, and talented organizers driving LEADS Next Gen Centre and the Bharat Lead Summit vision forward.
+
+Section: Executive Council
+Guiding LEADS Next Gen Centre with strategic vision and institutional excellence.
+Members:
+- Prof. Kuldeep Kumar Raina — PATRON (LEADS NEXT GEN CENTRE), Honourable Vice-Chancellor of RUAS
+- Dr. K. M. Sharath Kumar — CHIEF ADVISER (LEADS NEXT GEN CENTRE), Professor and Dean of FMC, RUAS
+- Dr. Subhadeep Mukherjee — CENTRE HEAD (LEADS NEXT GEN CENTRE), Associate Professor of FMC, RUAS
+- Mr. Ajay R — FINANCE HEAD AND AUDITOR, Assistant Professor of FMC, RUAS
+- Dr. Kiran Kumar B M — HEAD EVENT & CAMPUS COORDINATION (RT CAMPUS), Associate Professor of FET, RUAS
+- Dr. Pallabi Mund — HEAD EVENT & CAMPUS COORDINATION (GG CAMPUS), Associate Professor of FMC, RUAS
+- Ms. Sujata Bijwe — HEAD INDUSTRY CONNECT, Adjunct Faculty of FMC, RUAS
+
+Section: Senior Organizing Committee
+Eight senior leaders driving strategic initiatives and operational excellence across all functions.
+Members:
+- Mr. Gurutejas C — SR. PRESIDENT
+- Mr. Abhijit Arya — SR. VICE PRESIDENT
+- Mr. Laksh Soorya Singh — SR. EVENTS & OPERATIONS HEAD
+- Mr. Bhawen Maroo — SR. EVENTS & OPERATIONS HEAD
+- Ms. Shreesha S.N — SR. SOCIAL MEDIA & DESIGN HEAD
+- Ms. Bharvi A Padia — SR. PR HEAD
+- Mr. Arvind Rakshith G — SR. FINANCE & SPONSORSHIP HEAD
+
+Section: Organizing Committee Members
+The dedicated team executing the summit vision with passion, precision, and purpose.
+Members:
+- Nuthan H — PRESIDENT
+- Kunal Bhadauria — VICE PRESIDENT
+- Sudev Mitra — CHIEF COORDINATOR
+- Jyotsna Karn — CHIEF COORDINATOR
+- Pranav P J — CHIEF COORDINATOR
+- Shravya T — CHIEF COORDINATOR
+- Shriram SG — GENERAL SECRETARY
+- S Bhavya Shree — GENERAL SECRETARY
+- Manoj Petakamsetty — GENERAL SECRETARY
+- Yash Chandak — HEAD-OPERATIONS AND LOGISTICS
+- Kayomarz Pavri — HEAD-DESIGN AND SOCIAL MEDIA
+- Shwetha S — HEAD-DESIGN AND SOCIAL MEDIA
+- Niyati Chawra — HEAD-LEADERSHIP AND DEVELOPMENT
+- Sadiya Sawood — HEAD-LEADERSHIP AND DEVELOPMENT
+- Nimisha K M — HEAD-SUSTAINABILITY AND INNOVATION
+- Kishan KP — HEAD-MARKETING AND BRANDING
+- Aravind Manashetti — HEAD-FINANCE AND SPONSORSHIP
+- Syed Furqaan Ahmed — HEAD-RESEARCH & DEVELOPMENT
+
+Section: Team Stats
+- 7 Executive Council Members
+- 8 Senior Organizers
+- 17+ Committee Members
+- 32+ Total Team Members
+
 PART 2 – COMPANY PROFILE
 LEADS Next Gen Centre – MSRUAS
 Company Profile 2026
@@ -242,9 +368,9 @@ Core Executive (Year 2+): If you're driving impact, you're invited to step into 
 Leadership Roles: Chief Coordinator, Vice-President, General Secretary, President – These formal roles come with governance responsibilities and direct mentorship from faculty advisors. Leadership roles are determined through peer nomination and faculty guidance.
 This progression ensures that LEADS grows from the inside, with students who understand the mission deeply shaping the movement.
 CONTACT & CONNECT
-Email: leads.msruas@msruas.ac.in
-Phone: +91 8910332851 | +91 8045386666 Ext 793
-Address: LEADS Next Gen Centre, Faculty of Management & Commerce, MSRUAS, Gnanagangothri Campus, New BEL Road, MSR Nagar, Bengaluru – 560054, India
+Email: leads.ngc@msruas.ac.in
+Phone: +91 91106 73919 | +91 80183 75553 | +91 78992 93097
+Address: University House, New BEL Rd, M S R Nagar, Mathikere, Bengaluru, Karnataka 560054
 Follow our journey and stay updated on programs, events, and opportunities to join a movement building India's next generation of purpose-driven leaders.
 ---
 Document Prepared for LEADS Next Gen Centre – MSRUAS

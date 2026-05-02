@@ -288,13 +288,13 @@
 
 <div class="doc-header">
   <div class="container">
-    <span class="badge">Design System · v2.0 — Inspiration-Enhanced</span>
+    <span class="badge">Design System · v3.0 — Current Release</span>
     <h1>LEADS <span>Next Gen Centre</span></h1>
     <p>Interactive Design Document — UI, Animations & Component Library · MSRUAS</p>
     <div class="meta">
       <div class="meta-item">📅 <strong>March 2026</strong></div>
       <div class="meta-item">🎨 <strong>5 Sites Analyzed</strong></div>
-      <div class="meta-item">📦 <strong>Next.js 14 · Tailwind · Supabase</strong></div>
+      <div class="meta-item">📦 <strong>Next.js 16 · Custom CSS · Prisma/SQLite</strong></div>
       <div class="meta-item">⚡ <strong>Dark Mode Included</strong></div>
     </div>
   </div>
@@ -334,12 +334,12 @@
     </div>
     <div class="card reveal reveal-delay-2">
       <div class="card-badge badge-complex">Stack</div>
-      <h4 style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px">Next.js 14 + Tailwind</h4>
-      <p style="font-size:13px;color:var(--text2)">App Router · TypeScript · Supabase · Vercel. Dark mode via CSS custom properties + localStorage.</p>
+      <h4 style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px">Next.js 16 + Custom CSS</h4>
+      <p style="font-size:13px;color:var(--text2)">App Router · TypeScript · Prisma ORM (SQLite) · Vercel. Dark mode via ThemeProvider + localStorage + system time (auto-dark after 6 PM).</p>
     </div>
   </div>
   <div class="info-box" style="margin-top:24px">
-    <strong>v2 Enhancement:</strong> This document incorporates UI patterns and animations from 5 analyzed inspiration sites — Pixlab, Ventix, Oifolio, Xolio, and Adelux. Patterns tagged with source throughout.
+    <strong>v3 Update (2026-03-24):</strong> Database migrated to Prisma ORM (SQLite). CSS framework changed from Tailwind to custom CSS. New components: InteractiveCards (Framer Motion D-shape), ArcRings, StatsSection, TeamCard, Starfield (custom), ThemeProvider (auto system-time detection). Added Team page and Admin dashboard.
   </div>
 </section>
 
@@ -356,7 +356,7 @@
       <div class="sm-node">/about</div>
       <div class="sm-node">/events</div>
       <div class="sm-node">/bls</div>
-      <div class="sm-node">/join-us</div>
+      <div class="sm-node">/join</div>
       <div class="sm-node">/contact</div>
     </div>
   </div>
@@ -593,7 +593,7 @@
       <button onclick="filterMasonry('mindfulness',this)" class="mf-btn" style="background:var(--surface);color:var(--text2);border:1px solid rgba(21,101,192,0.2);padding:7px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer">Mindfulness</button>
     </div>
     <div class="masonry-grid" id="masonryGrid">
-      <div class="masonry-item" data-cat="bls"><div class="mi-ph" style="height:160px;background:linear-gradient(135deg,var(--primary),var(--navy))">BLS 2025</div><span class="mi-tag">BLS</span><div class="mi-overlay"><span>Business Leadership Summit 2025</span></div></div>
+      <div class="masonry-item" data-cat="bls"><div class="mi-ph" style="height:160px;background:linear-gradient(135deg,var(--primary),var(--navy))">BLS 2026</div><span class="mi-tag">BLS</span><div class="mi-overlay"><span>Bharat Lead Summit 2026</span></div></div>
       <div class="masonry-item" data-cat="workshop"><div class="mi-ph" style="height:110px;background:linear-gradient(135deg,#006064,var(--teal))">Workshop</div><span class="mi-tag">Workshop</span><div class="mi-overlay"><span>Public Speaking Workshop</span></div></div>
       <div class="masonry-item" data-cat="mindfulness"><div class="mi-ph" style="height:130px;background:linear-gradient(135deg,#2E7D32,#1B5E20)">Mind</div><span class="mi-tag">Mindfulness</span><div class="mi-overlay"><span>Annual Mindfulness Retreat</span></div></div>
       <div class="masonry-item" data-cat="bls"><div class="mi-ph" style="height:120px;background:linear-gradient(135deg,#1A237E,var(--navy))">BLS</div><span class="mi-tag">BLS</span><div class="mi-overlay"><span>BLS Speaker Panel</span></div></div>
@@ -621,7 +621,7 @@
           <p class="testi-quote">"The Public Speaking programme is no joke. Three months in and I was leading workshops for my own class. LEADS builds real skills, not just certificates."</p>
           <div class="testi-author">
             <div class="testi-av" style="background:linear-gradient(135deg,var(--gold),#E65100)">RK</div>
-            <div><div class="testi-name">Rohan Kumar</div><div class="testi-role">2nd Year, MBA · Programme Lead 2025</div></div>
+            <div><div class="testi-name">Rohan Kumar</div><div class="testi-role">2nd Year, MBA · Programme Lead 2026</div></div>
           </div>
         </div>
         <div class="testi-slide">
@@ -803,7 +803,7 @@
         <div class="star-canvas" id="starCanvas"></div>
         <div class="bg-label">BLS · Starfield Particles</div>
       </div>
-      <p style="font-size:12px;color:var(--text2)">tsParticles v2. 60 particles desktop / 25 mobile. Lines connect nearby stars. Deep space drama.</p>
+      <p style="font-size:12px;color:var(--text2)">Custom Starfield component. CSS + JS-based starfield. No external particle library. Deep space drama on BLS page.</p>
     </div>
     <div>
       <div class="bg-preview bg-scroll-demo" id="scrollBg">
@@ -854,7 +854,7 @@
         <tr><td><strong>Scroll reveal</strong></td><td>All pages</td><td>IntersectionObserver</td><td><span class="insp-tag">Xolio</span> <span class="insp-tag">Ventix</span></td><td>550ms ease</td></tr>
         <tr><td><strong>Arc ring pulse</strong></td><td>Home</td><td>CSS @keyframes opacity</td><td><span class="insp-tag">Original</span></td><td>3s ease-in-out ∞</td></tr>
         <tr><td><strong>Hero shape float</strong></td><td>Home, BLS</td><td>CSS @keyframes translateY</td><td><span class="insp-tag">Pixlab</span></td><td>6–8s ease-in-out ∞</td></tr>
-        <tr><td><strong>Starfield particles</strong></td><td>BLS</td><td>tsParticles v2</td><td><span class="insp-tag">Original</span></td><td>Continuous</td></tr>
+        <tr><td><strong>Starfield particles</strong></td><td>BLS</td><td>Custom Starfield component</td><td><span class="insp-tag">Original</span></td><td>Continuous</td></tr>
         <tr><td><strong>BG colour shift</strong></td><td>Events</td><td>IntersectionObserver + CSS transition</td><td><span class="insp-tag">Original</span></td><td>1s ease</td></tr>
         <tr><td><strong>Gallery hover overlay</strong></td><td>Events</td><td>CSS opacity transition</td><td><span class="insp-tag">Pixlab</span> <span class="insp-tag">Oifolio</span></td><td>300ms ease</td></tr>
         <tr><td><strong>Testimonial slide</strong></td><td>BLS, About</td><td>CSS transform translateX</td><td><span class="insp-tag">Adelux</span></td><td>500ms cubic-bezier</td></tr>

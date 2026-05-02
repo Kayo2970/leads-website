@@ -4,17 +4,17 @@ Inspiring Future-Ready Youth Leaders for Sustainability
 
 
 Sitemap & URL Structure
-Website Project — v1.0
+Website Project — v2.0
 
 Prepared for: LEADS Next Gen Centre, MSRUAS
-Date: March 2026
+Date: March 2026 (Updated: 2026-03-24)
 
 
 
 
 
 1. Site Architecture
-The LEADS website has a flat, simple structure with one nested page (BLS under Events). This keeps navigation intuitive for first-time visitors and easy to manage for the LEADS student team.
+The LEADS website has a flat structure with one nested page (BLS under Events), a Team page for organizational hierarchy, and a restricted Admin section. Navigation is intuitive for first-time visitors and manageable for the LEADS student team.
 
 Depth
 Page Name
@@ -36,6 +36,11 @@ Events
 /events
 All events listing
 All
+Level 1 (Root)
+Team
+/team
+Team hierarchy & profiles
+All
 Level 2 (Under Events)
 BLS — Bharat Lead Summit
 /events/bharat-lead-summit
@@ -51,6 +56,16 @@ Contact
 /contact
 Contact details & form
 All
+Level 1 (Root, restricted)
+Admin
+/admin
+Admin login
+Staff only
+Level 2 (Under Admin)
+Admin Dashboard
+/admin/dashboard
+View applications & enquiries
+Staff only
 Level 1 (Root, system)
 404 Error Page
 /404
@@ -90,7 +105,7 @@ BLS — Bharat Lead Summit
 Marketing
 No
 High
-Join Us
+Join
 /join
 Root
 Form
@@ -102,6 +117,18 @@ Root
 Form
 No
 Medium
+Admin Login
+/admin
+Root
+Admin
+Staff only
+Low
+Admin Dashboard
+/admin/dashboard
+/admin
+Admin
+Staff only
+Low
 404 Error
 /404
 Root
@@ -125,9 +152,15 @@ About
 Events
 /events
 Dropdown reveals: All Events, BLS
-Join Us
+Join
 /join
 Highlighted button style — amber gold
+Team
+/team
+Shows full team hierarchy
+Admin
+/admin
+Restricted — staff only
 Contact
 /contact
 
@@ -141,17 +174,17 @@ Appears on every page. Three column groups:
 Column
 Links
 Organisation
-About, Our Programs, Leadership Council
+About, Our Programs, Leadership Council, Terms & Conditions
 Events
-Upcoming Events, BLS 2026, Gallery
+Upcoming Events, BLS 2026
 Connect
-Join Us, Contact, leads.msruas@msruas.ac.in
+Join Us, Contact, leads.ngc@msruas.ac.in
 
 4. URL Rules
 All developers and content editors working on the LEADS site must follow these rules when creating or editing any page URL:
 
 	•	Always lowercase: /about-us not /About-Us
-	•	Use hyphens, not underscores: /join-us not /join_us
+	•	Use hyphens, not underscores: /join not /join_us
 	•	Keyword-first: /events/bharat-lead-summit not /events/summit/bls
 	•	No trailing slash: /about not /about/
 	•	No dates in permanent page URLs — dates only in blog/news slugs (if added later)
@@ -195,10 +228,18 @@ BLS — Bharat Lead Summit
 /events/bharat-lead-summit
 0.9
 Weekly
-Join Us
+Join
 /join
 0.8
 Monthly
+Team
+/team
+0.7
+Monthly
+Admin
+/admin
+0.1
+Yearly (restricted)
 Contact
 /contact
 0.6
@@ -211,7 +252,7 @@ Source Page
 Links To
 Why
 Home
-About, Events, BLS, Join Us
+About, Team, Events, BLS, Join
 Every key page should be reachable from Home within one click
 About
 Events, Join Us, Contact
@@ -220,8 +261,11 @@ Events
 BLS (dedicated page), Join Us
 Each event card links to its full page; events page upsells membership
 BLS Page
-Events (back), Contact
+Events (back), Contact, Join
 BLS visitors should be able to explore LEADS further and contact for sponsorship
+Team
+About, Contact
+Team page visitors should understand the organization and be able to get in touch
 Join Us
 About, Contact
 Applicants often want to read more before submitting
